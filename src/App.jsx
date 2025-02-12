@@ -7,6 +7,7 @@ function App() {
   // State values
   const [gameRunning, setGameRunning] = useState(false);
   const [roundCount, setRoundCount] = useState(0);
+  const [score, setScore] = useState(0);
 
   function startGame() {
     setGameRunning(true);
@@ -26,7 +27,7 @@ function App() {
         </p>
         <button onClick={startGame}>Start Game</button>
       </section> :
-      <Game roundCount={roundCount}/>
+      <Game roundCount={roundCount} score={score} />
       }
 
     </>

@@ -60,6 +60,11 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+hr {
+  width: 80%;
+  border-color: #A69CAC;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

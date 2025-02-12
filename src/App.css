@@ -27,7 +27,19 @@ section.instructions h2 {
   line-height: 0;
 }
 
+/* Game component */
+
 section.game-content {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+span.score {
+  position: absolute;
+  align-self: flex-end;
+  margin-right: 170px;
+  top: 140px;
+  font-size: 1.8rem;
+  font-variation-settings: "slnt" -10;
 }
