@@ -1,42 +1,33 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+/* Hex values:
+tan: #F1DAC4
+faint purple: #A69CAC
+bright purple: #474973
+dark purple: #161B33
+darkest purple: #0D0C1D */
+
+header {
+  background-color: #474973;
+  display: flex;
+  width: 100%;
+  padding: 1rem;
+}
+
+section.instructions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
+  max-width: 500px;
+  margin: 120px auto;
+  gap: 20px;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+section.instructions h2 {
+  font-size: 2.4rem;
+  line-height: 0;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+section.game-content {
+  display: flex;
+  justify-content: center;
 }

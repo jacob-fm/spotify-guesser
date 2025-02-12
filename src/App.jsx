@@ -1,35 +1,36 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import Header from "./components/Header";
+import Game from "./components/Game"
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
+  // State values
+  const [gameRunning, setGameRunning] = useState(false);
+  const [roundCount, setRoundCount] = useState(0);
 
+  function startGame() {
+    setGameRunning(true);
+    setRoundCount(1);
+  }
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
+      <Header />
+      {/* when gameRunning, Game renders, otherwise instructions section renders */}
+      {!gameRunning ? <section className="instructions">
+        <h2>How to play:</h2>
         <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
+          Each round, you’ll be given a target artist. You’re job is to search
+          for and select an artist who you think has a similar monthly listener
+          count. The closer you are, the more points you’ll be awarded. See how
+          many points you can accumulate in 5 rounds!
         </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+        <button onClick={startGame}>Start Game</button>
+      </section> :
+      <Game roundCount={roundCount}/>
+      }
+
     </>
-  )
+  );
 }
 
-export default App
+export default App;

@@ -1,11 +1,15 @@
+* {
+  box-sizing: border-box;
+}
+
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: Geologica, Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: #0d0c1d;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -25,7 +29,7 @@ a:hover {
 body {
   margin: 0;
   display: flex;
-  place-items: center;
+  flex-direction: column;
   min-width: 320px;
   min-height: 100vh;
 }
@@ -36,18 +40,20 @@ h1 {
 }
 
 button {
-  border-radius: 8px;
+  display: block;
+  margin: 0 auto;
+  border-radius: 6px;
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
-  font-size: 1em;
+  font-size: 1.2rem;
   font-weight: 500;
   font-family: inherit;
   background-color: #1a1a1a;
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: border-color 0.15s;
 }
 button:hover {
-  border-color: #646cff;
+  border-color: #F1DAC4;
 }
 button:focus,
 button:focus-visible {
