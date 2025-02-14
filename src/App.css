@@ -6,40 +6,84 @@ dark purple: #161B33
 darkest purple: #0D0C1D */
 
 header {
-  background-color: #474973;
-  display: flex;
-  width: 100%;
-  padding: 1rem;
+    background-color: #474973;
+    display: flex;
+    width: 100%;
+    padding: 1rem;
 }
 
 section.instructions {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  max-width: 500px;
-  margin: 120px auto;
-  gap: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    max-width: 500px;
+    margin: 120px auto;
+    gap: 20px;
 }
 
 section.instructions h2 {
-  font-size: 2.4rem;
-  line-height: 0;
+    font-size: 2.4rem;
+    line-height: 0;
 }
 
 /* Game component */
 
 section.game-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 span.score {
-  position: absolute;
-  align-self: flex-end;
-  margin-right: 170px;
-  top: 140px;
-  font-size: 1.8rem;
-  font-variation-settings: "slnt" -10;
+    position: absolute;
+    align-self: flex-end;
+    margin-right: 170px;
+    top: 140px;
+    font-size: 1.8rem;
+    font-variation-settings: "slnt" -10;
+}
+
+/* Artist Cards */
+
+div.artist-cards-container {
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+}
+
+div.artist-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+div.artist-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f1dac4;
+    border-radius: 7px;
+    border: solid 6px #f1dac4;
+    width: 380px;
+    height: auto;
+}
+
+span.artist-name {
+    width: 100%;
+    text-align: center;
+    background-color: #0d0c1d;
+    font-size: 1.4rem;
+    color: white;
+    padding: 6px;
+}
+
+div.artist-info > img {
+    width: 100%;
+}
+
+span.monthly-listeners {
+    font-size: 1.6rem;
+    color: #0d0c1d;
+    padding: 6px;
 }
