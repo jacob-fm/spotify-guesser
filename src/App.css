@@ -83,6 +83,7 @@ div.artist-info > img {
 }
 
 span.monthly-listeners {
+    text-align: center;
     font-size: 1.6rem;
     color: #0d0c1d;
     padding: 6px;

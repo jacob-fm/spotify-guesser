@@ -1,4 +1,5 @@
 import ArtistCard from "./ArtistCard";
+import artists from "/src/data/artists.json"
 export default function Game({ roundCount, score }) {
     return (
         <section className='game-content'>
@@ -6,8 +7,8 @@ export default function Game({ roundCount, score }) {
             <span className='score'>Score: {score}</span>
             <hr />
             <div className='artist-cards-container'>
-                <ArtistCard />
-                <ArtistCard />
+                <ArtistCard artist={artists[0]}/>
+                <ArtistCard artist={artists[0]} />
             </div>
         </section>
     );
