@@ -50,6 +50,7 @@ div.artist-cards-container {
     display: flex;
     width: 100%;
     justify-content: space-evenly;
+    text-align: center;
 }
 
 div.artist-card {
@@ -78,8 +79,33 @@ span.artist-name {
     padding: 6px;
 }
 
+div.artist-info > input.artist-search-input {
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    border: none;
+    font-size: 1.4rem;
+    background-color: #f1dac4;
+    color: #0d0c1d;
+    &:focus {
+        outline: none;
+    }
+}
+
 div.artist-info > img {
     width: 100%;
+    height: 230px;
+    object-fit: cover;
+}
+div.artist-info > .artist-image-placeholder {
+    width: 100%;
+    height: 230px;
+    background-color: #474973;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 6rem;
+    color: white;
 }
 
 span.monthly-listeners {
