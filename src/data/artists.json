@@ -1,5 +1,25 @@
 [
   { "name": "Drake", "listeners": 75000000 },
   { "name": "Taylor Swift", "listeners": 85000000 },
-  { "name": "Ed Sheeran", "listeners": 70000000 }
+  { "name": "Ed Sheeran", "listeners": 70000000 },
+  { "name": "Madonna", "listeners": 5000000},
+  { "name": "Sade", "listeners": 2000000},
+  { "name": "Kendrick Lamar", "listeners": 64000000},
+  { "name": "Kelly Clarkson", "listeners": 1200000},
+  { "name": "Beyonce", "listeners": 45000000},
+  { "name": "The Alchemist", "listeners": 1080000},
+  { "name": "MF Doom", "listeners": 4300000},
+  { "name": "Usher", "listeners": 7200000},
+  { "name": "The Marias", "listeners": 800000},
+  { "name": "Billy Crystal", "listeners": 12000000},
+  { "name": "The Pharcyde", "listeners": 900000},
+  { "name": "Selena Gomez", "listeners": 20700834},
+  { "name": "Dizzy Galespi", "listeners": 672456},
+  { "name": "Buddy Holly", "listeners": 3905729},
+  { "name": "Big Leesh", "listeners": 1945999},
+  { "name": "Mickey and the Micks", "listeners": 20578229},
+  { "name": "Daweeedo", "listeners": 106729},
+  { "name": "Kish", "listeners": 30000},
+  { "name": "Bobbathon", "listeners": 490000},
+  { "name": "Moodha", "listeners": 800000000}
 ]
