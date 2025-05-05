@@ -3,9 +3,9 @@ export default function ArtistCard({artist}) {
         <div className='artist-card'>
             <div className='artist-info'>
                 <span className="artist-name">{artist.name}</span>
-                <img src='/src/assets/drake.webp' alt='drake' />
+                <img src={artist.images[0].url} />
                 <span className="monthly-listeners">Monthly Listeners:</span>
-                <span className="monthly-listeners">{artist.listeners} </span>
+                <span className="monthly-listeners">IDK YET</span>
             </div>
         </div>
     );

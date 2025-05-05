@@ -1,5 +1,5 @@
 import useDebounce from "../hooks/useDebounce";
-import fetchSpotifyData from "../api/fetchSpotifyData";
+import { searchSpotifyArtists } from "../api/fetchSpotifyData";
 import { useState, useEffect, useRef } from "react";
 import SearchResult from "./SearchResult";
 
@@ -26,7 +26,7 @@ export default function ArtistPlaceholder() {
 			console.log("Loaded from cache");
 		} else {
 			// Fetch from Spotify API and cache it
-			fetchSpotifyData(debouncedInput)
+			searchSpotifyArtists(debouncedInput)
 				.then((results) => {
 					cacheRef.current[debouncedInput] = results;
 					setSearchResults(results);
