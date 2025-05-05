@@ -1,7 +1,9 @@
 export default function Header() {
     return (
         <header>
-            <img src="/src/assets/logo.png" alt="spotify guesser logo" />
+            <a href="/">
+                <img src="/src/assets/logo.png" alt="spotify guesser logo" />
+            </a>
         </header>
     )
 }
