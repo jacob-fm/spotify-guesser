@@ -60,18 +60,31 @@ export default function Game({ roundCount, score }) {
 					{selectedArtist != null ? (
 						<>
 							<ArtistCard artist={selectedArtist} />
-							<button
-								className="reset-button"
-								onClick={() => setSelectedArtist(null)}
-							>
-								Reset Selection
-							</button>
 						</>
 					) : (
 						<ArtistPlaceholder onArtistSelect={handleArtistSelect} />
 					)}
 				</div>
 			</div>
+			{selectedArtist != null ? (
+				<div className="post-guess-buttons">
+					<button
+						className="reset-button"
+						onClick={() => setSelectedArtist(null)}
+					>
+						Reset Selection
+					</button>
+					<button
+						className="submit-guess-button"
+						onClick={() => {
+							console.log("Submit Guess");
+							// Handle guess submission logic here
+						}}
+					>
+						Submit Guess
+					</button>
+				</div>
+			) : null}
 		</section>
 	);
 }
