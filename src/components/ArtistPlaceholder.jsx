@@ -1,7 +1,6 @@
 import useDebounce from "../hooks/useDebounce";
 import fetchSpotifyData from "../api/fetchSpotifyData";
 import { useState, useEffect, useRef } from "react";
-// import artistsData from "../data/artists.json";
 import SearchResult from "./SearchResult";
 
 export default function ArtistPlaceholder() {
@@ -13,23 +12,6 @@ export default function ArtistPlaceholder() {
 
 	// Simple cache object stored in a ref
 	const cacheRef = useRef({});
-
-	// const fetchData = (value) => {
-	// 	const lowerValue = value.toLowerCase();
-	// 	// Check if the result is already cached, use it if available
-	// 	if (cacheRef.current[lowerValue]) {
-	// 		setSearchResults(cacheRef.current[lowerValue]);
-	// 		return;
-	// 	}
-
-	// 	// Otherwise, filter the data
-	// 	const results = artistsData.filter((artist) =>
-	// 		artist.name.toLowerCase().includes(lowerValue)
-	// 	);
-	// 	// Cache the results
-	// 	cacheRef.current[lowerValue] = results;
-	// 	setSearchResults(results);
-	// };
 
 	useEffect(() => {
 		// if the input is empty, clear the results
