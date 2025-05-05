@@ -13,6 +13,7 @@ function getRandomTargetArtistId() {
 export default function Game({ roundCount, score }) {
 	const [targetArtist, setTargetArtist] = useState(null);
 	const [selectedArtist, setSelectedArtist] = useState(null);
+	const [guessSubmitted, setGuessSubmitted] = useState(false);
 
 	useEffect(() => {
 		const randomId = getRandomTargetArtistId();
@@ -41,6 +42,10 @@ export default function Game({ roundCount, score }) {
 			});
 	}
 
+	function handleSubmitGuess() {
+		setGuessSubmitted(true);
+	}
+
 	return (
 		<section className="game-content">
 			<h1>Round {roundCount}</h1>
@@ -50,7 +55,7 @@ export default function Game({ roundCount, score }) {
 				<div>
 					<h2>Target Artist:</h2>
 					{targetArtist ? (
-						<ArtistCard artist={targetArtist} />
+						<ArtistCard artist={targetArtist} visibleScore={guessSubmitted} />
 					) : (
 						<p>Loading target artist...</p>
 					)}
@@ -59,7 +64,10 @@ export default function Game({ roundCount, score }) {
 					<h2>Your Pick:</h2>
 					{selectedArtist != null ? (
 						<>
-							<ArtistCard artist={selectedArtist} />
+							<ArtistCard
+								artist={selectedArtist}
+								visibleScore={guessSubmitted}
+							/>
 						</>
 					) : (
 						<ArtistPlaceholder onArtistSelect={handleArtistSelect} />
@@ -77,8 +85,7 @@ export default function Game({ roundCount, score }) {
 					<button
 						className="submit-guess-button"
 						onClick={() => {
-							console.log("Submit Guess");
-							// Handle guess submission logic here
+							handleSubmitGuess();
 						}}
 					>
 						Submit Guess

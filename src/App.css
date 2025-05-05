@@ -110,7 +110,7 @@ div.artist-info > .artist-image-placeholder {
     color: white;
 }
 
-span.monthly-listeners {
+span.popularity-score {
     text-align: center;
     font-size: 1.6rem;
     color: #0d0c1d;

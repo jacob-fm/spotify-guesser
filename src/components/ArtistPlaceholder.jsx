@@ -91,8 +91,8 @@ export default function ArtistPlaceholder({ onArtistSelect }) {
 					<SearchResultsList results={searchResults} />
 				)}
 				<span className="artist-image-placeholder">?</span>
-				<span className="monthly-listeners">Monthly Listeners:</span>
-				<span className="monthly-listeners">???</span>
+				<span className="popularity-score">Popularity Score:</span>
+				<span className="popularity-score">???</span>
 			</div>
 		</div>
 	);

@@ -1,11 +1,11 @@
-export default function ArtistCard({artist}) {
+export default function ArtistCard({ artist, visibleScore }) {
     return (
         <div className='artist-card'>
             <div className='artist-info'>
                 <span className="artist-name">{artist.name}</span>
                 <img src={artist.images[0].url} />
-                <span className="monthly-listeners">Monthly Listeners:</span>
-                <span className="monthly-listeners">IDK YET</span>
+                <span className="popularity-score">Popularity Score:</span>
+                <span className="popularity-score">{visibleScore ? artist.popularity : "???" }</span>
             </div>
         </div>
     );
