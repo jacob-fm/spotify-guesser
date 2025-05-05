@@ -12,6 +12,7 @@ function getRandomTargetArtistId() {
 
 export default function Game({ roundCount, score }) {
 	const [targetArtist, setTargetArtist] = useState(null);
+	const [selectedArtist, setSelectedArtist] = useState(null);
 
 	useEffect(() => {
 		const randomId = getRandomTargetArtistId();
@@ -27,6 +28,18 @@ export default function Game({ roundCount, score }) {
 	}, []);
 
 	console.log("Target Artist:", targetArtist);
+
+	function handleArtistSelect(artist) {
+		getArtistById(artist.id)
+			.then((artist) => {
+				setSelectedArtist(artist);
+				console.log("Fetched Selected Artist:", artist);
+			})
+			.catch((error) => {
+				console.error("Error fetching artist data:", error);
+				setSelectedArtist(null);
+			});
+	}
 
 	return (
 		<section className="game-content">
@@ -44,7 +57,11 @@ export default function Game({ roundCount, score }) {
 				</div>
 				<div>
 					<h2>Your Pick:</h2>
-					<ArtistPlaceholder />
+					{selectedArtist != null ? (
+						<ArtistCard artist={selectedArtist} />
+					) : (
+						<ArtistPlaceholder onArtistSelect={handleArtistSelect}/>
+					)}
 				</div>
 			</div>
 		</section>

@@ -1,0 +1,202 @@
+[
+  {
+    "name": "Bruno Mars",
+    "id": "0du5cEVh5yTK9QJze8zA0C"
+  },
+  {
+    "name": "The Weeknd",
+    "id": "1Xyo4u8uXC1ZmMpatF05PJ"
+  },
+  {
+    "name": "Lady Gaga",
+    "id": "1HY2Jd0NmPuamShAr6KMms"
+  },
+  {
+    "name": "Billie Eilish",
+    "id": "6qqNVTkY8uBg9cP3Jd7DAH"
+  },
+  {
+    "name": "Coldplay",
+    "id": "4gzpq5DPGxSnKTe4SA8HAU"
+  },
+  {
+    "name": "Kendrick Lamar",
+    "id": "2YZyLoL8N0Wb9xBt1NhZWg"
+  },
+  {
+    "name": "Rihanna",
+    "id": "5pKCCKE2ajJHZ9KAiaK11H"
+  },
+  {
+    "name": "Ed Sheeran",
+    "id": "6eUKZXaKkcviH0Ku9w2n3V"
+  },
+  {
+    "name": "Taylor Swift",
+    "id": "06HL4z0CvFAxyc27GXpf02"
+  },
+  {
+    "name": "Ariana Grande",
+    "id": "66CXWjxzNUsdJxJ2JdwvnR"
+  },
+  {
+    "name": "SZA",
+    "id": "7tYKF4w9nC0nq9CsPZTHyP"
+  },
+  {
+    "name": "Justin Bieber",
+    "id": "1uNFoZAHBGtllmzznpCI3s"
+  },
+  {
+    "name": "Drake",
+    "id": "3TVXtAsR1Inumwj472S9r4"
+  },
+  {
+    "name": "Eminem",
+    "id": "7dGJo4pcD2V6oG8kP0tJRR"
+  },
+  {
+    "name": "David Guetta",
+    "id": "1Cs0zKBU1kc0i8ypK3B9ai"
+  },
+  {
+    "name": "Travis Scott",
+    "id": "0Y5tJX1MQlPlqiwlOH1tJY"
+  },
+  {
+    "name": "Post Malone",
+    "id": "246dkjvS1zLTtiykXe5h60"
+  },
+  {
+    "name": "Sabrina Carpenter",
+    "id": "74KM79TiuVKeVCqs8QtB0B"
+  },
+  {
+    "name": "ROS\u00c9",
+    "id": "3eVa5w3URK5duf6eyVDbu9"
+  },
+  {
+    "name": "Kanye West",
+    "id": "5K4W6rqBFWDnAN6FQUkS6x"
+  },
+  {
+    "name": "Dua Lipa",
+    "id": "6M2wZ9GZgrQXHCFfjv46we"
+  },
+  {
+    "name": "J Balvin",
+    "id": "1vyhD5VmyZ7KMfW5gqLgo5"
+  },
+  {
+    "name": "Maroon 5",
+    "id": "04gDigrS5kc9YWfZHwBETP"
+  },
+  {
+    "name": "Imagine Dragons",
+    "id": "53XhwfbYqKCa1cC15pYq2q"
+  },
+  {
+    "name": "Shakira",
+    "id": "0EmeFodog0BfCgMzAIvKQp"
+  },
+  {
+    "name": "Lana Del Rey",
+    "id": "00FQb4jTyendYWaN8pK0wa"
+  },
+  {
+    "name": "Katy Perry",
+    "id": "6jJ0s89eD6GaHleKKya26X"
+  },
+  {
+    "name": "Sam Smith",
+    "id": "2wY79sveU1sp5g7SokKOiI"
+  },
+  {
+    "name": "Adele",
+    "id": "4dpARuHxo51G3z768sgnrY"
+  },
+  {
+    "name": "Future",
+    "id": "1RyvyyTE3xzB2ZywiAwp0i"
+  },
+  {
+    "name": "Sia",
+    "id": "5WUlDfRSoLAfcVSX1WnrxN"
+  },
+  {
+    "name": "Beyonc\u00e9",
+    "id": "6vWDO969PvNqNYHIOW5v0m"
+  },
+  {
+    "name": "Karol G",
+    "id": "790FomKkXshlbRYZFtlgla"
+  },
+  {
+    "name": "Pitbull",
+    "id": "0TnOYISbd1XYRBk9myaseg"
+  },
+  {
+    "name": "Rauw Alejandro",
+    "id": "1mcTU81TzQhprhouKaTkpq"
+  },
+  {
+    "name": "Miley Cyrus",
+    "id": "5YGY8feqx7naU7z4HrwZM6"
+  },
+  {
+    "name": "Arctic Monkeys",
+    "id": "7Ln80lUS6He07XvHI8qqHH"
+  },
+  {
+    "name": "Marshmello",
+    "id": "64KEffDW9EtZ1y2vBYgq8T"
+  },
+  {
+    "name": "Daddy Yankee",
+    "id": "4VMYDCV2IEDYJArk749S6m"
+  },
+  {
+    "name": "Michael Bubl\u00e9",
+    "id": "1GxkXlMwML1oSg5eLPiAz3"
+  },
+  {
+    "name": "Playboi Carti",
+    "id": "699OTQXzgjhIYAHMy9RyPD"
+  },
+  {
+    "name": "Gracie Abrams",
+    "id": "4tuJ0bMpJh08umKkEXKUI5"
+  },
+  {
+    "name": "Teddy Swims",
+    "id": "33qOK5uJ8AR2xuQQAhHump"
+  },
+  {
+    "name": "21 Savage",
+    "id": "1URnnhqYAYcrqrcwql10ft"
+  },
+  {
+    "name": "Chris Brown",
+    "id": "7bXgB6jMjp9ATFy66eO08Z"
+  },
+  {
+    "name": "Lil Wayne",
+    "id": "55Aa2cqylxrFIXC767Z865"
+  },
+  {
+    "name": "Hozier",
+    "id": "2FXC3k01G6Gw61bmprjgqS"
+  },
+  {
+    "name": "Khalid",
+    "id": "6LuN9FCkKOj5PcnpouEgny"
+  },
+  {
+    "name": "Noah Kahan",
+    "id": "2RQXRUsr4IW1f3mKyKsy4B"
+  },
+  {
+    "name": "Peso Pluma",
+    "id": "12GqGscKJx3aE4t07u7eVZ"
+  }
+]

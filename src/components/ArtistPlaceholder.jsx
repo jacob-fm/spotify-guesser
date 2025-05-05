@@ -3,7 +3,7 @@ import { searchSpotifyArtists } from "../api/fetchSpotifyData";
 import { useState, useEffect, useRef } from "react";
 import SearchResult from "./SearchResult";
 
-export default function ArtistPlaceholder() {
+export default function ArtistPlaceholder({ onArtistSelect }) {
 	const [searchInput, setSearchInput] = useState("");
 	const debouncedInput = useDebounce(searchInput);
 	const [searchResults, setSearchResults] = useState([]);
@@ -57,8 +57,7 @@ export default function ArtistPlaceholder() {
 			);
 		} else if (e.key === "Enter" && selectedItemIndex >= 0) {
 			const selected = searchResults[selectedItemIndex];
-			handleChange(selected.name);
-			console.log("Selected Artist:", selected.name);
+			onArtistSelect(selected);
 		}
 	};
 
@@ -70,6 +69,7 @@ export default function ArtistPlaceholder() {
 						key={index}
 						artistName={artist.name}
 						isActive={index === selectedItemIndex}
+						onClick={() => onArtistSelect(artist)}	
 					/>
 				))}
 			</div>
