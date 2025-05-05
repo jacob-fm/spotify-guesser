@@ -10,7 +10,7 @@ function getRandomTargetArtistId() {
 	return targetPool[randomIndex].id;
 }
 
-export default function Game({ roundCount, score }) {
+export default function Game({ roundCount, updateScore, score }) {
 	const [targetArtist, setTargetArtist] = useState(null);
 	const [selectedArtist, setSelectedArtist] = useState(null);
 	const [guessSubmitted, setGuessSubmitted] = useState(false);
@@ -44,6 +44,9 @@ export default function Game({ roundCount, score }) {
 
 	function handleSubmitGuess() {
 		setGuessSubmitted(true);
+		const diff = Math.abs(targetArtist.popularity - selectedArtist.popularity);
+		const points = Math.max(0, 100 - diff * 5);
+		updateScore((prevScore) => prevScore + points);
 	}
 
 	return (
@@ -70,7 +73,7 @@ export default function Game({ roundCount, score }) {
 							/>
 						</>
 					) : (
-						<ArtistPlaceholder onArtistSelect={handleArtistSelect} />
+						<ArtistPlaceholder onArtistSelect={handleArtistSelect} targetArtist={targetArtist} />
 					)}
 				</div>
 			</div>

@@ -3,7 +3,7 @@ import { searchSpotifyArtists } from "../api/fetchSpotifyData";
 import { useState, useEffect, useRef } from "react";
 import SearchResult from "./SearchResult";
 
-export default function ArtistPlaceholder({ onArtistSelect }) {
+export default function ArtistPlaceholder({ onArtistSelect, targetArtist }) {
 	const [searchInput, setSearchInput] = useState("");
 	const debouncedInput = useDebounce(searchInput);
 	const [searchResults, setSearchResults] = useState([]);
@@ -28,8 +28,11 @@ export default function ArtistPlaceholder({ onArtistSelect }) {
 			// Fetch from Spotify API and cache it
 			searchSpotifyArtists(debouncedInput)
 				.then((results) => {
-					cacheRef.current[debouncedInput] = results;
-					setSearchResults(results);
+					const filteredResults = results.filter(
+						(artist) => artist.id !== targetArtist.id
+					);
+					cacheRef.current[debouncedInput] = filteredResults;
+					setSearchResults(filteredResults);
 					console.log("Fetched from API");
 				})
 				.catch((err) => {

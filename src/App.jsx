@@ -30,7 +30,7 @@ function App() {
                     <button onClick={startGame}>Start Game</button>
                 </section>
             ) : (
-                <Game roundCount={roundCount} score={score} />
+                <Game roundCount={roundCount} updateScore={setScore} score={score} />
             )}
         </>
     );
