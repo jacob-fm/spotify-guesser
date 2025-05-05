@@ -1,7 +1,7 @@
 import useDebounce from "../hooks/useDebounce";
 import fetchSpotifyData from "../api/fetchSpotifyData";
 import { useState, useEffect, useRef } from "react";
-import artistsData from "../data/artists.json";
+// import artistsData from "../data/artists.json";
 import SearchResult from "./SearchResult";
 
 export default function ArtistPlaceholder() {
@@ -14,31 +14,49 @@ export default function ArtistPlaceholder() {
 	// Simple cache object stored in a ref
 	const cacheRef = useRef({});
 
-	const fetchData = (value) => {
-		const lowerValue = value.toLowerCase();
-		// Check if the result is already cached, use it if available
-		if (cacheRef.current[lowerValue]) {
-			setSearchResults(cacheRef.current[lowerValue]);
+	// const fetchData = (value) => {
+	// 	const lowerValue = value.toLowerCase();
+	// 	// Check if the result is already cached, use it if available
+	// 	if (cacheRef.current[lowerValue]) {
+	// 		setSearchResults(cacheRef.current[lowerValue]);
+	// 		return;
+	// 	}
+
+	// 	// Otherwise, filter the data
+	// 	const results = artistsData.filter((artist) =>
+	// 		artist.name.toLowerCase().includes(lowerValue)
+	// 	);
+	// 	// Cache the results
+	// 	cacheRef.current[lowerValue] = results;
+	// 	setSearchResults(results);
+	// };
+
+	useEffect(() => {
+		// if the input is empty, clear the results
+		if (debouncedInput.length === 0) {
+			setSearchResults([]);
 			return;
 		}
 
-		// Otherwise, filter the data
-		const results = artistsData.filter((artist) =>
-			artist.name.toLowerCase().includes(lowerValue)
-		);
-		// Cache the results
-		cacheRef.current[lowerValue] = results;
-		setSearchResults(results);
-	};
-
-	useEffect(() => {
-		if (debouncedInput.length > 0) {
-			fetchSpotifyData(debouncedInput).then((results) => {
-				setSearchResults(results);
-			});
+		// Check cache
+		if (cacheRef.current[debouncedInput]) {
+			setSearchResults(cacheRef.current[debouncedInput]);
+			console.log("Loaded from cache");
 		} else {
-			setSearchResults([]);
+			// Fetch from Spotify API and cache it
+			fetchSpotifyData(debouncedInput)
+				.then((results) => {
+					cacheRef.current[debouncedInput] = results;
+					setSearchResults(results);
+					console.log("Fetched from API");
+				})
+				.catch((err) => {
+					console.error("Error fetching from Spotify:", err);
+				});
 		}
+
+		console.log("Search Results:", searchResults.length);
+		console.log("Cache Size:", Object.keys(cacheRef.current).length);
 	}, [debouncedInput]);
 
 	const handleChange = (value) => {
