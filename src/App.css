@@ -140,3 +140,8 @@ span.search-result {
         color: white;
     }
 }
+
+.reset-button {
+    margin-top: 20px;
+    background-color: #474973;
+}

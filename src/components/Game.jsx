@@ -58,9 +58,17 @@ export default function Game({ roundCount, score }) {
 				<div>
 					<h2>Your Pick:</h2>
 					{selectedArtist != null ? (
-						<ArtistCard artist={selectedArtist} />
+						<>
+							<ArtistCard artist={selectedArtist} />
+							<button
+								className="reset-button"
+								onClick={() => setSelectedArtist(null)}
+							>
+								Reset Selection
+							</button>
+						</>
 					) : (
-						<ArtistPlaceholder onArtistSelect={handleArtistSelect}/>
+						<ArtistPlaceholder onArtistSelect={handleArtistSelect} />
 					)}
 				</div>
 			</div>
