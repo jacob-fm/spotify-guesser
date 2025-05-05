@@ -1,12 +1,64 @@
-import { useState } from "react";
+import useDebounce from "../hooks/useDebounce";
+import fetchSpotifyData from "../api/fetchSpotifyData";
+import { useState, useEffect, useRef } from "react";
 import artistsData from "../data/artists.json";
 import SearchResult from "./SearchResult";
 
 export default function ArtistPlaceholder() {
 	const [searchInput, setSearchInput] = useState("");
+	const debouncedInput = useDebounce(searchInput);
 	const [searchResults, setSearchResults] = useState([]);
 	// for selecting search results with keyboard
 	const [selectedItemIndex, setSelectedItemIndex] = useState(-1);
+
+	// Simple cache object stored in a ref
+	const cacheRef = useRef({});
+
+	const fetchData = (value) => {
+		const lowerValue = value.toLowerCase();
+		// Check if the result is already cached, use it if available
+		if (cacheRef.current[lowerValue]) {
+			setSearchResults(cacheRef.current[lowerValue]);
+			return;
+		}
+
+		// Otherwise, filter the data
+		const results = artistsData.filter((artist) =>
+			artist.name.toLowerCase().includes(lowerValue)
+		);
+		// Cache the results
+		cacheRef.current[lowerValue] = results;
+		setSearchResults(results);
+	};
+
+	useEffect(() => {
+		if (debouncedInput.length > 0) {
+			fetchData(debouncedInput);
+		} else {
+			setSearchResults([]);
+		}
+	}, [debouncedInput]);
+
+	const handleChange = (value) => {
+		setSearchInput(value);
+	};
+
+	const handleKeyDown = (e) => {
+		if (e.key === "ArrowUp" && selectedItemIndex > 0) {
+			setSelectedItemIndex((prevIndex) => Math.max(prevIndex - 1, 0));
+		} else if (
+			e.key === "ArrowDown" &&
+			selectedItemIndex < searchResults.length - 1
+		) {
+			setSelectedItemIndex((prevIndex) =>
+				Math.min(prevIndex + 1, searchResults.length - 1)
+			);
+		} else if (e.key === "Enter" && selectedItemIndex >= 0) {
+			const selected = searchResults[selectedItemIndex];
+			handleChange(selected.name);
+			console.log("Selected Artist:", selected.name);
+		}
+	};
 
 	function SearchResultsList({ results }) {
 		return (
@@ -21,47 +73,6 @@ export default function ArtistPlaceholder() {
 			</div>
 		);
 	}
-	// This version uses placeholder user data
-	// const fetchData = (value) => {
-	// 	fetch("https://jsonplaceholder.typicode.com/users")
-	// 		.then((response) => response.json())
-	// 		.then((json) => {
-	//             const results = json.filter((user) => {
-	//                 return user  && user.name && user.name.toLowerCase().includes(value.toLowerCase());
-	//             })
-	//             console.log("Search Results:", results);
-	// 		});
-	// };
-
-	// This version uses dummy artist data from data/artists.json
-	const fetchData = (value) => {
-		const results = artistsData.filter((artist) => {
-			return artist && artist.name.toLowerCase().includes(value.toLowerCase());
-		});
-		setSearchResults(results);
-	};
-
-	const handleChange = (value) => {
-		setSearchInput(value);
-		fetchData(value);
-	};
-
-	const handleKeyDown = (e) => {
-		if (e.key === "ArrowUp" && selectedItemIndex > 0) {
-			setSelectedItemIndex((prevIndex) => Math.max(prevIndex - 1, 0));
-		} else if (
-			e.key === "ArrowDown" &&
-			selectedItemIndex < searchResults.length - 1
-		) {
-			setSelectedItemIndex((prevIndex) =>
-				Math.min(prevIndex + 1, searchResults.length - 1)
-			);
-		} else if (e.key === "Enter" && selectedItemIndex >= 0) {
-			handleChange(searchResults[selectedItemIndex].name);
-			console.log("Selected Artist:", searchResults[selectedItemIndex]);
-		}
-	};
-
 	return (
 		<div className="artist-card">
 			<div className="artist-info">
