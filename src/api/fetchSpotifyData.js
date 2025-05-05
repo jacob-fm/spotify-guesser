@@ -1,5 +1,3 @@
-import 'dotenv/config';
-
 export default async function fetchSpotifyData(query) {
     // Get access token
     const authResponse = await fetch(
@@ -8,7 +6,7 @@ export default async function fetchSpotifyData(query) {
         method: "POST",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
-          Authorization: `Basic ${window.btoa(process.env.SPOTIFY_CLIENT_ID + ":" + process.env.SPOTIFY_CLIENT_SECRET)}`
+          Authorization: `Basic ${window.btoa(import.meta.env.VITE_SPOTIFY_CLIENT_ID + ":" + import.meta.env.VITE_SPOTIFY_CLIENT_SECRET)}`
         },
         body: "grant_type=client_credentials"
       }

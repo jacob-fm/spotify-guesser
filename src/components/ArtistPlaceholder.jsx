@@ -33,7 +33,9 @@ export default function ArtistPlaceholder() {
 
 	useEffect(() => {
 		if (debouncedInput.length > 0) {
-			fetchData(debouncedInput);
+			fetchSpotifyData(debouncedInput).then((results) => {
+				setSearchResults(results);
+			});
 		} else {
 			setSearchResults([]);
 		}
