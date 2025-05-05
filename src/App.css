@@ -119,17 +119,19 @@ span.monthly-listeners {
 /* SearchResultsspan */
 div.search-results-list {
     position: absolute;
-    top: 50px;
+    top: 45.5px;
     display: flex;
     flex-direction: column;
     width: 90%;
+    height: 230px;
+    justify-content: space-evenly;
 }
 
 span.search-result {
     font-size: 1.4rem;
     color: #0d0c1d;
     background-color: rgba(233, 233, 233, 0.743);
-    padding: 6px;
+    padding: 4px;
     text-align: center;
     width: 100%;
     &:hover,
