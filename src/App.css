@@ -64,6 +64,16 @@ div.artist-cards-container {
     }
 }
 
+div.loading-placeholder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 380px;
+    height: 200px;
+    font-size: 4rem;
+    color: white;
+}
+
 div.artist-card {
     display: flex;
     flex-direction: column;

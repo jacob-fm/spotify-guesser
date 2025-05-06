@@ -102,7 +102,9 @@ export default function Game({
 					{targetArtist ? (
 						<ArtistCard artist={targetArtist} visibleScore={guessSubmitted} />
 					) : (
-						<p>Loading target artist...</p>
+						<div className="loading-placeholder">
+							<p>Loading...</p>
+						</div>
 					)}
 				</div>
 				<div>
