@@ -8,25 +8,16 @@ async function getAccessToken() {
 		return accessToken; // Reuse valid token
 	}
 
-	// Request new token
-	const authResponse = await fetch("https://accounts.spotify.com/api/token", {
-		method: "POST",
-		headers: {
-			"Content-Type": "application/x-www-form-urlencoded",
-			Authorization:
-				"Basic " +
-				window.btoa(
-					import.meta.env.VITE_SPOTIFY_CLIENT_ID +
-						":" +
-						import.meta.env.VITE_SPOTIFY_CLIENT_SECRET
-				),
-		},
-		body: "grant_type=client_credentials",
-	});
+	// Request a new token from Netlify serverless function
+	const tokenResponse = await fetch("/.netlify/functions/getSpotifyToken");
 
-	const authData = await authResponse.json();
-	accessToken = authData.access_token;
-	tokenExpiry = now + authData.expires_in * 1000; // expires_in is in seconds
+	if (!tokenResponse.ok) {
+		throw new Error("Failed to fetch access token from Netlify function");
+	}
+
+	const tokenData = await tokenResponse.json();
+	accessToken = tokenData.access_token;
+	tokenExpiry = now + tokenData.expires_in * 1000; // expires_in is in seconds
 
 	return accessToken;
 }
@@ -60,6 +51,6 @@ export async function getArtistById(artistId) {
 		}
 	);
 
-    const data = await response.json();
-    return data;
+	const data = await response.json();
+	return data;
 }
