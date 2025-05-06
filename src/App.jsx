@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Header from "./components/Header";
+import Instructions from "./components/Instructions";
 import Game from "./components/Game";
 import Scoreboard from "./components/Scoreboard";
 import "./App.css";
@@ -20,24 +21,14 @@ function App() {
 	}
 
 	function handleGameOver() {
-        setGameState(GAME_STATES.ENDED);
-    }
+		setGameState(GAME_STATES.ENDED);
+	}
 
 	return (
 		<>
 			<Header />
-			{/* when gameRunning, Game renders, otherwise instructions section renders */}
 			{gameState === GAME_STATES.INSTRUCTIONS && (
-				<section className="instructions">
-					<h2>How to play:</h2>
-					<p>
-						Each round, you’ll be given a target artist. You’re job is to search
-						for and select an artist who you think has a similar monthly
-						listener count. The closer you are, the more points you’ll be
-						awarded. See how many points you can accumulate in 5 rounds!
-					</p>
-					<button onClick={startGame}>Start Game</button>
-				</section>
+				<Instructions startGame={startGame} />
 			)}
 			{gameState === GAME_STATES.GAME && (
 				<Game
@@ -48,9 +39,7 @@ function App() {
 					onGameOver={handleGameOver}
 				/>
 			)}
-            {gameState === GAME_STATES.ENDED && (
-                <Scoreboard score={score} />
-            )}
+			{gameState === GAME_STATES.ENDED && <Scoreboard score={score} />}
 		</>
 	);
 }
