@@ -3,32 +3,31 @@ import targetPool from "../data/target_pool.json";
 import { getArtistById } from "../api/fetchSpotifyData";
 import ArtistCard from "./ArtistCard";
 import ArtistPlaceholder from "./ArtistPlaceholder";
-// import artists from "/src/data/artists.json";
 
 function getRandomTargetArtistId() {
 	const randomIndex = Math.floor(Math.random() * targetPool.length);
 	return targetPool[randomIndex].id;
 }
 
-export default function Game({ roundCount, updateRoundCount, score, updateScore, onGameOver }) {
+export default function Game({
+	roundCount,
+	updateRoundCount,
+	roundResults,
+	updateRoundResults,
+	onGameOver,
+}) {
 	const [targetArtist, setTargetArtist] = useState(null);
 	const [selectedArtist, setSelectedArtist] = useState(null);
 	const [guessSubmitted, setGuessSubmitted] = useState(false);
+	const [combinedScore, setCombinedScore] = useState(0);
 	const totalRounds = 2;
-	// const [gameOver, setGameOver] = useState(false);
-
-	// useEffect(() => {
-	// 	if (roundCount > totalRounds) {
-	// 		setGameOver(true);
-	// 	}
-	// }, [roundCount]);
 
 	function handleTargetArtistSelection() {
 		const randomId = getRandomTargetArtistId();
 		getArtistById(randomId)
 			.then((artist) => {
 				setTargetArtist(artist);
-				console.log("Fetched Target Artist:", artist);
+				// console.log("Fetched Target Artist:", artist);
 			})
 			.catch((error) => {
 				console.error("Error fetching artist data:", error);
@@ -40,13 +39,21 @@ export default function Game({ roundCount, updateRoundCount, score, updateScore,
 		handleTargetArtistSelection();
 	}, []);
 
-	console.log("Target Artist:", targetArtist);
+	useEffect(() => {
+		let totalScore = 0;
+		roundResults.forEach((element) => {
+			totalScore += element.score;
+		});
+		setCombinedScore(totalScore);
+	}, [roundResults]);
+
+	// console.log("Target Artist:", targetArtist);
 
 	function handleArtistSelect(artist) {
 		getArtistById(artist.id)
 			.then((artist) => {
 				setSelectedArtist(artist);
-				console.log("Fetched Selected Artist:", artist);
+				// console.log("Fetched Selected Artist:", artist);
 			})
 			.catch((error) => {
 				console.error("Error fetching artist data:", error);
@@ -58,7 +65,23 @@ export default function Game({ roundCount, updateRoundCount, score, updateScore,
 		setGuessSubmitted(true);
 		const diff = Math.abs(targetArtist.popularity - selectedArtist.popularity);
 		const points = Math.max(0, 100 - diff * 5);
-		updateScore((prevScore) => prevScore + points);
+		updateRoundResults((prev) => [
+			...prev,
+			{
+				round: prev.length + 1,
+				target: {
+					id: targetArtist.id,
+					name: targetArtist.name,
+					popularity: targetArtist.popularity,
+				},
+				guessed: {
+					id: selectedArtist.id,
+					name: selectedArtist.name,
+					popularity: selectedArtist.popularity,
+				},
+				score: points,
+			},
+		]);
 	}
 
 	function handleNextRound() {
@@ -71,7 +94,7 @@ export default function Game({ roundCount, updateRoundCount, score, updateScore,
 	return (
 		<section className="game-content">
 			<h1>Round {roundCount}</h1>
-			<span className="score">Score: {score}</span>
+			<span className="score">Score: {combinedScore}</span>
 			<hr />
 			<div className="artist-cards-container">
 				<div>
@@ -92,7 +115,10 @@ export default function Game({ roundCount, updateRoundCount, score, updateScore,
 							/>
 						</>
 					) : (
-						<ArtistPlaceholder onArtistSelect={handleArtistSelect} targetArtist={targetArtist} />
+						<ArtistPlaceholder
+							onArtistSelect={handleArtistSelect}
+							targetArtist={targetArtist}
+						/>
 					)}
 				</div>
 			</div>
@@ -116,20 +142,16 @@ export default function Game({ roundCount, updateRoundCount, score, updateScore,
 					</button>
 				</div>
 			) : null}
-			{guessSubmitted && (
-				(roundCount >= totalRounds) ? (
+			{guessSubmitted &&
+				(roundCount >= totalRounds ? (
 					<button className="game-over-button" onClick={onGameOver}>
 						See Score
 					</button>
 				) : (
-					<button
-						className="next-round-button"
-						onClick={handleNextRound}
-					>
+					<button className="next-round-button" onClick={handleNextRound}>
 						Next Round
 					</button>
-				)
-			)}
+				))}
 		</section>
 	);
 }
