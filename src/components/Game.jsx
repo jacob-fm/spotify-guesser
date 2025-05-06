@@ -10,10 +10,18 @@ function getRandomTargetArtistId() {
 	return targetPool[randomIndex].id;
 }
 
-export default function Game({ roundCount, updateRoundCount, score, updateScore}) {
+export default function Game({ roundCount, updateRoundCount, score, updateScore, onGameOver }) {
 	const [targetArtist, setTargetArtist] = useState(null);
 	const [selectedArtist, setSelectedArtist] = useState(null);
 	const [guessSubmitted, setGuessSubmitted] = useState(false);
+	const totalRounds = 2;
+	// const [gameOver, setGameOver] = useState(false);
+
+	// useEffect(() => {
+	// 	if (roundCount > totalRounds) {
+	// 		setGameOver(true);
+	// 	}
+	// }, [roundCount]);
 
 	function handleTargetArtistSelection() {
 		const randomId = getRandomTargetArtistId();
@@ -57,16 +65,7 @@ export default function Game({ roundCount, updateRoundCount, score, updateScore}
 		setGuessSubmitted(false);
 		setSelectedArtist(null);
 		updateRoundCount((prevRound) => prevRound + 1);
-		const randomId = getRandomTargetArtistId();
-		getArtistById(randomId)
-			.then((artist) => {
-				setTargetArtist(artist);
-				console.log("Fetched Target Artist:", artist);
-			})
-			.catch((error) => {
-				console.error("Error fetching artist data:", error);
-				setTargetArtist(null);
-			});
+		handleTargetArtistSelection();
 	}
 
 	return (
@@ -117,12 +116,20 @@ export default function Game({ roundCount, updateRoundCount, score, updateScore}
 					</button>
 				</div>
 			) : null}
-			{guessSubmitted && <button
-				className="next-round-button"
-				onClick={handleNextRound}
-			>
-				Next Round
-			</button>}
+			{guessSubmitted && (
+				(roundCount >= totalRounds) ? (
+					<button className="game-over-button" onClick={onGameOver}>
+						See Score
+					</button>
+				) : (
+					<button
+						className="next-round-button"
+						onClick={handleNextRound}
+					>
+						Next Round
+					</button>
+				)
+			)}
 		</section>
 	);
 }

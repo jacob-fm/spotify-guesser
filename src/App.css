@@ -164,7 +164,7 @@ span.search-result {
     background-color: #474973;
 }
 
-.next-round-button {
+.next-round-button, .game-over-button {
     position: absolute;
     bottom: 20px;
     right: 20px;
