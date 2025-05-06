@@ -20,7 +20,7 @@ export default function Game({
 	const [selectedArtist, setSelectedArtist] = useState(null);
 	const [guessSubmitted, setGuessSubmitted] = useState(false);
 	const [combinedScore, setCombinedScore] = useState(0);
-	const totalRounds = 2;
+	const totalRounds = 5;
 
 	function handleTargetArtistSelection() {
 		const randomId = getRandomTargetArtistId();

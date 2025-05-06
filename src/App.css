@@ -52,11 +52,16 @@ span.score {
 /* Artist Cards */
 
 div.artist-cards-container {
+    margin-top: 20px;
     display: flex;
     width: 100%;
     padding-inline: 15vw;
     justify-content: space-evenly;
     text-align: center;
+    h2 {
+        font-size: 1.8rem;
+        line-height: 0.4rem;
+    }
 }
 
 div.artist-card {
@@ -184,7 +189,7 @@ section.scoreboard {
     align-items: center;
     text-align: center;
     max-width: 700px;
-    margin: 120px auto;
+    margin: 70px auto;
     gap: 20px;
     h2 {
         font-size: 3rem;
