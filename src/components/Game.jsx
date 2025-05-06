@@ -10,12 +10,12 @@ function getRandomTargetArtistId() {
 	return targetPool[randomIndex].id;
 }
 
-export default function Game({ roundCount, updateScore, score }) {
+export default function Game({ roundCount, updateRoundCount, score, updateScore}) {
 	const [targetArtist, setTargetArtist] = useState(null);
 	const [selectedArtist, setSelectedArtist] = useState(null);
 	const [guessSubmitted, setGuessSubmitted] = useState(false);
 
-	useEffect(() => {
+	function handleTargetArtistSelection() {
 		const randomId = getRandomTargetArtistId();
 		getArtistById(randomId)
 			.then((artist) => {
@@ -26,6 +26,10 @@ export default function Game({ roundCount, updateScore, score }) {
 				console.error("Error fetching artist data:", error);
 				setTargetArtist(null);
 			});
+	}
+
+	useEffect(() => {
+		handleTargetArtistSelection();
 	}, []);
 
 	console.log("Target Artist:", targetArtist);
@@ -47,6 +51,22 @@ export default function Game({ roundCount, updateScore, score }) {
 		const diff = Math.abs(targetArtist.popularity - selectedArtist.popularity);
 		const points = Math.max(0, 100 - diff * 5);
 		updateScore((prevScore) => prevScore + points);
+	}
+
+	function handleNextRound() {
+		setGuessSubmitted(false);
+		setSelectedArtist(null);
+		updateRoundCount((prevRound) => prevRound + 1);
+		const randomId = getRandomTargetArtistId();
+		getArtistById(randomId)
+			.then((artist) => {
+				setTargetArtist(artist);
+				console.log("Fetched Target Artist:", artist);
+			})
+			.catch((error) => {
+				console.error("Error fetching artist data:", error);
+				setTargetArtist(null);
+			});
 	}
 
 	return (
@@ -82,6 +102,7 @@ export default function Game({ roundCount, updateScore, score }) {
 					<button
 						className="reset-button"
 						onClick={() => setSelectedArtist(null)}
+						disabled={guessSubmitted}
 					>
 						Reset Selection
 					</button>
@@ -90,11 +111,18 @@ export default function Game({ roundCount, updateScore, score }) {
 						onClick={() => {
 							handleSubmitGuess();
 						}}
+						disabled={guessSubmitted}
 					>
 						Submit Guess
 					</button>
 				</div>
 			) : null}
+			{guessSubmitted && <button
+				className="next-round-button"
+				onClick={handleNextRound}
+			>
+				Next Round
+			</button>}
 		</section>
 	);
 }

@@ -6,13 +6,16 @@ import "./App.css";
 function App() {
     // State values
     const [gameRunning, setGameRunning] = useState(false);
-    const [roundCount, setRoundCount] = useState(0);
+    const [roundCount, setRoundCount] = useState(1);
     const [score, setScore] = useState(0);
+    const totalRounds = 5;
 
     function startGame() {
         setGameRunning(true);
-        setRoundCount(1);
     }
+
+    const gameOver = roundCount > totalRounds;
+
     return (
         <>
             <Header />
@@ -30,7 +33,7 @@ function App() {
                     <button onClick={startGame}>Start Game</button>
                 </section>
             ) : (
-                <Game roundCount={roundCount} updateScore={setScore} score={score} />
+                <Game roundCount={roundCount} updateRoundCount={setRoundCount} score={score} updateScore={setScore}  />
             )}
         </>
     );

@@ -163,3 +163,11 @@ span.search-result {
     font-size: 1.5rem;
     background-color: #474973;
 }
+
+.next-round-button {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background-color: transparent;
+    border: 1px solid #474973;
+}
