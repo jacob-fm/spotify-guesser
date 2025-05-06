@@ -64,7 +64,7 @@ export default function Game({
 	function handleSubmitGuess() {
 		setGuessSubmitted(true);
 		const diff = Math.abs(targetArtist.popularity - selectedArtist.popularity);
-		const points = Math.max(0, 100 - diff * 5);
+		const points = Math.max(0, (100 - diff) * 10);
 		updateRoundResults((prev) => [
 			...prev,
 			{

@@ -50,6 +50,7 @@ button {
     font-weight: 500;
     font-family: inherit;
     background-color: #1a1a1a;
+    color: white;
     cursor: pointer;
     transition: border-color 0.15s;
 }
@@ -69,7 +70,7 @@ hr {
     border-color: #a69cac;
 }
 
-@media (prefers-color-scheme: light) {
+/* @media (prefers-color-scheme: light) {
     :root {
         color: #213547;
         background-color: #ffffff;
@@ -80,4 +81,4 @@ hr {
     button {
         background-color: #f9f9f9;
     }
-}
+} */

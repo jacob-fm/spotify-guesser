@@ -42,7 +42,7 @@ function App() {
 					onGameOver={handleGameOver}
 				/>
 			)}
-			{gameState === GAME_STATES.ENDED && <Scoreboard roundResults={roundResults} />}
+			{gameState === GAME_STATES.ENDED && <Scoreboard roundResults={roundResults} onNewGame={startGame} />}
 		</>
 	);
 }

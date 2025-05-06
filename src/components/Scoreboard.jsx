@@ -1,4 +1,4 @@
-export default function Scoreboard({ roundResults }) {
+export default function Scoreboard({ roundResults, onNewGame }) {
     return (
         <section className="scoreboard">
             <h2>Score</h2>
@@ -28,6 +28,9 @@ export default function Scoreboard({ roundResults }) {
                     </tr>
                 </tbody>
             </table>
+            <button className="play-again" onClick={onNewGame}>
+                Play Again
+            </button>
         </section>
     );
 }
