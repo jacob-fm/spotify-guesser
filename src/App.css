@@ -27,6 +27,11 @@ section.instructions h2 {
     line-height: 0;
 }
 
+section.instructions p {
+    font-size: 1.2rem;
+    line-height: 1.5;
+}
+
 /* Game component */
 
 section.game-content {
@@ -182,7 +187,7 @@ section.scoreboard {
     margin: 120px auto;
     gap: 20px;
     h2 {
-        font-size: 2.4rem;
+        font-size: 3rem;
         line-height: 0;
     }
 }

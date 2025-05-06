@@ -1,7 +1,7 @@
 export default function Scoreboard({ roundResults }) {
     return (
         <section className="scoreboard">
-            <h2>Score:</h2>
+            <h2>Score</h2>
             <table className="scoreboard-table">
                 <thead>
                     <tr>
