@@ -1,12 +1,5 @@
-/* Hex values:
-tan: #F1DAC4
-faint purple: #A69CAC
-bright purple: #474973
-dark purple: #161B33
-darkest purple: #0D0C1D */
-
 header {
-    background-color: #474973;
+    background-color: var(--bright-purple);
     display: flex;
     width: 100%;
     padding: 1rem;
@@ -71,7 +64,7 @@ div.loading-placeholder {
     width: 380px;
     height: 200px;
     font-size: 4rem;
-    color: white;
+    color: var(--white);
 }
 
 div.artist-card {
@@ -84,9 +77,9 @@ div.artist-info {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #f1dac4;
+    background-color: var(--tan);
     border-radius: 7px;
-    border: solid 6px #f1dac4;
+    border: solid 6px var(--tan);
     width: 380px;
     height: auto;
     position: relative;
@@ -95,9 +88,9 @@ div.artist-info {
 span.artist-name {
     width: 100%;
     text-align: center;
-    background-color: #0d0c1d;
+    background-color: var(--darkest);
     font-size: 1.4rem;
-    color: white;
+    color: var(--white);
     padding: 6px;
 }
 
@@ -107,8 +100,8 @@ div.artist-info > input.artist-search-input {
     padding: 10px;
     border: none;
     font-size: 1.4rem;
-    background-color: #f1dac4;
-    color: #0d0c1d;
+    background-color: var(--tan);
+    color: var(--darkest);
     &:focus {
         outline: none;
     }
@@ -122,18 +115,18 @@ div.artist-info > img {
 div.artist-info > .artist-image-placeholder {
     width: 100%;
     height: 200px;
-    background-color: #474973;
+    background-color: var(--bright-purple);
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 6rem;
-    color: white;
+    color: var(--white);
 }
 
 span.popularity-score {
     text-align: center;
     font-size: 1.6rem;
-    color: #0d0c1d;
+    color: var(--darkest);
     padding: 6px;
 }
 
@@ -150,16 +143,16 @@ div.search-results-list {
 
 span.search-result {
     font-size: 1.4rem;
-    color: white;
-    background-color: #0D0C1D;
+    color: var(--white);
+    background-color: var(--darkest);
     border-radius: 7px;
     padding: 4px;
     text-align: center;
     width: 100%;
     &:hover,
     &.active {
-        background-color: #160abf;
-        color: white;
+        background-color: var(--faint-purple);
+        color: var(--white);
     }
 }
 
@@ -174,14 +167,14 @@ span.search-result {
 
 .reset-button {
     background-color: transparent;
-    border: 1px solid #474973;
+    border: 1px solid var(--bright-purple);
     width: 100%;
 }
 
 .submit-guess-button {
     width: 100%;
     font-size: 1.5rem;
-    background-color: #474973;
+    background-color: var(--bright-purple);
 }
 
 .next-round-button, .game-over-button {
@@ -189,7 +182,7 @@ span.search-result {
     bottom: 20px;
     right: 20px;
     background-color: transparent;
-    border: 1px solid #474973;
+    border: 1px solid var(--bright-purple);
 }
 
 /* Game Over screen */
@@ -216,6 +209,6 @@ table.scoreboard-table {
         padding: 10px;
     }
     tr.dashed-line {
-        border-bottom: 1px solid #474973;
+        border-bottom: 1px solid var(--bright-purple);
     }
 }
