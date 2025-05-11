@@ -93,8 +93,10 @@ export default function Game({
 
 	return (
 		<section className="game-content">
-			<h1>Round {roundCount}</h1>
-			<span className="score">Score: {combinedScore}</span>
+			<div className="round-info">
+				<h1>Round {roundCount}</h1>
+				<span className="score">Score: {combinedScore}</span>
+			</div>
 			<hr />
 			<div className="artist-cards-container">
 				<div>

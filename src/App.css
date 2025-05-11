@@ -1,214 +1,260 @@
 header {
-    background-color: var(--bright-purple);
-    display: flex;
-    width: 100%;
-    padding: 1rem;
+	background-color: var(--bright-purple);
+	display: flex;
+	width: 100vw;
+	padding: 1rem;
+	@media screen and (max-width: 768px) {
+		padding: 0.5rem;
+	}
+}
+
+header a {
+	line-height: 0;
+}
+
+img.header-logo {
+	@media screen and (max-width: 768px) {
+		width: 140px;
+	}
 }
 
 section.instructions {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    max-width: 500px;
-    margin: 120px auto;
-    gap: 20px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	max-width: 500px;
+	margin: 120px auto;
+	gap: 20px;
+	@media screen and (max-width: 768px) {
+		margin-block: 40px;
+	}
 }
 
 section.instructions h2 {
-    font-size: 2.4rem;
-    line-height: 0;
+	font-size: 2.4rem;
+	line-height: 0;
 }
 
 section.instructions p {
-    font-size: 1.2rem;
-    line-height: 1.5;
+	font-size: 1.2rem;
+	line-height: 1.5;
 }
 
 /* Game component */
 
 section.game-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+div.round-info {
+	display: flex;
+	@media screen and (max-width: 768px) {
+		margin-top: 10px;
+		flex-direction: column;
+		align-items: center;
+	}
 }
 
 span.score {
-    position: absolute;
-    align-self: flex-end;
-    margin-right: 170px;
-    top: 140px;
-    font-size: 1.8rem;
-    font-variation-settings: "slnt" -10;
+	font-variation-settings: "slnt" -10;
+	font-size: 1.4rem;
+	@media screen and (min-width: 769px) {
+		position: absolute;
+		right: 16%;
+		top: 15%;
+		font-size: 1.8rem;
+	}
 }
 
 /* Artist Cards */
 
 div.artist-cards-container {
-    margin-top: 20px;
-    display: flex;
-    width: 100%;
-    padding-inline: 15vw;
-    justify-content: space-evenly;
-    text-align: center;
-    h2 {
-        font-size: 1.8rem;
-        line-height: 0.4rem;
-    }
+	margin-top: 20px;
+	display: flex;
+	width: 100%;
+	padding-inline: 15vw;
+	justify-content: space-evenly;
+	text-align: center;
+	h2 {
+		font-size: 1.8rem;
+		line-height: 0.4rem;
+	}
+	@media screen and (max-width: 768px) {
+		flex-direction: column;
+		margin-top: 0;
+		gap: 20px;
+		padding: 0 5% 5% 5%;
+		h2 {
+			font-size: 1.4rem;
+			line-height: 0.2rem;
+		}
+	}
 }
 
 div.loading-placeholder {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 380px;
-    height: 200px;
-    font-size: 4rem;
-    color: var(--white);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 380px;
+	height: 200px;
+	font-size: 4rem;
+	color: var(--white);
 }
 
 div.artist-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 div.artist-info {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: var(--tan);
-    border-radius: 7px;
-    border: solid 6px var(--tan);
-    width: 380px;
-    height: auto;
-    position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background-color: var(--tan);
+	border-radius: 7px;
+	border: solid 6px var(--tan);
+	width: 380px;
+	height: auto;
+	position: relative;
+	@media screen and (max-width: 768px) {
+		width: 100%;
+		border-width: 3px;
+	}
 }
 
 span.artist-name {
-    width: 100%;
-    text-align: center;
-    background-color: var(--darkest);
-    font-size: 1.4rem;
-    color: var(--white);
-    padding: 6px;
+	width: 100%;
+	text-align: center;
+	background-color: var(--darkest);
+	font-size: 1.4rem;
+	color: var(--white);
+	padding: 6px;
 }
 
 div.artist-info > input.artist-search-input {
-    width: 100%;
-    text-align: center;
-    padding: 10px;
-    border: none;
-    font-size: 1.4rem;
-    background-color: var(--tan);
-    color: var(--darkest);
-    &:focus {
-        outline: none;
-    }
+	width: 100%;
+	text-align: center;
+	padding: 10px;
+	border: none;
+	font-size: 1.4rem;
+	background-color: var(--tan);
+	color: var(--darkest);
+	&:focus {
+		outline: none;
+	}
 }
 
 div.artist-info > img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
+	width: 100%;
+	height: 200px;
+	object-fit: cover;
+	@media screen and (max-width: 768px) {
+		height: 150px;
+	}
 }
 div.artist-info > .artist-image-placeholder {
-    width: 100%;
-    height: 200px;
-    background-color: var(--bright-purple);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 6rem;
-    color: var(--white);
+	width: 100%;
+	height: 200px;
+	background-color: var(--bright-purple);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 6rem;
+	color: var(--white);
 }
 
 span.popularity-score {
-    text-align: center;
-    font-size: 1.6rem;
-    color: var(--darkest);
-    padding: 6px;
+	text-align: center;
+	font-size: 1.6rem;
+	color: var(--darkest);
+	padding: 6px;
 }
 
 /* SearchResultsspan */
 div.search-results-list {
-    position: absolute;
-    top: 45.5px;
-    display: flex;
-    flex-direction: column;
-    width: 90%;
-    height: 230px;
-    justify-content: space-evenly;
+	position: absolute;
+	top: 45.5px;
+	display: flex;
+	flex-direction: column;
+	width: 90%;
+	height: 230px;
+	justify-content: space-evenly;
 }
 
 span.search-result {
-    font-size: 1.4rem;
-    color: var(--white);
-    background-color: var(--darkest);
-    border-radius: 7px;
-    padding: 4px;
-    text-align: center;
-    width: 100%;
-    &:hover,
-    &.active {
-        background-color: var(--faint-purple);
-        color: var(--white);
-    }
+	font-size: 1.4rem;
+	color: var(--white);
+	background-color: var(--darkest);
+	border-radius: 7px;
+	padding: 4px;
+	text-align: center;
+	width: 100%;
+	&:hover,
+	&.active {
+		background-color: var(--faint-purple);
+		color: var(--white);
+	}
 }
 
 .post-guess-buttons {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 20px;
-    width: 300px;
-    gap: 10px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 20px;
+	width: 300px;
+	gap: 10px;
 }
 
 .reset-button {
-    background-color: transparent;
-    border: 1px solid var(--bright-purple);
-    width: 100%;
+	background-color: transparent;
+	border: 1px solid var(--bright-purple);
+	width: 100%;
 }
 
 .submit-guess-button {
-    width: 100%;
-    font-size: 1.5rem;
-    background-color: var(--bright-purple);
+	width: 100%;
+	font-size: 1.5rem;
+	background-color: var(--bright-purple);
 }
 
-.next-round-button, .game-over-button {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    background-color: transparent;
-    border: 1px solid var(--bright-purple);
+.next-round-button,
+.game-over-button {
+	position: absolute;
+	bottom: 20px;
+	right: 20px;
+	background-color: transparent;
+	border: 1px solid var(--bright-purple);
 }
 
 /* Game Over screen */
 section.scoreboard {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    max-width: 700px;
-    margin: 70px auto;
-    gap: 20px;
-    h2 {
-        font-size: 3rem;
-        line-height: 0;
-    }
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	max-width: 700px;
+	margin: 70px auto;
+	gap: 20px;
+	h2 {
+		font-size: 3rem;
+		line-height: 0;
+	}
 }
 
 table.scoreboard-table {
-    border-collapse: collapse;
-    width: 100%;
-    margin-top: 20px;
-    font-size: 1.2rem;
-    th, td {
-        padding: 10px;
-    }
-    tr.dashed-line {
-        border-bottom: 1px solid var(--bright-purple);
-    }
+	border-collapse: collapse;
+	width: 100%;
+	margin-top: 20px;
+	font-size: 1.2rem;
+	th,
+	td {
+		padding: 10px;
+	}
+	tr.dashed-line {
+		border-bottom: 1px solid var(--bright-purple);
+	}
 }
