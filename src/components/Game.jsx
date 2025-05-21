@@ -126,35 +126,36 @@ export default function Game({
 					)}
 				</div>
 			</div>
-			{selectedArtist != null ? (
-				<div className="post-guess-buttons">
-					<button
-						className="reset-button"
-						onClick={() => setSelectedArtist(null)}
-						disabled={guessSubmitted}
-					>
-						Reset Selection
-					</button>
-					<button
-						className="submit-guess-button"
-						onClick={() => {
-							handleSubmitGuess();
-						}}
-						disabled={guessSubmitted}
-					>
-						Submit Guess
-					</button>
-				</div>
-			) : null}
-			{guessSubmitted &&
-				(roundCount >= totalRounds ? (
-					<button className="game-over-button" onClick={onGameOver}>
-						See Score
-					</button>
+			{selectedArtist != null &&
+				(guessSubmitted ? (
+					roundCount >= totalRounds ? (
+						<button className="game-over-button" onClick={onGameOver}>
+							See Score
+						</button>
+					) : (
+						<button className="next-round-button" onClick={handleNextRound}>
+							Next Round
+						</button>
+					)
 				) : (
-					<button className="next-round-button" onClick={handleNextRound}>
-						Next Round
-					</button>
+					<div className="post-guess-buttons">
+						<button
+							className="reset-button"
+							onClick={() => setSelectedArtist(null)}
+							disabled={guessSubmitted}
+						>
+							Reset Selection
+						</button>
+						<button
+							className="submit-guess-button"
+							onClick={() => {
+								handleSubmitGuess();
+							}}
+							disabled={guessSubmitted}
+						>
+							Submit Guess
+						</button>
+					</div>
 				))}
 		</section>
 	);
