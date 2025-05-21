@@ -47,12 +47,12 @@ section.game-content {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	justify-content: space-evenly;
 }
 
 div.round-info {
 	display: flex;
 	@media screen and (max-width: 768px) {
-		margin-top: 10px;
 		flex-direction: column;
 		align-items: center;
 	}
@@ -86,9 +86,9 @@ div.artist-cards-container {
 		flex-direction: column;
 		margin-top: 0;
 		gap: 20px;
-		padding: 0 5% 5% 5%;
+		padding: 0 10% 5% 10%;
 		h2 {
-			font-size: 1.4rem;
+			font-size: 1.2rem;
 			line-height: 0.2rem;
 		}
 	}
@@ -130,7 +130,7 @@ span.artist-name {
 	width: 100%;
 	text-align: center;
 	background-color: var(--darkest);
-	font-size: 1.4rem;
+	font-size: 1.2rem;
 	color: var(--white);
 	padding: 6px;
 }
@@ -140,7 +140,7 @@ div.artist-info > input.artist-search-input {
 	text-align: center;
 	padding: 10px;
 	border: none;
-	font-size: 1.4rem;
+	font-size: 1.2rem;
 	background-color: var(--tan);
 	color: var(--darkest);
 	&:focus {
@@ -153,7 +153,7 @@ div.artist-info > img {
 	height: 200px;
 	object-fit: cover;
 	@media screen and (max-width: 768px) {
-		height: 150px;
+		height: 15dvh;
 	}
 }
 div.artist-info > .artist-image-placeholder {
@@ -165,6 +165,9 @@ div.artist-info > .artist-image-placeholder {
 	align-items: center;
 	font-size: 6rem;
 	color: var(--white);
+	@media screen and (max-width: 768px) {
+		height: 15dvh;
+	}
 }
 
 span.popularity-score {
@@ -172,6 +175,9 @@ span.popularity-score {
 	font-size: 1.6rem;
 	color: var(--darkest);
 	padding: 6px;
+	@media screen and (max-width: 768px) {
+		font-size: 1.2rem;
+	}
 }
 
 /* SearchResultsspan */
@@ -223,9 +229,8 @@ span.search-result {
 
 .next-round-button,
 .game-over-button {
-	position: absolute;
-	bottom: 20px;
-	right: 20px;
+	margin-top: 40px;
+	font-size: 1.5rem;
 	background-color: transparent;
 	border: 1px solid var(--bright-purple);
 }
