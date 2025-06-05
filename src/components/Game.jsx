@@ -4,9 +4,14 @@ import { getArtistById } from "../api/fetchSpotifyData";
 import ArtistCard from "./ArtistCard";
 import ArtistPlaceholder from "./ArtistPlaceholder";
 
-function getRandomTargetArtistId() {
-	const randomIndex = Math.floor(Math.random() * targetPool.length);
-	return targetPool[randomIndex].id;
+function getRandomTargetArtistId(usedIds) {
+    const availableArtists = targetPool.filter(artist => !usedIds.includes(artist.id));
+    if (availableArtists.length === 0) {
+        console.warn("All artists have been used - recycling pool");
+        return targetPool[Math.floor(Math.random() * targetPool.length)].id;
+    }
+    const randomIndex = Math.floor(Math.random() * availableArtists.length);
+    return availableArtists[randomIndex].id;
 }
 
 export default function Game({
@@ -23,22 +28,26 @@ export default function Game({
 	const totalRounds = 5;
 
 	function handleTargetArtistSelection() {
-		const randomId = getRandomTargetArtistId();
-		getArtistById(randomId)
-			.then((artist) => {
-				setTargetArtist(artist);
-				// console.log("Fetched Target Artist:", artist);
-			})
-			.catch((error) => {
-				console.error("Error fetching artist data:", error);
-				setTargetArtist(null);
-			});
-	}
+    // Get array of previously used target artist IDs
+    const usedTargetIds = roundResults.map(result => result.target.id);
+    
+    const randomId = getRandomTargetArtistId(usedTargetIds);
+    getArtistById(randomId)
+        .then((artist) => {
+            setTargetArtist(artist);
+        })
+        .catch((error) => {
+            console.error("Error fetching artist data:", error);
+            setTargetArtist(null);
+        });
+}
 
+	// Initialize the target artist when the component mounts initially
 	useEffect(() => {
 		handleTargetArtistSelection();
 	}, []);
 
+	// Update the combined score whenever roundResults change
 	useEffect(() => {
 		let totalScore = 0;
 		roundResults.forEach((element) => {
@@ -46,8 +55,6 @@ export default function Game({
 		});
 		setCombinedScore(totalScore);
 	}, [roundResults]);
-
-	// console.log("Target Artist:", targetArtist);
 
 	function handleArtistSelect(artist) {
 		getArtistById(artist.id)

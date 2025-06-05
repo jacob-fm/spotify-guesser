@@ -72,6 +72,14 @@ hr {
     border-color: var(--faint-purple);
 }
 
+ol {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    font-size: 1.2rem;
+    line-height: 1.6rem;
+}
+
 /* @media (prefers-color-scheme: light) {
     :root {
         color: #213547;

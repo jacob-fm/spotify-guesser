@@ -20,7 +20,7 @@ export default function Scoreboard({ roundResults, onNewGame }) {
                             <td>{result.score}</td>
                         </tr>
                     ))}
-                    <tr className="dashed-line"> </tr>
+                    <tr className="dashed-line"></tr>
                     <tr className="total-score-row">
                         <td>Total</td>
                         <td colSpan="2"></td>
