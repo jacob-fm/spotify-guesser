@@ -23,7 +23,7 @@ export default function ArtistPlaceholder({ onArtistSelect, targetArtist }) {
 		// Check cache
 		if (cacheRef.current[debouncedInput]) {
 			setSearchResults(cacheRef.current[debouncedInput]);
-			console.log("Loaded from cache");
+			// console.log("Loaded from cache");
 		} else {
 			// Fetch from Spotify API and cache it
 			searchSpotifyArtists(debouncedInput)
@@ -33,15 +33,15 @@ export default function ArtistPlaceholder({ onArtistSelect, targetArtist }) {
 					);
 					cacheRef.current[debouncedInput] = filteredResults;
 					setSearchResults(filteredResults);
-					console.log("Fetched from API");
+					// console.log("Fetched from API");
 				})
 				.catch((err) => {
 					console.error("Error fetching from Spotify:", err);
 				});
 		}
 
-		console.log("Search Results:", searchResults.length);
-		console.log("Cache Size:", Object.keys(cacheRef.current).length);
+		// console.log("Search Results:", searchResults.length);
+		// console.log("Cache Size:", Object.keys(cacheRef.current).length);
 	}, [debouncedInput]);
 
 	const handleChange = (value) => {

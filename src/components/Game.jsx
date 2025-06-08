@@ -57,7 +57,7 @@ export default function Game({
 	}, []);
 
 	function handleGetTargetArtist() {
-		console.log("attempted ID:", targetArtistList[roundCount - 1]);
+		// console.log("attempted ID:", targetArtistList[roundCount - 1]);
 		getArtistById(targetArtistList[roundCount - 1])
 			.then((artist) => {
 				setTargetArtist(artist);
