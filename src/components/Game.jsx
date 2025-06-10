@@ -1,21 +1,8 @@
 import { useState, useEffect } from "react";
-// import targetPool from "../data/target_pool.json";
 import { supabase } from "../lib/supabaseClient";
 import { getArtistById } from "../api/fetchSpotifyData";
 import ArtistCard from "./ArtistCard";
 import ArtistPlaceholder from "./ArtistPlaceholder";
-
-// function getRandomTargetArtistId(usedIds) {
-// 	const availableArtists = targetPool.filter(
-// 		(artist) => !usedIds.includes(artist.id)
-// 	);
-// 	if (availableArtists.length === 0) {
-// 		console.warn("All artists have been used - recycling pool");
-// 		return targetPool[Math.floor(Math.random() * targetPool.length)].id;
-// 	}
-// 	const randomIndex = Math.floor(Math.random() * availableArtists.length);
-// 	return availableArtists[randomIndex].id;
-// }
 
 export default function Game({
 	roundCount,
@@ -57,32 +44,15 @@ export default function Game({
 	}, []);
 
 	function handleGetTargetArtist() {
-		// console.log("attempted ID:", targetArtistList[roundCount - 1]);
 		getArtistById(targetArtistList[roundCount - 1])
 			.then((artist) => {
 				setTargetArtist(artist);
-				// console.log("Fetched Target Artist:", artist);
 			})
 			.catch((error) => {
 				console.error("Error fetching artist data:", error);
 				setTargetArtist(null);
 			});
 	}
-
-	// function handleTargetArtistSelection() {
-	// 	// Get array of previously used target artist IDs
-	// 	const usedTargetIds = roundResults.map((result) => result.target.id);
-
-	// 	const randomId = getRandomTargetArtistId(usedTargetIds);
-	// 	getArtistById(randomId)
-	// 		.then((artist) => {
-	// 			setTargetArtist(artist);
-	// 		})
-	// 		.catch((error) => {
-	// 			console.error("Error fetching artist data:", error);
-	// 			setTargetArtist(null);
-	// 		});
-	// }
 
 	useEffect(() => {
 		if (targetArtistList.length > 0) {
@@ -104,7 +74,6 @@ export default function Game({
 		getArtistById(artist.id)
 			.then((artist) => {
 				setSelectedArtist(artist);
-				// console.log("Fetched Selected Artist:", artist);
 			})
 			.catch((error) => {
 				console.error("Error fetching artist data:", error);
@@ -114,8 +83,7 @@ export default function Game({
 
 	function handleSubmitGuess() {
 		setGuessSubmitted(true);
-		const diff = Math.abs(targetArtist.popularity - selectedArtist.popularity);
-		const points = Math.max(0, (100 - diff) * 10);
+		const points = calculateRoundScore(targetArtist.popularity, selectedArtist.popularity);
 		updateRoundResults((prev) => [
 			...prev,
 			{
@@ -135,11 +103,20 @@ export default function Game({
 		]);
 	}
 
+	function calculateRoundScore(targetPopularity, guessPopularity) {
+		const diff = Math.abs(targetPopularity - guessPopularity);
+		if (diff === 0) return 100;
+		else if (diff <= 3) return 80;
+		else if (diff <= 5) return 60;
+		else if (diff <= 10) return 40;
+		else if (diff <= 15) return 20;
+		else return 0; 
+	}
+
 	function handleNextRound() {
 		setGuessSubmitted(false);
 		setSelectedArtist(null);
 		updateRoundCount((prevRound) => prevRound + 1);
-		// handleTargetArtistSelection();
 	}
 
 	return (
