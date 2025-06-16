@@ -105,12 +105,7 @@ export default function Game({
 
 	function calculateRoundScore(targetPopularity, guessPopularity) {
 		const diff = Math.abs(targetPopularity - guessPopularity);
-		if (diff === 0) return 100;
-		else if (diff <= 3) return 80;
-		else if (diff <= 5) return 60;
-		else if (diff <= 10) return 40;
-		else if (diff <= 15) return 20;
-		else return 0; 
+		return 100 - (diff * 5);
 	}
 
 	function handleNextRound() {
