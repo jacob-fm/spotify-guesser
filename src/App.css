@@ -122,7 +122,7 @@ div.artist-info {
 	height: auto;
 	position: relative;
 	@media screen and (max-width: 768px) {
-		width: 100%;
+		width: 70%;
 		border-width: 3px;
 	}
 }
@@ -134,6 +134,10 @@ span.artist-name {
 	font-size: 1.2rem;
 	color: var(--white);
 	padding: 6px;
+	@media screen and (max-width: 768px) {
+		font-size: 1.0rem;
+		padding: 3px;
+	}
 }
 
 div.artist-info > input.artist-search-input {
@@ -147,6 +151,10 @@ div.artist-info > input.artist-search-input {
 	&:focus {
 		outline: none;
 	}
+	@media screen and (max-width: 768px) {
+		font-size: 1rem;
+		padding: 4px;
+	}
 }
 
 div.artist-info > img {
@@ -154,7 +162,7 @@ div.artist-info > img {
 	height: 200px;
 	object-fit: cover;
 	@media screen and (max-width: 768px) {
-		height: 15dvh;
+		height: 20dvh;
 	}
 }
 div.artist-info > .artist-image-placeholder {
@@ -177,7 +185,8 @@ span.popularity-score {
 	color: var(--darkest);
 	padding: 6px;
 	@media screen and (max-width: 768px) {
-		font-size: 1.2rem;
+		font-size: 1.0rem;
+		padding: 3px;
 	}
 }
 
@@ -192,6 +201,10 @@ div.search-results-list {
 	width: 100%;
 	height: 200px;
 	justify-content: space-between;
+	@media screen and (max-width: 768px) {
+		top: 27px;
+		height: 170px;
+	}
 }
 
 span.search-result {
@@ -205,6 +218,9 @@ span.search-result {
 	&.active {
 		background-color: var(--faint-purple);
 		color: var(--darkest);
+	}
+	@media screen and (max-width: 768px) {
+		font-size: 1rem;
 	}
 }
 
