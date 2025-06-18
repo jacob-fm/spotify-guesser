@@ -59,6 +59,7 @@ div.round-info {
 	}
 }
 
+span.added-score,
 span.score {
 	font-variation-settings: "slnt" -10;
 	font-size: 1.4rem;
@@ -68,6 +69,11 @@ span.score {
 		top: 15%;
 		font-size: 1.8rem;
 	}
+}
+
+span.added-score {
+	color: rgb(15, 222, 70);
+	transform: translateY(-32px);
 }
 
 /* Artist Cards */
@@ -135,7 +141,7 @@ span.artist-name {
 	color: var(--white);
 	padding: 6px;
 	@media screen and (max-width: 768px) {
-		font-size: 1.0rem;
+		font-size: 1rem;
 		padding: 3px;
 	}
 }
@@ -185,7 +191,7 @@ span.popularity-score {
 	color: var(--darkest);
 	padding: 6px;
 	@media screen and (max-width: 768px) {
-		font-size: 1.0rem;
+		font-size: 1rem;
 		padding: 3px;
 	}
 }
@@ -214,6 +220,7 @@ span.search-result {
 	padding: 4px;
 	text-align: center;
 	width: 100%;
+	cursor: pointer;
 	&:hover,
 	&.active {
 		background-color: var(--faint-purple);
