@@ -234,8 +234,6 @@ span.search-result {
 }
 
 .reset-button {
-	background-color: transparent;
-	border: 1px solid var(--bright-purple);
 	width: 100%;
 }
 
@@ -249,8 +247,6 @@ span.search-result {
 .game-over-button {
 	margin-top: 40px;
 	font-size: 1.5rem;
-	background-color: transparent;
-	border: 1px solid var(--bright-purple);
 }
 
 /* Game Over screen */
