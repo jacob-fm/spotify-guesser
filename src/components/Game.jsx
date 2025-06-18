@@ -128,10 +128,20 @@ export default function Game({
 		<section className="game-content">
 			<div className="round-info">
 				<h1>Round {roundCount}</h1>
-				{guessSubmitted && (
-					<ScoreIncrement startValue={thisRoundScore} endValue={0} duration={1.4} />
-				)}
-				<AnimatedScore previousScore={previousScore} newScore={combinedScore} duration={1.4} />
+				<div className="score-display-line">
+					<AnimatedScore
+						previousScore={previousScore}
+						newScore={combinedScore}
+						duration={1.4}
+					/>
+					{guessSubmitted && (
+						<ScoreIncrement
+							startValue={thisRoundScore}
+							endValue={0}
+							duration={1.4}
+						/>
+					)}
+				</div>
 			</div>
 			<hr />
 			<div className="artist-cards-container">
