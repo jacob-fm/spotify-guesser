@@ -3,6 +3,8 @@ import { supabase } from "../lib/supabaseClient";
 import { getArtistById } from "../api/fetchSpotifyData";
 import ArtistCard from "./ArtistCard";
 import ArtistPlaceholder from "./ArtistPlaceholder";
+import AnimatedScore from "./AnimatedScore";
+import ScoreIncrement from "./ScoreIncrement";
 
 export default function Game({
 	roundCount,
@@ -16,7 +18,9 @@ export default function Game({
 	// const [isLoading, setIsLoading] = useState(true);
 	const [selectedArtist, setSelectedArtist] = useState(null);
 	const [guessSubmitted, setGuessSubmitted] = useState(false);
+	const [previousScore, setPreviousScore] = useState(0);
 	const [combinedScore, setCombinedScore] = useState(0);
+	const [thisRoundScore, setThisRoundScore] = useState(0);
 	const totalRounds = 5;
 	const today = new Date().toISOString().slice(0, 10); // Get today's date in YYYY-MM-DD format
 
@@ -54,19 +58,21 @@ export default function Game({
 			});
 	}
 
+	// fetch target artist when round count or list changes
 	useEffect(() => {
 		if (targetArtistList.length > 0) {
 			// Only call if we have data
 			handleGetTargetArtist();
 		}
-	}, [targetArtistList, roundCount]); 
+	}, [targetArtistList, roundCount]);
 
-	// Update the combined score whenever roundResults change
+	// Update the combined score whenever new score is added to roundResults
 	useEffect(() => {
 		let totalScore = 0;
 		roundResults.forEach((element) => {
 			totalScore += element.score;
 		});
+		setPreviousScore(combinedScore);
 		setCombinedScore(totalScore);
 	}, [roundResults]);
 
@@ -83,7 +89,11 @@ export default function Game({
 
 	function handleSubmitGuess() {
 		setGuessSubmitted(true);
-		const points = calculateRoundScore(targetArtist.popularity, selectedArtist.popularity);
+		const points = calculateRoundScore(
+			targetArtist.popularity,
+			selectedArtist.popularity
+		);
+		setThisRoundScore(points);
 		updateRoundResults((prev) => [
 			...prev,
 			{
@@ -105,7 +115,7 @@ export default function Game({
 
 	function calculateRoundScore(targetPopularity, guessPopularity) {
 		const diff = Math.abs(targetPopularity - guessPopularity);
-		return Math.max(0, 100 - (diff * 5));
+		return Math.max(0, 100 - diff * 5);
 	}
 
 	function handleNextRound() {
@@ -118,7 +128,10 @@ export default function Game({
 		<section className="game-content">
 			<div className="round-info">
 				<h1>Round {roundCount}</h1>
-				<span className="score">Score: {combinedScore}</span>
+				{guessSubmitted && (
+					<ScoreIncrement startValue={thisRoundScore} endValue={0} duration={1.4} />
+				)}
+				<AnimatedScore previousScore={previousScore} newScore={combinedScore} duration={1.4} />
 			</div>
 			<hr />
 			<div className="artist-cards-container">

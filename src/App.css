@@ -59,7 +59,7 @@ div.round-info {
 	}
 }
 
-span.added-score,
+.score-increment,
 span.score {
 	font-variation-settings: "slnt" -10;
 	font-size: 1.4rem;
@@ -71,7 +71,7 @@ span.score {
 	}
 }
 
-span.added-score {
+.score-increment {
 	color: rgb(15, 222, 70);
 	transform: translateY(-32px);
 }
