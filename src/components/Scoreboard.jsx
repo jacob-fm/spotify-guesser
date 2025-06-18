@@ -28,9 +28,10 @@ export default function Scoreboard({ roundResults, onNewGame }) {
                     </tr>
                 </tbody>
             </table>
-            <button className="play-again" onClick={onNewGame}>
+            {/* <button className="play-again" onClick={onNewGame}>
                 Play Again
-            </button>
+            </button> */}
+            <h3>See you tomorrow!</h3>
         </section>
     );
 }
