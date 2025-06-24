@@ -97,6 +97,7 @@ header {
 	display: flex;
 	width: 100vw;
 	padding: 1rem;
+	justify-content: space-between;
 	@media screen and (max-width: 768px) {
 		padding: 0.5rem;
 	}
@@ -110,6 +111,12 @@ img.header-logo {
 	@media screen and (max-width: 768px) {
 		width: 140px;
 	}
+}
+
+div.user-pages {
+	display: flex;
+	gap: 20px;
+	align-items: center;
 }
 
 div.not-found {

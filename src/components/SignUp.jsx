@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { supabase } from '../lib/supabaseClient'; 
+import Header from './Header';
 
 export default function SignUp() {
   const [email, setEmail] = useState('');
@@ -25,6 +26,9 @@ export default function SignUp() {
   };
 
   return (
+    <>
+    <Header />
+
     <div style={{ maxWidth: '400px', margin: '2rem auto' }}>
       <h2>Sign Up</h2>
       <form onSubmit={handleSignUp}>
@@ -58,5 +62,6 @@ export default function SignUp() {
         </p>
       )}
     </div>
+    </>
   );
 }
