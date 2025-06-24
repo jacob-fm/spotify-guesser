@@ -11,9 +11,12 @@ export default function Header() {
 				/>
 			</a>
 			<div className="user-pages">
-				<Link to="/signup" className="signup-link">
+				<Link to="/signup">
 					Sign Up
 				</Link>
+                <Link to="/login">
+                    Login
+                </Link>
 			</div>
 		</header>
 	);
