@@ -4,10 +4,6 @@ export async function handler(event, context) {
 	const clientId = process.env.SPOTIFY_CLIENT_ID;
 	const clientSecret = process.env.SPOTIFY_CLIENT_SECRET;
 
-	// TEMPORARY LOGGING
-	console.log("SPOTIFY_CLIENT_ID:", clientId ? "✓" : "✗");
-	console.log("SPOTIFY_CLIENT_SECRET:", clientSecret ? "✓" : "✗");
-
 	// Ensure the environment variables are loaded
 	if (!clientId || !clientSecret) {
 		return {
