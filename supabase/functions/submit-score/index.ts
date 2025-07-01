@@ -5,7 +5,8 @@ const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
 const supabaseServiceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
 const supabase = createClient(supabaseUrl, supabaseServiceRoleKey);
 
-const FETCH_SPOTIFY_URL = "https://<your-project-id>.functions.supabase.co/fetch-from-spotify";
+const FETCH_SPOTIFY_URL =
+	"https://jyskxullnyuwlnsfcxoc.functions.supabase.co/fetch-from-spotify";
 
 serve(async (req) => {
 	try {
@@ -19,10 +20,13 @@ serve(async (req) => {
 		const { rounds, user_id } = await req.json();
 
 		if (!Array.isArray(rounds) || rounds.length === 0) {
-			return new Response(JSON.stringify({ error: "Missing or invalid rounds" }), {
-				status: 400,
-				headers: { "Content-Type": "application/json" },
-			});
+			return new Response(
+				JSON.stringify({ error: "Missing or invalid rounds" }),
+				{
+					status: 400,
+					headers: { "Content-Type": "application/json" },
+				}
+			);
 		}
 
 		if (!user_id) {
@@ -38,7 +42,10 @@ serve(async (req) => {
 
 		const res = await fetch(FETCH_SPOTIFY_URL, {
 			method: "POST",
-			headers: { "Content-Type": "application/json" },
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")}`,
+			},
 			body: JSON.stringify({ artistIds }),
 		});
 
@@ -83,28 +90,33 @@ serve(async (req) => {
 			});
 		}
 
-		const { error } = await supabase.from("user_scores").insert({
+		const { data, error } = await supabase.from("user_scores").insert({
 			user_id,
 			score: totalScore,
 			details: detailedRounds,
 		});
 
+		console.log("Insert result:", { data, error });
+
 		if (error) {
-			console.error("Failed to insert score:", error);
+			console.error("Failed to insert score:", error.message || error);
 			return new Response(JSON.stringify({ error: "Failed to save score" }), {
 				status: 500,
 				headers: { "Content-Type": "application/json" },
 			});
 		}
 
-		return new Response(JSON.stringify({
-			success: true,
-			totalScore,
-			detailedRounds,
-		}), {
-			status: 200,
-			headers: { "Content-Type": "application/json" },
-		});
+		return new Response(
+			JSON.stringify({
+				success: true,
+				totalScore,
+				detailedRounds,
+			}),
+			{
+				status: 200,
+				headers: { "Content-Type": "application/json" },
+			}
+		);
 	} catch (err) {
 		console.error("submit-score error:", err);
 		return new Response(JSON.stringify({ error: "Internal server error" }), {
