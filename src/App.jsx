@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { UserAuth } from "./lib/AuthContext";
+import "./App.css";
 import Header from "./components/Header";
 import Instructions from "./components/Instructions";
 import Game from "./components/Game";
 import Scoreboard from "./components/Scoreboard";
-import "./App.css";
-import { supabase } from "./lib/supabaseClient";
+import submitScoreToSupabase from "./lib/submitScoreToSupabase";
 
 function App() {
 	// other state things
@@ -18,7 +18,8 @@ function App() {
 	const [roundCount, setRoundCount] = useState(1);
 	const [roundResults, setRoundResults] = useState([]);
 
-	// if (loading) return <p>Loading...</p>;
+	const { session } = UserAuth();
+	const loggedIn = session != null && session != undefined;
 
 	function startGame() {
 		setRoundCount(1);
@@ -28,6 +29,17 @@ function App() {
 
 	function handleGameOver() {
 		setGameState(GAME_STATES.ENDED);
+		submitScoreToSupabase(roundResults, session.user.id)
+			.then((result) => {
+				if (result === null) {
+					console.error("Failed to submit score.");
+				} else {
+					console.log("Score submitted successfully:", result);
+				}
+			})
+			.catch((err) => {
+				console.error("Unexpected error in handleGameOver:", err);
+			});
 	}
 
 	return (
