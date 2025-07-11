@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { supabase } from "../lib/supabaseClient";
 import { getArtistById } from "../api/fetchSpotifyData";
+import submitScoreToSupabase from "../lib/submitScoreToSupabase";
 import ArtistCard from "./ArtistCard";
 import ArtistPlaceholder from "./ArtistPlaceholder";
 import AnimatedScore from "./AnimatedScore";

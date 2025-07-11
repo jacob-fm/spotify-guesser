@@ -91,3 +91,39 @@ ol {
         background-color: #f9f9f9;
     }
 } */
+
+header {
+	background-color: var(--bright-purple);
+	display: flex;
+	width: 100vw;
+	padding: 1rem;
+	justify-content: space-between;
+	@media screen and (max-width: 768px) {
+		padding: 0.5rem;
+	}
+}
+
+header a {
+	line-height: 0;
+}
+
+img.header-logo {
+	@media screen and (max-width: 768px) {
+		width: 140px;
+	}
+}
+
+div.user-pages {
+	display: flex;
+	gap: 20px;
+	align-items: center;
+}
+
+div.not-found {
+	display: flex;
+	width: 100%;
+	flex-direction: column;
+	align-items: center;
+	padding: 20px;
+	font-size: 2rem;
+}

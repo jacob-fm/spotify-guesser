@@ -1,12 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { UserAuth } from "./lib/AuthContext";
 import Header from "./components/Header";
 import Instructions from "./components/Instructions";
 import Game from "./components/Game";
 import Scoreboard from "./components/Scoreboard";
 import "./App.css";
+import { supabase } from "./lib/supabaseClient";
 
 function App() {
-	// State values
+	// other state things
 	const GAME_STATES = {
 		INSTRUCTIONS: "instructions",
 		GAME: "game",
@@ -14,12 +16,13 @@ function App() {
 	};
 	const [gameState, setGameState] = useState(GAME_STATES.INSTRUCTIONS);
 	const [roundCount, setRoundCount] = useState(1);
-	// const [score, setScore] = useState(0);
-    const [roundResults, setRoundResults] = useState([]);
+	const [roundResults, setRoundResults] = useState([]);
+
+	// if (loading) return <p>Loading...</p>;
 
 	function startGame() {
-        setRoundCount(1);
-        setRoundResults([]);
+		setRoundCount(1);
+		setRoundResults([]);
 		setGameState(GAME_STATES.GAME);
 	}
 
@@ -38,11 +41,13 @@ function App() {
 					roundCount={roundCount}
 					updateRoundCount={setRoundCount}
 					roundResults={roundResults}
-                    updateRoundResults={setRoundResults}
+					updateRoundResults={setRoundResults}
 					onGameOver={handleGameOver}
 				/>
 			)}
-			{gameState === GAME_STATES.ENDED && <Scoreboard roundResults={roundResults} onNewGame={startGame} />}
+			{gameState === GAME_STATES.ENDED && (
+				<Scoreboard roundResults={roundResults} onNewGame={startGame} />
+			)}
 		</>
 	);
 }
