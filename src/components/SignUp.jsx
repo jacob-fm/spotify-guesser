@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { supabase } from "../lib/supabaseClient";
 import { UserAuth } from "../lib/AuthContext";
 import Header from "./Header";
 import { Link, useNavigate } from "react-router-dom";
