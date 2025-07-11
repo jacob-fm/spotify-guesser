@@ -1,67 +1,64 @@
 import { useState } from "react";
-import { supabase } from "../lib/supabaseClient"; // Your initialized Supabase client
-import { useNavigate } from "react-router-dom"; // If you're using React Router
+import { supabase } from "../lib/supabaseClient";
+import { UserAuth } from "../lib/AuthContext";
 import Header from "./Header";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Login() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-	const [errorMsg, setErrorMsg] = useState("");
-	const [success, setSuccess] = useState(false);
+	const [error, setError] = useState("");
+	const [loading, setLoading] = useState(false);
 
+	const { session, loginUser } = UserAuth();
 	const navigate = useNavigate();
+	console.log(session);
 
 	const handleLogin = async (e) => {
 		e.preventDefault();
-		setErrorMsg("");
-		setSuccess(false);
+		setLoading(true);
 
-		const { error } = await supabase.auth.signInWithPassword({
-			email,
-			password,
-		});
+		try {
+			const result = await loginUser(email, password); // Call context function
 
-		if (error) {
-			setErrorMsg(error.message);
-		} else {
-			setSuccess(true);
-			navigate("/");
+			if (result.success) {
+				navigate("/dashboard"); // navigate to dashboard on success
+			} else {
+				setError(result.error.message); // show error message on failure
+			}
+		} catch (err) {
+			setError("An unexpected error occurred."); // catch unexpected errors
+		} finally {
+			setLoading(false);
 		}
 	};
 
 	return (
 		<>
 			<Header />
-			<div style={{ maxWidth: "400px", margin: "2rem auto" }}>
-				<h2>Log In</h2>
+			<div>
 				<form onSubmit={handleLogin}>
-					<div style={{ marginBottom: "1rem" }}>
-						<label>Email</label>
-						<br />
+					<h2>Sign in</h2>
+					<p>
+						Don't have an account? <Link to="/signup">Log in!</Link>
+					</p>
+					<div>
 						<input
-							type="email"
-							value={email}
 							onChange={(e) => setEmail(e.target.value)}
-							required
-							style={{ width: "100%" }}
+							placeholder="Email"
+							type="email"
 						/>
-					</div>
-					<div style={{ marginBottom: "1rem" }}>
-						<label>Password</label>
-						<br />
 						<input
-							type="password"
-							value={password}
 							onChange={(e) => setPassword(e.target.value)}
-							required
-							style={{ width: "100%" }}
+							placeholder="Password"
+							type="password"
 						/>
+						<button type="submit" disabled={loading}>
+							Log in
+						</button>
+						{error && <p>{error}</p>}
 					</div>
-					<button type="submit">Log In</button>
 				</form>
-
-				{errorMsg && <p style={{ color: "red" }}>{errorMsg}</p>}
-				{success && <p style={{ color: "green" }}>Logged in! Redirecting...</p>}
 			</div>
 		</>
 	);

@@ -7,6 +7,8 @@ import App from "./App.jsx";
 import SignUp from "./components/SignUp.jsx";
 import NotFoundPage from "./components/NotFoundPage.jsx";
 import Login from "./components/Login.jsx";
+import Dashboard from "./components/Dashboard.jsx";
+import PrivateRoute from "./components/PrivateRoute.jsx";
 
 const router = createBrowserRouter([
 	{
@@ -21,6 +23,14 @@ const router = createBrowserRouter([
 	{
 		path: "/login",
 		element: <Login />,
+	},
+	{
+		path: "/dashboard",
+		element: (
+			<PrivateRoute>
+				<Dashboard />
+			</PrivateRoute>
+		),
 	},
 ]);
 
