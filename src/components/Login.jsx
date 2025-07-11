@@ -12,7 +12,6 @@ export default function Login() {
 
 	const { session, loginUser } = UserAuth();
 	const navigate = useNavigate();
-	console.log(session);
 
 	const handleLogin = async (e) => {
 		e.preventDefault();

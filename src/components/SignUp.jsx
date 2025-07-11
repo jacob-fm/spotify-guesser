@@ -12,7 +12,6 @@ export default function SignUp() {
 
 	const { session, signUpNewUser } = UserAuth();
 	const navigate = useNavigate();
-	console.log(session);
 
 	const handleSignUp = async (e) => {
 		e.preventDefault();
