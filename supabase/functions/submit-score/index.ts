@@ -1,5 +1,6 @@
 import { serve } from "https://deno.land/std@0.192.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { corsHeaders } from "../_shared/cors.js";
 
 const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
 const supabaseServiceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
@@ -9,6 +10,10 @@ const FETCH_SPOTIFY_URL =
 	"https://jyskxullnyuwlnsfcxoc.functions.supabase.co/fetch-from-spotify";
 
 serve(async (req) => {
+	if (req.method === "OPTIONS") {
+		return new Response("ok", { headers: corsHeaders });
+	}
+
 	try {
 		if (req.method !== "POST") {
 			return new Response(JSON.stringify({ error: "Method not allowed" }), {
@@ -24,7 +29,7 @@ serve(async (req) => {
 				JSON.stringify({ error: "Missing or invalid rounds" }),
 				{
 					status: 400,
-					headers: { "Content-Type": "application/json" },
+					headers: { ...corsHeaders, "Content-Type": "application/json" },
 				}
 			);
 		}
@@ -32,7 +37,7 @@ serve(async (req) => {
 		if (!user_id) {
 			return new Response(JSON.stringify({ error: "Missing user_id" }), {
 				status: 400,
-				headers: { "Content-Type": "application/json" },
+				headers: { ...corsHeaders, "Content-Type": "application/json" },
 			});
 		}
 
@@ -52,7 +57,7 @@ serve(async (req) => {
 		if (!res.ok) {
 			return new Response(
 				JSON.stringify({ error: "Failed to fetch artist data" }),
-				{ status: 500, headers: { "Content-Type": "application/json" } }
+				{ status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
 			);
 		}
 
@@ -69,7 +74,7 @@ serve(async (req) => {
 			if (!target || !guess) {
 				return new Response(JSON.stringify({ error: "Missing artist info" }), {
 					status: 400,
-					headers: { "Content-Type": "application/json" },
+					headers: { ...corsHeaders, "Content-Type": "application/json" },
 				});
 			}
 
@@ -102,7 +107,7 @@ serve(async (req) => {
 			console.error("Failed to insert score:", error.message || error);
 			return new Response(JSON.stringify({ error: "Failed to save score" }), {
 				status: 500,
-				headers: { "Content-Type": "application/json" },
+				headers: { ...corsHeaders, "Content-Type": "application/json" },
 			});
 		}
 
@@ -114,14 +119,14 @@ serve(async (req) => {
 			}),
 			{
 				status: 200,
-				headers: { "Content-Type": "application/json" },
+				headers: { ...corsHeaders, "Content-Type": "application/json" },
 			}
 		);
 	} catch (err) {
 		console.error("submit-score error:", err);
 		return new Response(JSON.stringify({ error: "Internal server error" }), {
 			status: 500,
-			headers: { "Content-Type": "application/json" },
+			headers: { ...corsHeaders, "Content-Type": "application/json" },
 		});
 	}
 });
