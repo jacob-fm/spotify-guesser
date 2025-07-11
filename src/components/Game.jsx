@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { supabase } from "../lib/supabaseClient";
-import { useUser } from "../lib/UserContext";
 import { getArtistById } from "../api/fetchSpotifyData";
 import submitScoreToSupabase from "../lib/submitScoreToSupabase";
 import ArtistCard from "./ArtistCard";
@@ -15,15 +14,6 @@ export default function Game({
 	updateRoundResults,
 	onGameOver,
 }) {
-	const user = useUser()
-	const handleSubmitScore = async () => {
-		if (!user) {
-			console.warn('No user logged in')
-			return
-		}
-		await submitScoreToSupabase(roundResults, user.id)
-	}
-
 	const [targetArtistList, setTargetArtistList] = useState([]);
 	const [targetArtist, setTargetArtist] = useState(null);
 	// const [isLoading, setIsLoading] = useState(true);

@@ -1,67 +1,65 @@
-import { useState } from 'react';
-import { supabase } from '../lib/supabaseClient'; 
-import Header from './Header';
+import { useState } from "react";
+import { supabase } from "../lib/supabaseClient";
+import { UserAuth } from "../lib/AuthContext";
+import Header from "./Header";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function SignUp() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [errorMsg, setErrorMsg] = useState('');
-  const [success, setSuccess] = useState(false);
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const [error, setError] = useState("");
+	const [loading, setLoading] = useState(false);
 
-  const handleSignUp = async (e) => {
-    e.preventDefault();
-    setErrorMsg('');
-    setSuccess(false);
+	const { session, signUpNewUser } = UserAuth();
+	const navigate = useNavigate();
+	console.log(session);
 
-    const { error } = await supabase.auth.signUp({
-      email,
-      password,
-    });
+	const handleSignUp = async (e) => {
+		e.preventDefault();
+		setLoading(true);
 
-    if (error) {
-      setErrorMsg(error.message);
-    } else {
-      setSuccess(true);
-    }
-  };
+		try {
+			const result = await signUpNewUser(email, password); // Call context function
 
-  return (
-    <>
-    <Header />
+			if (result.success) {
+				navigate("/"); // navigate to home on success
+			} else {
+				setError(result.error.message); // show error message on failure
+			}
+		} catch (err) {
+			setError("An unexpected error occurred."); // catch unexpected errors
+		} finally {
+			setLoading(false);
+		}
+	};
 
-    <div style={{ maxWidth: '400px', margin: '2rem auto' }}>
-      <h2>Sign Up</h2>
-      <form onSubmit={handleSignUp}>
-        <div style={{ marginBottom: '1rem' }}>
-          <label>Email</label><br />
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            style={{ width: '100%' }}
-          />
-        </div>
-        <div style={{ marginBottom: '1rem' }}>
-          <label>Password</label><br />
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            style={{ width: '100%' }}
-          />
-        </div>
-        <button type="submit">Sign Up</button>
-      </form>
-
-      {errorMsg && <p style={{ color: 'red' }}>{errorMsg}</p>}
-      {success && (
-        <p style={{ color: 'green' }}>
-          Sign-up successful! Please check your email to confirm your account.
-        </p>
-      )}
-    </div>
-    </>
-  );
+	return (
+		<>
+			<Header />
+			<div>
+				<form onSubmit={handleSignUp}>
+					<h2>Sign up to track your scores!</h2>
+					<p>
+						Already have an account? <Link to="/login">Log in!</Link>
+					</p>
+					<div>
+						<input
+							onChange={(e) => setEmail(e.target.value)}
+							placeholder="Email"
+							type="email"
+						/>
+						<input
+							onChange={(e) => setPassword(e.target.value)}
+							placeholder="Password"
+							type="password"
+						/>
+						<button type="submit" disabled={loading}>
+							Sign up
+						</button>
+            {error && <p>{error}</p>}
+					</div>
+				</form>
+			</div>
+		</>
+	);
 }

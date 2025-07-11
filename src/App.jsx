@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { UserContext } from "./lib/UserContext";
+import { UserAuth } from "./lib/AuthContext";
 import Header from "./components/Header";
 import Instructions from "./components/Instructions";
 import Game from "./components/Game";
@@ -8,19 +8,6 @@ import "./App.css";
 import { supabase } from "./lib/supabaseClient";
 
 function App() {
-	// user context things
-	const [user, setUser] = useState(null);
-	const [loading, setLoading] = useState(true);
-	useEffect(() => {
-		const getUser = async () => {
-			const { data, error } = await supabase.auth.getUser();
-			if (data?.user) setUser(data.user);
-			if (error) console.error(error.message);
-			setLoading(false);
-		};
-		getUser();
-	}, []);
-
 	// other state things
 	const GAME_STATES = {
 		INSTRUCTIONS: "instructions",
@@ -31,7 +18,7 @@ function App() {
 	const [roundCount, setRoundCount] = useState(1);
 	const [roundResults, setRoundResults] = useState([]);
 
-	if (loading) return <p>Loading...</p>;
+	// if (loading) return <p>Loading...</p>;
 
 	function startGame() {
 		setRoundCount(1);
@@ -44,7 +31,7 @@ function App() {
 	}
 
 	return (
-		<UserContext.Provider value={user}>
+		<>
 			<Header />
 			{gameState === GAME_STATES.INSTRUCTIONS && (
 				<Instructions startGame={startGame} />
@@ -61,7 +48,7 @@ function App() {
 			{gameState === GAME_STATES.ENDED && (
 				<Scoreboard roundResults={roundResults} onNewGame={startGame} />
 			)}
-		</UserContext.Provider>
+		</>
 	);
 }
 

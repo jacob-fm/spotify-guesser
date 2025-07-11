@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@netlify/functions": "^4.1.4",
+    "@supabase/auth-js": "^2.70.0",
     "@supabase/supabase-js": "^2.49.10",
     "dotenv": "^16.5.0",
     "motion": "^12.18.1",
