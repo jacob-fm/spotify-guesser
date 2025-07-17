@@ -7,6 +7,11 @@ import Game from "./components/Game";
 import Scoreboard from "./components/Scoreboard";
 // import submitScoreToSupabase from "./lib/submitScoreToSupabase";
 import { supabase } from "./lib/supabaseClient";
+import {
+	FunctionsHttpError,
+	FunctionsRelayError,
+	FunctionsFetchError,
+} from "@supabase/supabase-js";
 
 function App() {
 	// other state things
@@ -47,16 +52,22 @@ function App() {
 	}
 
 	async function submitScoreToSupabase() {
-		await supabase.functions.invoke('submit-score', {
+		const { data, error } = await supabase.functions.invoke("submit-score", {
 			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify({
+			body: {
 				user_id: session.user.id,
 				rounds: roundResults,
-			})
-		})
+			},
+		});
+
+		if (error instanceof FunctionsHttpError) {
+			const errorMessage = await error.context.json();
+			console.log("Function returned an error", errorMessage);
+		} else if (error instanceof FunctionsRelayError) {
+			console.log("Relay error:", error.message);
+		} else if (error instanceof FunctionsFetchError) {
+			console.log("Fetch error:", error.message);
+		}
 	}
 
 	return (

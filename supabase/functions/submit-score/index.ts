@@ -11,6 +11,8 @@ const FETCH_SPOTIFY_URL =
 
 serve(async (req) => {
 	console.log(`[${req.method}] Request received`);
+	// const rawBody = await req.text()
+	// console.log("Raw request body:", rawBody)
 
 	if (req.method === "OPTIONS") {
 		console.log(`[${req.method}] Handling preflight OPTIONS request`);
