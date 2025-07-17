@@ -52,12 +52,23 @@ function App() {
 	}
 
 	async function submitScoreToSupabase() {
-		const { data, error } = await supabase.functions.invoke("submit-score", {
-			method: "POST",
-			body: {
+		console.log(
+			"body:",
+			JSON.stringify({
 				user_id: session.user.id,
 				rounds: roundResults,
+			})
+		);
+
+		const { data, error } = await supabase.functions.invoke("submit-score", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
 			},
+			body: JSON.stringify({
+				user_id: session.user.id,
+				rounds: roundResults,
+			}),
 		});
 
 		if (error instanceof FunctionsHttpError) {
