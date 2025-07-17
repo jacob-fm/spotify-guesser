@@ -7,24 +7,29 @@ const supabaseServiceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
 const supabase = createClient(supabaseUrl, supabaseServiceRoleKey);
 
 const FETCH_SPOTIFY_URL =
-	"https://jyskxullnyuwlnsfcxoc.functions.supabase.co/fetch-from-spotify";
+	"https://jyskxullnyuwlnsfcxoc.supabase.co/functions/v1/fetch-from-spotify";
 
 serve(async (req) => {
+	console.log(`[${req.method}] Request received`);
+
 	if (req.method === "OPTIONS") {
+		console.log(`[${req.method}] Handling preflight OPTIONS request`);
 		return new Response("ok", { headers: corsHeaders });
 	}
 
 	try {
 		if (req.method !== "POST") {
+			console.log(`[${req.method}] Method not allowed`);
 			return new Response(JSON.stringify({ error: "Method not allowed" }), {
 				status: 405,
-				headers: { "Content-Type": "application/json" },
+				headers: { ...corsHeaders, "Content-Type": "application/json" },
 			});
 		}
 
 		const { rounds, user_id } = await req.json();
 
 		if (!Array.isArray(rounds) || rounds.length === 0) {
+			console.log(`[${req.method}] Missing or invalid rounds`);
 			return new Response(
 				JSON.stringify({ error: "Missing or invalid rounds" }),
 				{
@@ -35,6 +40,7 @@ serve(async (req) => {
 		}
 
 		if (!user_id) {
+			console.log(`[${req.method}] Missing user_id`);
 			return new Response(JSON.stringify({ error: "Missing user_id" }), {
 				status: 400,
 				headers: { ...corsHeaders, "Content-Type": "application/json" },
@@ -48,6 +54,7 @@ serve(async (req) => {
 		const res = await fetch(FETCH_SPOTIFY_URL, {
 			method: "POST",
 			headers: {
+				...corsHeaders,
 				"Content-Type": "application/json",
 				Authorization: `Bearer ${Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")}`,
 			},
@@ -55,9 +62,13 @@ serve(async (req) => {
 		});
 
 		if (!res.ok) {
+			console.log(`[${req.method}] failed to fetch artist data`);
 			return new Response(
 				JSON.stringify({ error: "Failed to fetch artist data" }),
-				{ status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+				{
+					status: 500,
+					headers: { ...corsHeaders, "Content-Type": "application/json" },
+				}
 			);
 		}
 
@@ -72,6 +83,7 @@ serve(async (req) => {
 			const guess = artistMap.get(round.guessId);
 
 			if (!target || !guess) {
+				console.log(`[${req.method}] missing artist info`);
 				return new Response(JSON.stringify({ error: "Missing artist info" }), {
 					status: 400,
 					headers: { ...corsHeaders, "Content-Type": "application/json" },
@@ -111,6 +123,7 @@ serve(async (req) => {
 			});
 		}
 
+		console.log(`[${req.method}] Success`);
 		return new Response(
 			JSON.stringify({
 				success: true,

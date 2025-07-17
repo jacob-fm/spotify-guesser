@@ -1,11 +1,16 @@
+import { supabase } from "./supabaseClient";
 export default async function submitScoreToSupabase(rounds, userId) {
 	try {
+		const { data } = await supabase.auth.getSession();
+		const accessToken = data.session?.access_token;
+
 		const response = await fetch(
 			"https://jyskxullnyuwlnsfcxoc.supabase.co/functions/v1/submit-score",
 			{
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
+					Authorization: `Bearer ${accessToken}`,
 				},
 				body: JSON.stringify({
 					user_id: userId,

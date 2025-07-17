@@ -5,7 +5,8 @@ import Header from "./components/Header";
 import Instructions from "./components/Instructions";
 import Game from "./components/Game";
 import Scoreboard from "./components/Scoreboard";
-import submitScoreToSupabase from "./lib/submitScoreToSupabase";
+// import submitScoreToSupabase from "./lib/submitScoreToSupabase";
+import { supabase } from "./lib/supabaseClient";
 
 function App() {
 	// other state things
@@ -29,17 +30,33 @@ function App() {
 
 	function handleGameOver() {
 		setGameState(GAME_STATES.ENDED);
-		submitScoreToSupabase(roundResults, session.user.id)
-			.then((result) => {
-				if (result === null) {
-					console.error("Failed to submit score.");
-				} else {
-					console.log("Score submitted successfully:", result);
-				}
+		if (loggedIn) {
+			submitScoreToSupabase();
+		}
+		// submitScoreToSupabase(roundResults, session.user.id)
+		// 	.then((result) => {
+		// 		if (result === null) {
+		// 			console.error("Failed to submit score.");
+		// 		} else {
+		// 			console.log("Score submitted successfully:", result);
+		// 		}
+		// 	})
+		// 	.catch((err) => {
+		// 		console.error("Unexpected error in handleGameOver:", err);
+		// 	});
+	}
+
+	async function submitScoreToSupabase() {
+		await supabase.functions.invoke('submit-score', {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				user_id: session.user.id,
+				rounds: roundResults,
 			})
-			.catch((err) => {
-				console.error("Unexpected error in handleGameOver:", err);
-			});
+		})
 	}
 
 	return (

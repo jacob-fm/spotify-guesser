@@ -30,6 +30,7 @@ serve(async (req) => {
 	const tokenRes = await fetch("https://accounts.spotify.com/api/token", {
 		method: "POST",
 		headers: {
+			...corsHeaders,
 			"Content-Type": "application/x-www-form-urlencoded",
 			Authorization: authHeader,
 		},
@@ -49,7 +50,7 @@ serve(async (req) => {
 	const { access_token } = await tokenRes.json();
 
 	// Step 2: Parse artistIds from request
-	let artistIds: string[] = [];
+	let artistIds = [];
 	try {
 		const body = await req.json();
 		artistIds = body.artistIds;
