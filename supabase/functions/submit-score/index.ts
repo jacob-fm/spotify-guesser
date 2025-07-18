@@ -1,18 +1,19 @@
-import { serve } from "https://deno.land/std@0.192.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 import { corsHeaders } from "../_shared/cors.js";
 
-const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
-const supabaseServiceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
+const supabaseUrl = Deno.env.get("SUPABASE_URL");
+const supabaseServiceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
+
+if (!supabaseUrl || !supabaseServiceRoleKey) {
+	throw new Error(
+		"Missing SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY environment variable"
+	);
+}
+
 const supabase = createClient(supabaseUrl, supabaseServiceRoleKey);
 
-const FETCH_SPOTIFY_URL =
-	"https://jyskxullnyuwlnsfcxoc.supabase.co/functions/v1/fetch-from-spotify";
-
-serve(async (req) => {
+Deno.serve(async (req) => {
 	console.log(`[${req.method}] Request received`);
-	// const rawBody = await req.text()
-	// console.log("Raw request body:", rawBody)
 
 	if (req.method === "OPTIONS") {
 		console.log(`[${req.method}] Handling preflight OPTIONS request`);
@@ -29,6 +30,8 @@ serve(async (req) => {
 		}
 
 		const { rounds, user_id } = await req.json();
+		console.log("Rounds:", rounds)
+		console.log("user_id:", user_id)
 
 		if (!Array.isArray(rounds) || rounds.length === 0) {
 			console.log(`[${req.method}] Missing or invalid rounds`);
@@ -50,23 +53,18 @@ serve(async (req) => {
 		}
 
 		const artistIds = Array.from(
-			new Set(rounds.flatMap(({ targetId, guessId }) => [targetId, guessId]))
+			new Set(
+				rounds.flatMap((r) => [r.target.id, r.guessed.id])
+			)
 		);
 
-		const res = await fetch(FETCH_SPOTIFY_URL, {
-			method: "POST",
-			headers: {
-				...corsHeaders,
-				"Content-Type": "application/json",
-				Authorization: `Bearer ${Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")}`,
-			},
-			body: JSON.stringify({ artistIds }),
-		});
+		// Get Spotify credentials from env
+		const spotifyClientId = Deno.env.get("SPOTIFY_CLIENT_ID");
+		const spotifyClientSecret = Deno.env.get("SPOTIFY_CLIENT_SECRET");
 
-		if (!res.ok) {
-			console.log(`[${req.method}] failed to fetch artist data`);
+		if (!spotifyClientId || !spotifyClientSecret) {
 			return new Response(
-				JSON.stringify({ error: "Failed to fetch artist data" }),
+				JSON.stringify({ message: "Spotify client credentials are missing." }),
 				{
 					status: 500,
 					headers: { ...corsHeaders, "Content-Type": "application/json" },
@@ -74,15 +72,69 @@ serve(async (req) => {
 			);
 		}
 
-		const { artists } = await res.json();
-		const artistMap = new Map(artists.map((a: any) => [a.id, a]));
+		// Fetch Spotify access token
+		const authHeader =
+			"Basic " + btoa(`${spotifyClientId}:${spotifyClientSecret}`);
+		const tokenRes = await fetch("https://accounts.spotify.com/api/token", {
+			method: "POST",
+			headers: {
+				...corsHeaders,
+				"Content-Type": "application/x-www-form-urlencoded",
+				Authorization: authHeader,
+			},
+			body: "grant_type=client_credentials",
+		});
+		if (!tokenRes.ok) {
+			return new Response(
+				JSON.stringify({ error: "Failed to get access token from Spotify" }),
+				{
+					status: tokenRes.status,
+					headers: { ...corsHeaders, "Content-Type": "application/json" },
+				}
+			);
+		}
+		const { access_token } = await tokenRes.json();
+
+		// Fetch each artist by ID
+
+		const artistData = [];
+
+		for (const id of artistIds) {
+			const artistRes = await fetch(
+				`https://api.spotify.com/v1/artists/${id}`,
+				{
+					headers: {
+						Authorization: `Bearer ${access_token}`,
+					},
+				}
+			);
+
+			if (!artistRes.ok) {
+				return new Response(
+					JSON.stringify({ error: `Failed to fetch artist: ${id}` }),
+					{
+						status: 500,
+						headers: { ...corsHeaders, "Content-Type": "application/json" },
+					}
+				);
+			}
+
+			const data = await artistRes.json();
+			artistData.push({
+				id: data.id,
+				name: data.name,
+				popularity: data.popularity,
+			});
+		}
+
+		const artistMap = new Map(artistData.map((a) => [a.id, a]));
 
 		let totalScore = 0;
 		const detailedRounds = [];
 
 		for (const round of rounds) {
-			const target = artistMap.get(round.targetId);
-			const guess = artistMap.get(round.guessId);
+			const target = artistMap.get(round.target.id);
+			const guess = artistMap.get(round.guessed.id);
 
 			if (!target || !guess) {
 				console.log(`[${req.method}] missing artist info`);

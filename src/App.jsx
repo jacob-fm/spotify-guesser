@@ -1,11 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { UserAuth } from "./lib/AuthContext";
 import "./App.css";
 import Header from "./components/Header";
 import Instructions from "./components/Instructions";
 import Game from "./components/Game";
 import Scoreboard from "./components/Scoreboard";
-// import submitScoreToSupabase from "./lib/submitScoreToSupabase";
 import { supabase } from "./lib/supabaseClient";
 import {
 	FunctionsHttpError,
@@ -38,21 +37,16 @@ function App() {
 		if (loggedIn) {
 			submitScoreToSupabase();
 		}
-		// submitScoreToSupabase(roundResults, session.user.id)
-		// 	.then((result) => {
-		// 		if (result === null) {
-		// 			console.error("Failed to submit score.");
-		// 		} else {
-		// 			console.log("Score submitted successfully:", result);
-		// 		}
-		// 	})
-		// 	.catch((err) => {
-		// 		console.error("Unexpected error in handleGameOver:", err);
-		// 	});
 	}
 
 	async function submitScoreToSupabase() {
-		const { data, error } = await supabase.functions.invoke("submit-score", {
+		console.log(
+			JSON.stringify({
+				user_id: session.user.id,
+				rounds: roundResults,
+			})
+		);
+		const { error } = await supabase.functions.invoke("submit-score", {
 			method: "POST",
 			body: {
 				user_id: session.user.id,
