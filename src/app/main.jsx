@@ -9,6 +9,7 @@ import NotFoundPage from "./routes/NotFoundPage.jsx";
 import Login from "./routes/Login.jsx";
 import Dashboard from "./routes/Dashboard.jsx";
 import PrivateRoute from "../components/PrivateRoute.jsx";
+import PublicRoute from "../components/PublicRoute.jsx";
 
 const router = createBrowserRouter([
 	{
@@ -18,11 +19,19 @@ const router = createBrowserRouter([
 	},
 	{
 		path: "/signup",
-		element: <SignUp />,
+		element: (
+			<PublicRoute>
+				<SignUp />
+			</PublicRoute>
+		),
 	},
 	{
 		path: "/login",
-		element: <Login />,
+		element: (
+			<PublicRoute>
+				<Login />
+			</PublicRoute>
+		),
 	},
 	{
 		path: "/dashboard",
