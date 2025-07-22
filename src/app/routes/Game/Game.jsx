@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import { supabase } from "../lib/supabaseClient";
-import { getArtistById } from "../api/fetchSpotifyData";
-import ArtistCard from "./ArtistCard";
-import ArtistPlaceholder from "./ArtistPlaceholder";
-import AnimatedScore from "./AnimatedScore";
-import ScoreIncrement from "./ScoreIncrement";
+import { supabase } from "/src/lib/supabaseClient";
+import { getArtistById } from "/src/api/fetchSpotifyData";
+import ArtistCard from "/src/app/routes/Game/components/ArtistCard";
+import ArtistPlaceholder from "/src/app/routes/Game/components/ArtistPlaceholder";
+import AnimatedScore from "/src/app/routes/Game/components/AnimatedScore";
+import ScoreIncrement from "/src/app/routes/Game/components/ScoreIncrement";
 
 export default function Game({
 	roundCount,

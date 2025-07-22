@@ -1,5 +1,5 @@
-import useDebounce from "../hooks/useDebounce";
-import { searchSpotifyArtists } from "../api/fetchSpotifyData";
+import useDebounce from "/src/hooks/useDebounce";
+import { searchSpotifyArtists } from "/src/api/fetchSpotifyData";
 import { useState, useEffect, useRef } from "react";
 import SearchResult from "./SearchResult";
 

@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { UserAuth } from "./lib/AuthContext";
+import { UserAuth } from "../lib/AuthContext";
 import "./App.css";
-import Header from "./components/Header";
-import Instructions from "./components/Instructions";
-import Game from "./components/Game";
-import Scoreboard from "./components/Scoreboard";
-import { supabase } from "./lib/supabaseClient";
+import Header from '/src/components/Header';
+import Instructions from "../components/Instructions";
+import Game from "./routes/Game/Game";
+import Scoreboard from "./routes/Game/components/Scoreboard";
+import { supabase } from "../lib/supabaseClient";
 import {
 	FunctionsHttpError,
 	FunctionsRelayError,

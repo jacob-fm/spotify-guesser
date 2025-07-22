@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { UserAuth } from "../lib/AuthContext";
-import Header from "./Header";
+import { UserAuth } from "/src/lib/AuthContext";
+import Header from '/src/components/Header';
 import { Link, useNavigate } from "react-router-dom";
 
 export default function Login() {

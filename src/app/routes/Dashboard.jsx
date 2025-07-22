@@ -1,6 +1,6 @@
-import { UserAuth } from '../lib/AuthContext';
+import { UserAuth } from '/src/lib/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import Header from './Header';
+import Header from '/src/components/Header';
 
 const Dashboard = () => {
     const { session, signOut } = UserAuth()
