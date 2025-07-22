@@ -9,28 +9,33 @@ function ScoresTable({ games }) {
 	const accordionItems = games.map((g) => ({
 		id: g.id,
 		label: new Date(g.game_date).toLocaleDateString("en-US"),
-        renderContent: () => (
-            <p>hello</p>
-        )
+		renderContent: () => (
+			<table>
+				<thead>
+					<th>Round</th>
+					<th>Target Artist</th>
+					<th>Target Artist Popularity</th>
+					<th>Guessed Artist</th>
+					<th>Guessed Artist Popularity</th>
+					<th>Points</th>
+				</thead>
+				<tbody>
+					{g.details.map((round, index) => (
+						<tr key={index}>
+							<td>{index + 1}</td>
+                            <td>{round.targetName}</td>
+                            <td>{round.targetPopularity}</td>
+                            <td>{round.guessName}</td>
+                            <td>{round.guessPopularity}</td>
+                            <td>{round.points}</td>
+						</tr>
+					))}
+				</tbody>
+			</table>
+		),
 	}));
 
 	return (
-		// <table>
-		// 	<thead>
-		// 		<tr>
-		// 			<th>Date</th>
-		// 			<th>Score</th>
-		// 		</tr>
-		// 	</thead>
-		// 	<tbody>
-		// 		{games.map((g) => (
-		// 			<tr key={g.id}>
-		// 				<td>{new Date(g.game_date).toLocaleDateString("en-US")}</td>
-		// 				<td>{g.score}</td>
-		// 			</tr>
-		// 		))}
-		// 	</tbody>
-		// </table>
 		<Accordion items={accordionItems} keepOthersOpen={false} />
 	);
 }
