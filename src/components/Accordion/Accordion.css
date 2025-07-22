@@ -1,0 +1,42 @@
+.accordion-parent {
+}
+
+.accordion {
+	display: flex;
+	flex-direction: column;
+	/* max-width: 500px; */
+}
+
+.accordion .toggle {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	font-size: 1rem;
+	padding: 10px 15px;
+	transition: all 0.15s ease;
+	cursor: pointer;
+    width: 100%;
+}
+
+.arrow {
+    transition: all 0.2s ease;
+}
+.arrow.active {
+    rotate: 180deg;
+}
+
+.accordion .content-parent {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.15s ease-out;
+    border-bottom: 3px solid #aaa;
+}
+
+.accordion.toggled .content-parent {
+    max-height: 500px;
+    transition: max-height 0.25s ease-in;
+}
+
+.accordion .content {
+    padding: 15px 10px;
+}

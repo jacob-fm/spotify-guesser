@@ -1,27 +1,37 @@
 import { UserAuth } from "/src/lib/AuthContext";
 import { useNavigate } from "react-router-dom";
 import Header from "/src/components/Header";
+import Accordion from "/src/components/Accordion/Accordion";
 import { supabase } from "../../lib/supabaseClient";
 import { useEffect, useState } from "react";
 
 function ScoresTable({ games }) {
+	const accordionItems = games.map((g) => ({
+		id: g.id,
+		label: new Date(g.game_date).toLocaleDateString("en-US"),
+        renderContent: () => (
+            <p>hello</p>
+        )
+	}));
+
 	return (
-		<table>
-			<thead>
-				<tr>
-					<th>Date</th>
-					<th>Score</th>
-				</tr>
-			</thead>
-			<tbody>
-				{games.map((g) => (
-					<tr key={g.id}>
-                        <td>{new Date(g.game_date).toLocaleDateString('en-US')}</td>
-                        <td>{g.score}</td>
-                    </tr>
-				))}
-			</tbody>
-		</table>
+		// <table>
+		// 	<thead>
+		// 		<tr>
+		// 			<th>Date</th>
+		// 			<th>Score</th>
+		// 		</tr>
+		// 	</thead>
+		// 	<tbody>
+		// 		{games.map((g) => (
+		// 			<tr key={g.id}>
+		// 				<td>{new Date(g.game_date).toLocaleDateString("en-US")}</td>
+		// 				<td>{g.score}</td>
+		// 			</tr>
+		// 		))}
+		// 	</tbody>
+		// </table>
+		<Accordion items={accordionItems} keepOthersOpen={false} />
 	);
 }
 
@@ -60,8 +70,8 @@ const Dashboard = () => {
 			<Header />
 			<h1>User Dashboard</h1>
 			<h2>Welcome, {session?.user?.email}</h2>
-			<button onClick={handleSignOut}>Sign out</button>
 			{scores === null ? <p>no scores</p> : <ScoresTable games={scores} />}
+			<button onClick={handleSignOut}>Sign out</button>
 		</>
 	);
 };
