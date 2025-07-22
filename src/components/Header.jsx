@@ -13,6 +13,8 @@ export default function Header() {
 		} else {
 			setLoggedIn(true);
 		}
+		console.log("Logged In:", loggedIn);
+		
 	}, [session]);
 
 	return (
