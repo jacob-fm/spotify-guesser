@@ -38,7 +38,7 @@ export default function Login() {
 				<form onSubmit={handleLogin}>
 					<h2>Sign in</h2>
 					<p>
-						Don't have an account? <Link to="/signup">Log in!</Link>
+						Don't have an account? <Link to="/signup">Sign up!</Link>
 					</p>
 					<div>
 						<input

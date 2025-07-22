@@ -14,7 +14,6 @@ export default function Header() {
 			setLoggedIn(true);
 		}
 		console.log("Logged In:", loggedIn);
-		
 	}, [session]);
 
 	return (
@@ -27,7 +26,9 @@ export default function Header() {
 				/>
 			</a>
 			{loggedIn ? (
-				<p>{session?.user?.email}</p>
+				<>
+					<Link to="/dashboard">{session?.user?.email}</Link>
+				</>
 			) : (
 				<div className="user-pages">
 					<Link to="/signup">Sign Up</Link>
