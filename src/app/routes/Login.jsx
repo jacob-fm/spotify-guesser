@@ -25,7 +25,7 @@ export default function Login() {
 				setError(result.error.message); // show error message on failure
 			}
 		} catch (err) {
-			setError("An unexpected error occurred."); // catch unexpected errors
+			setError(err.message); // catch unexpected errors
 		} finally {
 			setLoading(false);
 		}
@@ -38,7 +38,7 @@ export default function Login() {
 				<form onSubmit={handleLogin}>
 					<h2>Sign in</h2>
 					<p>
-						Don't have an account? <Link to="/signup">Sign up!</Link>
+						Don&apos;t have an account? <Link to="/signup">Sign up!</Link>
 					</p>
 					<div>
 						<input
