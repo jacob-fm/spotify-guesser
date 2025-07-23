@@ -47,7 +47,7 @@ export const AuthContextProvider = ({ children }) => {
 		}
 	};
 
-	// Reset password
+	// Send password reset link
 	const sendPasswordReset = async (email) => {
 		try {
 			const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
@@ -55,7 +55,7 @@ export const AuthContextProvider = ({ children }) => {
 			});
 			// Handle Supabase error explicitly
 			if (error) {
-				console.error("Password reset error:", error.message); // Log the error for debugging
+				console.error("Error sending password reset link:", error.message); // Log the error for debugging
 				return { success: false, error: error }; // Return the error
 			}
 
@@ -66,6 +66,29 @@ export const AuthContextProvider = ({ children }) => {
 			return {
 				success: false,
 				error: "An unexpected error occurred. Please try again.",
+			};
+		}
+	};
+
+	const updatePassword = async (password) => {
+		try {
+			const { data, error } = await supabase.auth.updateUser({
+				password: password,
+			});
+
+			// Handle Supabase error explicitly
+			if (error) {
+				console.error("Error setting new password:", error.message); // Log the error for debugging
+				return { success: false, error: error }; // Return the error
+			}
+
+			// if no error, return success
+			return { success: true, data };
+		} catch (err) {
+			console.error("Error setting new password:", err);
+			return {
+				success: false,
+				error: "Unexpected error setting new password. Please try again.",
 			};
 		}
 	};
@@ -95,7 +118,7 @@ export const AuthContextProvider = ({ children }) => {
 
 	return (
 		<AuthContext.Provider
-			value={{ session, signUpNewUser, loginUser, sendPasswordReset, signOut }}
+			value={{ session, signUpNewUser, loginUser, sendPasswordReset, updatePassword, signOut }}
 		>
 			{children}
 		</AuthContext.Provider>

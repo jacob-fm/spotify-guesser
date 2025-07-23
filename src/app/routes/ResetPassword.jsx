@@ -1,24 +1,47 @@
-import { useEffect } from "react";
-import { supabase } from "../../lib/supabaseClient";
+import { useState } from "react";
+import { UserAuth } from "/src/lib/AuthContext";
+import Header from "/src/components/Header";
+import { useNavigate } from "react-router-dom";
 
 export default function ResetPassword() {
-	useEffect(() => {
-		supabase.auth.onAuthStateChange(async (event, session) => {
-			if (event == "PASSWORD_RECOVERY") {
-                console.log(session.user.email)
-				const newPassword = prompt(
-					"What would you like your new password to be?"
-				);
-				const { data, error } = await supabase.auth.updateUser({
-					password: newPassword,
-				});
-				if (data) alert("Password updated successfully!");
-				if (error) alert("There was an error updating your password.");
-			}
-		});
-	}, []);
+	const [password, setPassword] = useState("");
+	const [error, setError] = useState("");
 
-    return (
-        <p>blah blah blah</p>
-    )
+	const { session, updatePassword } = UserAuth();
+	const navigate = useNavigate();
+
+	const handleResetPassword = async (e) => {
+		e.preventDefault();
+
+		try {
+			const result = await updatePassword(password);
+			if (result.success) {
+				navigate("/dashboard");
+			} else {
+				setError(result.error.message);
+			}
+		} catch (err) {
+			setError(err.message);
+		}
+	};
+
+	return (
+		<>
+			<Header />
+			<div>
+				<form onSubmit={handleResetPassword}>
+					<h2>Reset Password</h2>
+					<div>
+						<input
+							onChange={(e) => setPassword(e.target.value)}
+							placeholder="New password"
+							type="password"
+						/>
+						<button type="submit">Set new password</button>
+					</div>
+				</form>
+				{error && <p>{error}</p>}
+			</div>
+		</>
+	);
 }
