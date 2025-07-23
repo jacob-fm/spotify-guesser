@@ -23,11 +23,11 @@ function ScoresTable({ games }) {
 					{g.details.map((round, index) => (
 						<tr key={index}>
 							<td>{index + 1}</td>
-                            <td>{round.targetName}</td>
-                            <td>{round.targetPopularity}</td>
-                            <td>{round.guessName}</td>
-                            <td>{round.guessPopularity}</td>
-                            <td>{round.points}</td>
+							<td>{round.targetName}</td>
+							<td>{round.targetPopularity}</td>
+							<td>{round.guessName}</td>
+							<td>{round.guessPopularity}</td>
+							<td>{round.points}</td>
 						</tr>
 					))}
 				</tbody>
@@ -35,9 +35,7 @@ function ScoresTable({ games }) {
 		),
 	}));
 
-	return (
-		<Accordion items={accordionItems} keepOthersOpen={false} />
-	);
+	return <Accordion items={accordionItems} keepOthersOpen={false} />;
 }
 
 const Dashboard = () => {
@@ -55,7 +53,13 @@ const Dashboard = () => {
 			.from("user_scores")
 			.select()
 			.eq("user_id", session.user.id);
-		setScores(data);
+		if (error) {
+			console.error("Error fetching user scores:", error);
+			setScores([]);
+			return;
+		} else {
+			setScores(data);
+		}
 	}
 
 	const handleSignOut = async (e) => {
