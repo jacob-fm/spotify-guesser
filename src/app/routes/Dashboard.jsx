@@ -12,12 +12,14 @@ function ScoresTable({ games }) {
 		renderContent: () => (
 			<table>
 				<thead>
-					<th>Round</th>
-					<th>Target Artist</th>
-					<th>Target Artist Popularity</th>
-					<th>Guessed Artist</th>
-					<th>Guessed Artist Popularity</th>
-					<th>Points</th>
+					<tr>
+						<th>Round</th>
+						<th>Target Artist</th>
+						<th>Target Artist Popularity</th>
+						<th>Guessed Artist</th>
+						<th>Guessed Artist Popularity</th>
+						<th>Points</th>
+					</tr>
 				</thead>
 				<tbody>
 					{g.details.map((round, index) => (
