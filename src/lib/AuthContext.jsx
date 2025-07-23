@@ -16,7 +16,7 @@ export const AuthContextProvider = ({ children }) => {
 
 		if (error) {
 			console.error("There was a problem signing up:", error);
-			return { success: false, error };
+			return { success: false, error: error };
 		}
 		return { success: true, data };
 	};
@@ -32,7 +32,7 @@ export const AuthContextProvider = ({ children }) => {
 			// Handle Supabase error explicitly
 			if (error) {
 				console.error("Sign-in error: ", error.message); // Log the error for debugging
-				return { success: false, error: error.message }; // Return the error
+				return { success: false, error: error }; // Return the error
 			}
 
 			// If no error, return success
