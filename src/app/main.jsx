@@ -10,6 +10,8 @@ import Login from "./routes/Login.jsx";
 import Dashboard from "./routes/Dashboard.jsx";
 import PrivateRoute from "../components/PrivateRoute.jsx";
 import PublicRoute from "../components/PublicRoute.jsx";
+import ForgotPassword from "./routes/ForgotPassword.jsx";
+import ResetPassword from "./routes/ResetPassword.jsx";
 
 const router = createBrowserRouter([
 	{
@@ -39,6 +41,22 @@ const router = createBrowserRouter([
 			<PrivateRoute>
 				<Dashboard />
 			</PrivateRoute>
+		),
+	},
+	{
+		path: "/forgot-password",
+		element: (
+			<PublicRoute>
+				<ForgotPassword />
+			</PublicRoute>
+		),
+	},
+	{
+		path: "/reset-password",
+		element: (
+			<PublicRoute>
+				<ResetPassword />
+			</PublicRoute>
 		),
 	},
 ]);

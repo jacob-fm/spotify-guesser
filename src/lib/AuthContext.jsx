@@ -5,7 +5,7 @@ const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
 	const [session, setSession] = useState(undefined);
-	const [loading, setLoading] = useState(true)
+	const [loading, setLoading] = useState(true);
 
 	// Sign up
 	const signUpNewUser = async (email, password) => {
@@ -47,19 +47,42 @@ export const AuthContextProvider = ({ children }) => {
 		}
 	};
 
+	// Reset password
+	const sendPasswordReset = async (email) => {
+		try {
+			const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
+				redirectTo: "https://spopularity.jacobfm.com/reset-password",
+			});
+			// Handle Supabase error explicitly
+			if (error) {
+				console.error("Password reset error:", error.message); // Log the error for debugging
+				return { success: false, error: error }; // Return the error
+			}
+
+			// if no error, return success
+			return { success: true, data };
+		} catch (err) {
+			console.error("Error during passsword reset attempt:", err);
+			return {
+				success: false,
+				error: "An unexpected error occurred. Please try again.",
+			};
+		}
+	};
+
 	useEffect(() => {
 		supabase.auth.getSession().then(({ data: { session } }) => {
 			setSession(session);
-			setLoading(false)
+			setLoading(false);
 		});
 
 		supabase.auth.onAuthStateChange((_event, session) => {
 			setSession(session);
 		});
 	}, []);
-	
+
 	if (loading) {
-		return null
+		return null;
 	}
 
 	// Sign out
@@ -72,7 +95,7 @@ export const AuthContextProvider = ({ children }) => {
 
 	return (
 		<AuthContext.Provider
-			value={{ session, signUpNewUser, loginUser, signOut }}
+			value={{ session, signUpNewUser, loginUser, sendPasswordReset, signOut }}
 		>
 			{children}
 		</AuthContext.Provider>
