@@ -5,6 +5,7 @@ export default function ResetPassword() {
 	useEffect(() => {
 		supabase.auth.onAuthStateChange(async (event, session) => {
 			if (event == "PASSWORD_RECOVERY") {
+                console.log(session.user.email)
 				const newPassword = prompt(
 					"What would you like your new password to be?"
 				);
