@@ -17,4 +17,8 @@ export default function ResetPassword() {
 			}
 		});
 	}, []);
+
+    return (
+        <p>blah blah blah</p>
+    )
 }
