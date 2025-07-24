@@ -22,8 +22,8 @@ export default function Instructions({ startGame }) {
 					similarly popular.
 				</li>
 				<li>
-					You&apos;ll earn more points the closer your guess is to the
-					target&apos;s actual score.
+					You&apos;ll earn a max of 100 points, minus 5 for each point of
+					difference in <b>Popularity</b>.
 				</li>
 				<li>
 					Play through 5 rounds and try to get the highest total score you can!
