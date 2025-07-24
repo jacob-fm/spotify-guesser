@@ -278,3 +278,29 @@ table.scoreboard-table {
 		border-bottom: 1px solid var(--bright-purple);
 	}
 }
+
+.tooltip {
+	position: relative;
+	display: inline-block;
+	border-bottom: 1px dashed rgb(124, 124, 124);
+}
+
+.tooltip .tooltiptext {
+	visibility: hidden;
+	width: 230px;
+	background-color: rgb(211, 211, 211);
+	color: #000000;
+	text-align: center;
+	border-radius: 6px;
+	padding: 8px;
+
+	/* Position the tooltip */
+	position: absolute;
+	z-index: 1;
+	top: 23px;
+	right: 10px;
+}
+
+.tooltip:hover .tooltiptext {
+	visibility: visible;
+}

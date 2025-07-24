@@ -4,24 +4,33 @@ export default function Instructions({ startGame }) {
 			<h2>How to play:</h2>
 			<ol>
 				<li>
-					<b>A Target Artist will appear.&#10;</b>
-					Your goal is to guess another artist whose{" "}
-					<b>
-						<a href="https://arc.net/l/quote/wlwrltze" target="_blank" rel="noreferrer">
-							Spotify popularity score
-						</a>
-					</b>
-					, between 0-100, is closest to theirs.
+					Each round, you&apos;ll see a <b>Target Artist</b>, with their{" "}
+					<span className="tooltip">
+						<b>Popularity Score</b>
+						<span className="tooltiptext">
+							The Popularity Score measures how frequently and recently an
+							artist is streamed on Spotify, from 0 - 100. You can learn more{" "}
+							<a href="https://www.submithub.com/story/spotify-popularity-score-guide#:~:text=So%E2%80%A6%20what%20is%20the%20Popularity%20Score%3F">
+								here.
+							</a>
+						</span>
+					</span>{" "}
+					hidden.
 				</li>
 				<li>
-					Search for and select an artist, and click &quot;Submit Guess&quot; when ready.
+					Search for and select a <b>Guess Artist</b>, who you think is
+					similarly popular.
 				</li>
 				<li>
-					You’ll earn points based on how close your artist’s popularity is to
-					the target’s!
+					You&apos;ll earn more points the closer your guess is to the
+					target&apos;s actual score.
 				</li>
 				<li>
-					Play for 5 rounds, then see your final score and compare your guesses.
+					Play through 5 rounds and try to get the highest total score you can!
+				</li>
+				<li>
+					A new set of 5 <b>Target Artists</b> are available every day, so come
+					back daily for a fresh challenge!
 				</li>
 			</ol>
 			<button onClick={startGame}>Start Game</button>
