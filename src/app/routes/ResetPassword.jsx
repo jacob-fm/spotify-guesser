@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { UserAuth } from "/src/lib/AuthContext";
-import Header from "/src/components/Header";
+import Header from "/src/components/Header/Header";
 import { useNavigate } from "react-router-dom";
 
 export default function ResetPassword() {

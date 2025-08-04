@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { UserAuth } from "../../lib/AuthContext";
-import Header from "/src/components/Header";
+import Header from "/src/components/Header/Header";
 
 export default function ForgotPassword() {
 	const [email, setEmail] = useState("");

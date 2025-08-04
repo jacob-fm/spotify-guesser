@@ -102,7 +102,7 @@ div.loading-placeholder {
 	width: 380px;
 	height: 200px;
 	font-size: 4rem;
-	color: var(--white);
+	color: white;
 }
 
 div.artist-card {
@@ -132,7 +132,7 @@ span.artist-name {
 	text-align: center;
 	background-color: var(--darkest);
 	font-size: 1.2rem;
-	color: var(--white);
+	color: white;
 	padding: 6px;
 	@media screen and (max-width: 768px) {
 		font-size: 1rem;
@@ -168,12 +168,12 @@ div.artist-info > img {
 div.artist-info > .artist-image-placeholder {
 	width: 100%;
 	height: 200px;
-	background-color: var(--bright-purple);
+	background-color: var(--primary);
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	font-size: 6rem;
-	color: var(--white);
+	color: white;
 	@media screen and (max-width: 768px) {
 		height: 15dvh;
 	}
@@ -193,7 +193,7 @@ span.popularity-score {
 /* SearchResultsspan */
 div.search-results-list {
 	position: absolute;
-	background-color: var(--faint-purple);
+	background-color: var(--faint);
 	top: 42px;
 	padding-top: 3px;
 	display: flex;
@@ -209,7 +209,7 @@ div.search-results-list {
 
 span.search-result {
 	font-size: 1.2rem;
-	color: var(--white);
+	color: white;
 	background-color: var(--darkest);
 	padding: 4px;
 	text-align: center;
@@ -217,7 +217,7 @@ span.search-result {
 	cursor: pointer;
 	&:hover,
 	&.active {
-		background-color: var(--faint-purple);
+		background-color: var(--faint);
 		color: var(--darkest);
 	}
 	@media screen and (max-width: 768px) {
@@ -241,7 +241,7 @@ span.search-result {
 .submit-guess-button {
 	width: 100%;
 	font-size: 1.5rem;
-	background-color: var(--bright-purple);
+	background-color: var(--primary);
 }
 
 .next-round-button,
@@ -275,7 +275,7 @@ table.scoreboard-table {
 		padding: 10px;
 	}
 	tr.dashed-line {
-		border-bottom: 1px solid var(--bright-purple);
+		border-bottom: 1px solid var(--primary);
 	}
 }
 

@@ -1,6 +1,6 @@
 import { UserAuth } from "/src/lib/AuthContext";
 import { useNavigate } from "react-router-dom";
-import Header from "/src/components/Header";
+import Header from "/src/components/Header/Header";
 import Accordion from "/src/components/Accordion/Accordion";
 import { supabase } from "../../lib/supabaseClient";
 import { useEffect, useState } from "react";

@@ -10,11 +10,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@mantine/hooks": "^8.2.2",
     "@netlify/functions": "^4.1.4",
     "@supabase/auth-js": "^2.70.0",
     "@supabase/supabase-js": "^2.49.10",
     "deno": "^2.4.2",
     "dotenv": "^16.5.0",
+    "lucide-react": "^0.536.0",
     "motion": "^12.18.1",
     "node-fetch": "^3.3.2",
     "react": "^19.0.0",
