@@ -2,7 +2,6 @@ import { useState } from "react";
 import { UserAuth } from "../lib/AuthContext";
 import "./App.css";
 import Header from '/src/components/Header/Header';
-import Instructions from "./routes/Instructions/Instructions";
 import Game from "./routes/Game/Game";
 import Scoreboard from "./routes/Game/components/Scoreboard";
 import { supabase } from "../lib/supabaseClient";
@@ -15,11 +14,10 @@ import {
 function App() {
 	// other state things
 	const GAME_STATES = {
-		INSTRUCTIONS: "instructions",
 		GAME: "game",
 		ENDED: "end",
 	};
-	const [gameState, setGameState] = useState(GAME_STATES.INSTRUCTIONS);
+	const [gameState, setGameState] = useState(GAME_STATES.GAME);
 	const [roundCount, setRoundCount] = useState(1);
 	const [roundResults, setRoundResults] = useState([]);
 
@@ -67,9 +65,6 @@ function App() {
 	return (
 		<>
 			<Header />
-			{gameState === GAME_STATES.INSTRUCTIONS && (
-				<Instructions startGame={startGame} />
-			)}
 			{gameState === GAME_STATES.GAME && (
 				<Game
 					roundCount={roundCount}

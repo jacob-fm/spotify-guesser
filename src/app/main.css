@@ -131,3 +131,13 @@ div.not-found {
 	padding: 20px;
 	font-size: 2rem;
 }
+
+.basic-layout {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 90dvh;
+	gap: 18px;
+	padding: 12px;
+}

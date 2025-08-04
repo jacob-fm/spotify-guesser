@@ -13,12 +13,17 @@ import PublicRoute from "../components/PublicRoute.jsx";
 import ForgotPassword from "./routes/ForgotPassword.jsx";
 import ResetPassword from "./routes/ResetPassword.jsx";
 import Instructions from "./routes/Instructions/Instructions.jsx";
+import Home from "./routes/Home.jsx";
 
 const router = createBrowserRouter([
 	{
 		path: "/",
-		element: <App />,
+		element: <Home />,
 		errorElement: <NotFoundPage />,
+	},
+	{
+		path: "/game",
+		element: <App />,
 	},
 	{
 		path: "/instructions",
