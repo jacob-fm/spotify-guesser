@@ -12,7 +12,7 @@ import PrivateRoute from "../components/PrivateRoute.jsx";
 import PublicRoute from "../components/PublicRoute.jsx";
 import ForgotPassword from "./routes/ForgotPassword.jsx";
 import ResetPassword from "./routes/ResetPassword.jsx";
-import Instructions from "../components/Instructions.jsx";
+import Instructions from "./routes/Instructions/Instructions.jsx";
 
 const router = createBrowserRouter([
 	{

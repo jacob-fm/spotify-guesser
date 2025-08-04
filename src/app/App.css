@@ -1,27 +1,3 @@
-section.instructions {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	text-align: left;
-	max-width: 500px;
-	margin: 40px auto;
-	gap: 20px;
-	@media screen and (max-width: 768px) {
-		margin-block: 20px;
-		padding-inline: 10%;
-	}
-}
-
-section.instructions h2 {
-	font-size: 2.4rem;
-	line-height: 0;
-}
-
-section.instructions p {
-	font-size: 1.2rem;
-	line-height: 1.5;
-}
-
 /* Game component */
 
 section.game-content {

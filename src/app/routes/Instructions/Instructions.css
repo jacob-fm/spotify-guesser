@@ -1,0 +1,33 @@
+.content {
+    display: flex;
+    flex-direction: column;
+    padding: 12px;
+    height: 85dvh;
+    gap: 8px;
+}
+
+.info-card {
+    display: flex;
+    flex-direction: column;
+    height: 60vh;
+    gap: 18px;
+    background-color: white;
+    border: 1px solid var(--darkest);
+    border-radius: 8px;
+    padding: 14px;
+    img {
+        width: 100%;
+        height: 270px;
+        object-fit: cover;
+        border-radius: 8px;
+    }
+    h2 {
+        font-weight: 400;
+    }
+}
+
+.arrow-group {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 30px;
+}

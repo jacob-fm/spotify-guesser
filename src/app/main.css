@@ -41,11 +41,20 @@ h1 {
 	}
 }
 
-button {
-	display: block;
-	/* margin: 0 auto; */
+a {
+	color: var(--faint);
+}
+
+/* Button styling */
+
+button,
+.button-link {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 60px;
 	border-radius: 8px;
-	padding: 0;
 	font-size: 1.2rem;
 	font-family: inherit;
 	color: var(--label-color);
@@ -53,9 +62,14 @@ button {
 	border: 1px solid var(--border-color);
 	cursor: pointer;
 	transition: all 0.15s;
+
+	text-decoration: none;
 }
-button:not(:disabled):hover {
+button:not(:disabled):hover,
+.button-link:hover {
 	background-color: var(--background-hover-color);
+	color: var(--label-hover-color);
+	border-color: var(--border-hover-color);
 }
 button:focus,
 button:focus-visible {
@@ -63,6 +77,24 @@ button:focus-visible {
 }
 button:disabled {
 	cursor: default;
+}
+
+button.filled,
+.button-link.filled {
+	--label-color: white;
+	--background-color: var(--primary);
+	--border-color: transparent;
+	--background-hover-color: var(--darkest);
+	--label-hover-color: var(--tan);
+}
+
+button.outlined,
+.button-link.outlined {
+	--label-color: var(--darkest);
+	--background-color: transparent;
+	--border-color: var(--darkest);
+	--label-hover-color: var(--primary);
+	--border-hover-color: var(--primary);
 }
 
 hr {

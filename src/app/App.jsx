@@ -2,7 +2,7 @@ import { useState } from "react";
 import { UserAuth } from "../lib/AuthContext";
 import "./App.css";
 import Header from '/src/components/Header/Header';
-import Instructions from "../components/Instructions";
+import Instructions from "./routes/Instructions/Instructions";
 import Game from "./routes/Game/Game";
 import Scoreboard from "./routes/Game/components/Scoreboard";
 import { supabase } from "../lib/supabaseClient";
