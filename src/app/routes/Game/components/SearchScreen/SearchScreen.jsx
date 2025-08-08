@@ -1,9 +1,11 @@
-import useDebounce from "/src/hooks/useDebounce";
-import { searchSpotifyArtists } from "/src/api/fetchSpotifyData";
 import { useState, useEffect, useRef } from "react";
-import SearchResult from "./SearchResult";
+import { searchSpotifyArtists } from "/src/api/fetchSpotifyData";
+import useDebounce from "/src/hooks/useDebounce";
+import SearchResult from "../SearchResult";
+import { XIcon, SearchIcon } from "lucide-react";
+import "./SearchScreen.css";
 
-export default function ArtistPlaceholder({ onArtistSelect, targetArtist }) {
+export default function SearchScreen({ onArtistSelect, targetArtist }) {
   const [searchInput, setSearchInput] = useState("");
   const debouncedInput = useDebounce(searchInput);
   const [searchResults, setSearchResults] = useState([]);
@@ -80,21 +82,24 @@ export default function ArtistPlaceholder({ onArtistSelect, targetArtist }) {
   }
 
   return (
-    <div className="artist-card guess">
-      <div className="artist-info">
-        <input
-          type="text"
-          placeholder="Search for an artist..."
-          value={searchInput}
-          onChange={(e) => handleChange(e.target.value)}
-          className="artist-search-input"
-          autoComplete="off"
-          onKeyDown={handleKeyDown}
-        />
-        {searchInput.length > 0 && (
-          <SearchResultsList results={searchResults} />
-        )}
+    <section className="search-screen">
+      <div className="top-row">
+        <div className="search-input-container">
+          <SearchIcon size={35} />
+          <input
+            id="artist-search-input"
+            type="text"
+            placeholder="Type to search..."
+            value={searchInput}
+            onChange={(e) => handleChange(e.target.value)}
+            className="artist-search-input"
+            autoComplete="off"
+            onKeyDown={handleKeyDown}
+          />
+        </div>
+        <XIcon size={50} />
       </div>
-    </div>
+      {searchInput.length > 0 && <SearchResultsList results={searchResults} />}
+    </section>
   );
 }

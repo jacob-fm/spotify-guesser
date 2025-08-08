@@ -5,6 +5,7 @@ import ArtistCard from "/src/app/routes/Game/components/ArtistCard";
 import ArtistPlaceholder from "/src/app/routes/Game/components/ArtistPlaceholder";
 import AnimatedScore from "/src/app/routes/Game/components/AnimatedScore";
 import ScoreIncrement from "/src/app/routes/Game/components/ScoreIncrement";
+import SearchScreen from "./components/SearchScreen/SearchScreen";
 import "./Game.css";
 
 export default function Game({
@@ -16,7 +17,7 @@ export default function Game({
 }) {
   const [targetArtistList, setTargetArtistList] = useState([]);
   const [targetArtist, setTargetArtist] = useState(null);
-  // const [isLoading, setIsLoading] = useState(true);
+  const [isSearching, setIsSearching] = useState(false);
   const [selectedArtist, setSelectedArtist] = useState(null);
   const [guessSubmitted, setGuessSubmitted] = useState(false);
   const [previousScore, setPreviousScore] = useState(0);
@@ -199,6 +200,12 @@ export default function Game({
             </button>
           </div>
         ))}
+      {
+        <SearchScreen
+          onArtistSelect={handleArtistSelect}
+          targetArtist={targetArtist}
+        />
+      }
     </section>
   );
 }

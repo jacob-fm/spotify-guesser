@@ -6,7 +6,7 @@
 :root {
   /* variables */
   --tan: #fff6e6;
-  --faint: #9e88e5;
+  --faint: #9e88a5;
   --primary: #ff204d;
   --alt: #ffd5c3;
   --darkest: #643a71;
@@ -117,6 +117,13 @@ ol {
   gap: 0.7rem;
   font-size: 1.2rem;
   line-height: 1.6rem;
+}
+
+/* inputs don't inherit font unless explicit */
+input,
+textarea,
+select {
+  font-family: inherit;
 }
 
 /* @media (prefers-color-scheme: light) {
