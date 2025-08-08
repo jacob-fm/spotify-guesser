@@ -1,0 +1,114 @@
+/* Game component */
+
+section.game-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  padding-inline: 28px;
+}
+
+div.round-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  hr {
+    width: 70%;
+  }
+  h2 {
+    font-size: 1.5rem;
+  }
+}
+
+div.score-display-line {
+  margin-top: 12px;
+  margin-bottom: 24px;
+}
+span.score {
+  font-size: 1.125rem;
+}
+
+/* Artist Cards */
+
+div.artist-cards-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+div.artist-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  width: 100%;
+  padding: 14px;
+  border: 1px solid white;
+  border-radius: 8px;
+
+  color: white;
+
+  h2 {
+    font-size: 1.375rem;
+    font-weight: 600;
+  }
+  hr {
+    border-color: white;
+    width: 60%;
+  }
+}
+.artist-card.target {
+  background-color: var(--darkest);
+}
+.artist-card.guess {
+  background-color: var(--primary);
+}
+
+div.artist-info {
+  display: flex;
+  margin-top: 5px;
+  width: 100%;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+div.artist-img-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--primary);
+  color: white;
+  svg {
+    animation: spin 1.5s ease infinite;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+div.artist-img-loading,
+.artist-info > img {
+  border-radius: 8px;
+  border: 1px solid white;
+  width: 146px;
+  height: 120px;
+
+  object-fit: cover;
+}
+
+span.artist-name {
+  flex: 1;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 1.375rem;
+}

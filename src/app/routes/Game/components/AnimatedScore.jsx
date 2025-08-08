@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 import { useMotionValue, animate } from "motion/react";
 
 function AnimatedScore({ previousScore, newScore, duration }) {
@@ -23,7 +23,8 @@ function AnimatedScore({ previousScore, newScore, duration }) {
   }, [newScore]);
 
   return (
-    <span className='score'>
+    <span className="score">
+      {/* TODO: separate the word "score" and the number */}
       Score: {displayScore}
     </span>
   );

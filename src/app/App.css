@@ -1,282 +1,114 @@
-/* Game component */
-
-section.game-content {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: space-evenly;
-}
-
-div.round-info {
-	width: 80%;
-	display: flex;
-	@media screen and (max-width: 768px) {
-		flex-direction: column;
-		align-items: center;
-	}
-}
-
-div.score-display-line {
-	display: flex;
-	justify-content: space-between;
-	/* this prevents displacing of Round count when on desktop */
-	@media screen and (max-width: 768px) {
-		width: 100%;
-	}
-}
-
-.score-increment,
-span.score {
-	font-variation-settings: "slnt" -10;
-	font-size: 1.4rem;
-	/* this is min-width! */
-	@media screen and (min-width: 769px) {
-		position: absolute;
-		right: 16%;
-		top: 15%;
-		font-size: 1.8rem;
-	}
-}
-
-.score-increment {
-	color: rgb(15, 222, 70);
-	/* this is min-width! */
-	@media screen and (min-width: 768px) {
-		transform: translateY(-32px);
-	}
-}
-
-/* Artist Cards */
-
-div.artist-cards-container {
-	margin-top: 20px;
-	display: flex;
-	width: 100%;
-	padding-inline: 15vw;
-	justify-content: space-evenly;
-	text-align: center;
-	h2 {
-		font-size: 1.8rem;
-		line-height: 0.4rem;
-	}
-	@media screen and (max-width: 768px) {
-		flex-direction: column;
-		margin-top: 0;
-		gap: 20px;
-		padding: 0 10% 5% 10%;
-		h2 {
-			font-size: 1.2rem;
-			line-height: 0.2rem;
-		}
-	}
-}
-
-div.loading-placeholder {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 380px;
-	height: 200px;
-	font-size: 4rem;
-	color: white;
-}
-
-div.artist-card {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-}
-
-div.artist-info {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	background-color: var(--tan);
-	border-radius: 7px;
-	border: solid 6px var(--tan);
-	width: 380px;
-	height: auto;
-	position: relative;
-	@media screen and (max-width: 768px) {
-		width: 70%;
-		border-width: 3px;
-	}
-}
-
-span.artist-name {
-	width: 100%;
-	text-align: center;
-	background-color: var(--darkest);
-	font-size: 1.2rem;
-	color: white;
-	padding: 6px;
-	@media screen and (max-width: 768px) {
-		font-size: 1rem;
-		padding: 3px;
-	}
-}
-
-div.artist-info > input.artist-search-input {
-	width: 100%;
-	text-align: center;
-	padding: 10px;
-	border: none;
-	font-size: 1.2rem;
-	background-color: var(--darkest);
-	color: white;
-	&:focus {
-		outline: none;
-	}
-	@media screen and (max-width: 768px) {
-		font-size: 1rem;
-		padding: 4px;
-	}
-}
-
-div.artist-info > img {
-	width: 100%;
-	height: 200px;
-	object-fit: cover;
-	@media screen and (max-width: 768px) {
-		height: 20dvh;
-	}
-}
-div.artist-info > .artist-image-placeholder {
-	width: 100%;
-	height: 200px;
-	background-color: var(--primary);
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	font-size: 6rem;
-	color: white;
-	@media screen and (max-width: 768px) {
-		height: 15dvh;
-	}
-}
-
-span.popularity-score {
-	text-align: center;
-	font-size: 1.6rem;
-	color: var(--darkest);
-	padding: 6px;
-	@media screen and (max-width: 768px) {
-		font-size: 1rem;
-		padding: 3px;
-	}
-}
-
 /* SearchResultsspan */
 div.search-results-list {
-	position: absolute;
-	background-color: var(--faint);
-	top: 42px;
-	padding-top: 3px;
-	display: flex;
-	flex-direction: column;
-	width: 100%;
-	height: 200px;
-	justify-content: space-between;
-	@media screen and (max-width: 768px) {
-		top: 27px;
-		height: 170px;
-	}
+  position: absolute;
+  background-color: var(--faint);
+  top: 42px;
+  padding-top: 3px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 200px;
+  justify-content: space-between;
+  @media screen and (max-width: 768px) {
+    top: 27px;
+    height: 170px;
+  }
 }
 
 span.search-result {
-	font-size: 1.2rem;
-	color: white;
-	background-color: var(--darkest);
-	padding: 4px;
-	text-align: center;
-	width: 100%;
-	cursor: pointer;
-	&:hover,
-	&.active {
-		background-color: var(--faint);
-		color: var(--darkest);
-	}
-	@media screen and (max-width: 768px) {
-		font-size: 1rem;
-	}
+  font-size: 1.2rem;
+  color: white;
+  background-color: var(--darkest);
+  padding: 4px;
+  text-align: center;
+  width: 100%;
+  cursor: pointer;
+  &:hover,
+  &.active {
+    background-color: var(--faint);
+    color: var(--darkest);
+  }
+  @media screen and (max-width: 768px) {
+    font-size: 1rem;
+  }
 }
 
 .post-guess-buttons {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	margin-top: 20px;
-	width: 300px;
-	gap: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  width: 300px;
+  gap: 10px;
 }
 
 .reset-button {
-	width: 100%;
+  width: 100%;
 }
 
 .submit-guess-button {
-	width: 100%;
-	font-size: 1.5rem;
-	background-color: var(--primary);
+  width: 100%;
+  font-size: 1.5rem;
+  background-color: var(--primary);
 }
 
 .next-round-button,
 .game-over-button {
-	margin-top: 40px;
-	font-size: 1.5rem;
+  margin-top: 40px;
+  font-size: 1.5rem;
 }
 
 /* Game Over screen */
 section.scoreboard {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	text-align: center;
-	max-width: 700px;
-	margin: 70px auto;
-	gap: 20px;
-	h2 {
-		font-size: 3rem;
-		line-height: 0;
-	}
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 700px;
+  margin: 70px auto;
+  gap: 20px;
+  h2 {
+    font-size: 3rem;
+    line-height: 0;
+  }
 }
 
 table.scoreboard-table {
-	border-collapse: collapse;
-	width: 100%;
-	margin-top: 20px;
-	font-size: 1.2rem;
-	th,
-	td {
-		padding: 10px;
-	}
-	tr.dashed-line {
-		border-bottom: 1px solid var(--primary);
-	}
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 20px;
+  font-size: 1.2rem;
+  th,
+  td {
+    padding: 10px;
+  }
+  tr.dashed-line {
+    border-bottom: 1px solid var(--primary);
+  }
 }
 
 .tooltip {
-	position: relative;
-	display: inline-block;
-	border-bottom: 1px dashed rgb(124, 124, 124);
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dashed rgb(124, 124, 124);
 }
 
 .tooltip .tooltiptext {
-	visibility: hidden;
-	width: 230px;
-	background-color: rgb(211, 211, 211);
-	color: #000000;
-	text-align: center;
-	border-radius: 6px;
-	padding: 8px;
+  visibility: hidden;
+  width: 230px;
+  background-color: rgb(211, 211, 211);
+  color: #000000;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px;
 
-	/* Position the tooltip */
-	position: absolute;
-	z-index: 1;
-	top: 23px;
-	right: 10px;
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  top: 23px;
+  right: 10px;
 }
 
 .tooltip:hover .tooltiptext {
-	visibility: visible;
+  visibility: visible;
 }
