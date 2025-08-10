@@ -19,6 +19,16 @@ export default function SearchScreen({
   // Simple cache object stored in a ref
   const cacheRef = useRef({});
 
+  // for leaving search when escape is pressed
+  useEffect(() => {
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        setIsSearching(false);
+      }
+    });
+  }, []);
+
+  // for getting search results
   useEffect(() => {
     // if the input is empty, clear the results
     if (debouncedInput.length === 0) {

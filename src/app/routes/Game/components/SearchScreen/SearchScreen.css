@@ -37,6 +37,7 @@ div.search-input-container {
     border-radius: 8px;
     border: 1px solid var(--primary);
     color: var(--darkest);
+    background-color: white;
   }
   input::placeholder {
     color: var(--faint);

@@ -26,12 +26,22 @@ div.round-info {
   }
 }
 
+/* contians CURRENT score as well as ADDED score animation  */
 div.score-display-line {
   margin-top: 12px;
   margin-bottom: 24px;
+  display: flex;
 }
-span.score {
+
+div.current-score-container {
+  display: flex;
+  justify-content: space-between;
+  width: 110px;
   font-size: 1.125rem;
+}
+
+.score-increment {
+  color: green;
 }
 
 /* Artist Cards */
