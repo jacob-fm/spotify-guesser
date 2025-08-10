@@ -1,11 +1,15 @@
 import { useState, useEffect, useRef } from "react";
 import { searchSpotifyArtists } from "/src/api/fetchSpotifyData";
 import useDebounce from "/src/hooks/useDebounce";
-import SearchResult from "../SearchResult";
+import SearchResult from "./SearchResult";
 import { XIcon, SearchIcon } from "lucide-react";
 import "./SearchScreen.css";
 
-export default function SearchScreen({ onArtistSelect, targetArtist }) {
+export default function SearchScreen({
+  onArtistSelect,
+  targetArtist,
+  setIsSearching,
+}) {
   const [searchInput, setSearchInput] = useState("");
   const debouncedInput = useDebounce(searchInput);
   const [searchResults, setSearchResults] = useState([]);
@@ -81,12 +85,17 @@ export default function SearchScreen({ onArtistSelect, targetArtist }) {
     );
   }
 
+  function handleCloseSearch() {
+    setIsSearching(false);
+  }
+
   return (
     <section className="search-screen">
       <div className="top-row">
         <div className="search-input-container">
           <SearchIcon size={35} />
           <input
+            autoFocus
             id="artist-search-input"
             type="text"
             placeholder="Type to search..."
@@ -97,7 +106,7 @@ export default function SearchScreen({ onArtistSelect, targetArtist }) {
             onKeyDown={handleKeyDown}
           />
         </div>
-        <XIcon size={50} />
+        <XIcon size={50} onClick={handleCloseSearch} />
       </div>
       {searchInput.length > 0 && <SearchResultsList results={searchResults} />}
     </section>

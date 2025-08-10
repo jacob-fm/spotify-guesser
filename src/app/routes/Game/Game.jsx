@@ -2,10 +2,10 @@ import { useState, useEffect } from "react";
 import { supabase } from "/src/lib/supabaseClient";
 import { getArtistById } from "/src/api/fetchSpotifyData";
 import ArtistCard from "/src/app/routes/Game/components/ArtistCard";
-import ArtistPlaceholder from "/src/app/routes/Game/components/ArtistPlaceholder";
 import AnimatedScore from "/src/app/routes/Game/components/AnimatedScore";
 import ScoreIncrement from "/src/app/routes/Game/components/ScoreIncrement";
 import SearchScreen from "./components/SearchScreen/SearchScreen";
+import { SearchIcon } from "lucide-react";
 import "./Game.css";
 
 export default function Game({
@@ -87,6 +87,7 @@ export default function Game({
         console.error("Error fetching artist data:", error);
         setSelectedArtist(null);
       });
+    setIsSearching(false);
   }
 
   function handleSubmitGuess() {
@@ -126,6 +127,10 @@ export default function Game({
     updateRoundCount((prevRound) => prevRound + 1);
   }
 
+  function handleStartSearch() {
+    setIsSearching(true);
+  }
+
   return (
     <section className="game-content">
       <div className="round-info">
@@ -163,10 +168,10 @@ export default function Game({
             />
           </>
         ) : (
-          <ArtistPlaceholder
-            onArtistSelect={handleArtistSelect}
-            targetArtist={targetArtist}
-          />
+          <div className="artist-input-placeholder">
+            <SearchIcon size={35} />
+            <span onClick={handleStartSearch}>Type to search...</span>
+          </div>
         )}
       </div>
       {selectedArtist != null &&
@@ -200,12 +205,13 @@ export default function Game({
             </button>
           </div>
         ))}
-      {
+      {isSearching && (
         <SearchScreen
           onArtistSelect={handleArtistSelect}
           targetArtist={targetArtist}
+          setIsSearching={setIsSearching}
         />
-      }
+      )}
     </section>
   );
 }

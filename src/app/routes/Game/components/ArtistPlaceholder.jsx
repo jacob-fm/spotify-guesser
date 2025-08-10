@@ -1,7 +1,7 @@
 import useDebounce from "/src/hooks/useDebounce";
 import { searchSpotifyArtists } from "/src/api/fetchSpotifyData";
 import { useState, useEffect, useRef } from "react";
-import SearchResult from "./SearchResult";
+import SearchResult from "./SearchScreen/SearchResult";
 
 export default function ArtistPlaceholder({ onArtistSelect, targetArtist }) {
   const [searchInput, setSearchInput] = useState("");

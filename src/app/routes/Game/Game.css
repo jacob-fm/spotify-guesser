@@ -37,10 +37,12 @@ span.score {
 /* Artist Cards */
 
 div.artist-cards-container {
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 12px;
 }
 
 div.artist-card {
@@ -114,4 +116,22 @@ span.artist-name {
   align-items: center;
   text-align: center;
   font-size: 1.375rem;
+}
+
+div.artist-input-placeholder {
+  width: 100%;
+  height: 80px;
+  background-color: white;
+  border: 1px solid var(--primary);
+  border-radius: 8px;
+
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  gap: 8px;
+
+  color: var(--faint);
+  span {
+    font-size: 1.375rem;
+  }
 }
