@@ -104,6 +104,7 @@ button.outlined,
   --border-color: var(--darkest);
   --label-hover-color: var(--primary);
   --border-hover-color: var(--primary);
+  --background-hover-color: white;
 }
 
 hr {

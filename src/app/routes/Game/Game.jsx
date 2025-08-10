@@ -177,25 +177,28 @@ export default function Game({
       {selectedArtist != null &&
         (guessSubmitted ? (
           roundCount >= totalRounds ? (
-            <button className="game-over-button" onClick={onGameOver}>
+            <button className="game-over-button filled" onClick={onGameOver}>
               See Score
             </button>
           ) : (
-            <button className="next-round-button" onClick={handleNextRound}>
+            <button
+              className="next-round-button filled"
+              onClick={handleNextRound}
+            >
               Next Round
             </button>
           )
         ) : (
           <div className="post-guess-buttons">
             <button
-              className="reset-button"
+              className="outlined"
               onClick={() => setSelectedArtist(null)}
               disabled={guessSubmitted}
             >
               Reset Selection
             </button>
             <button
-              className="submit-guess-button"
+              className="filled"
               onClick={() => {
                 handleSubmitGuess();
               }}

@@ -135,3 +135,29 @@ div.artist-input-placeholder {
     font-size: 1.375rem;
   }
 }
+
+/* buttons */
+.post-guess-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  width: 100%;
+  gap: 10px;
+}
+
+.reset-button {
+  width: 100%;
+}
+
+.submit-guess-button {
+  width: 100%;
+  font-size: 1.5rem;
+  background-color: var(--primary);
+}
+
+.next-round-button,
+.game-over-button {
+  margin-top: 40px;
+  font-size: 1.5rem;
+}
