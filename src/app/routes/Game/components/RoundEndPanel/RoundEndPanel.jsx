@@ -1,3 +1,5 @@
+import { useState, useEffect } from "react";
+import { useMotionValue, animate } from "motion/react";
 import "./RoundEndPanel.css";
 
 export default function RoundEndPanel({
@@ -5,8 +7,27 @@ export default function RoundEndPanel({
   targetArtist,
   nextRound,
 }) {
+  const motionGuessPopularity = useMotionValue(0);
+  const motionTargetPopularity = useMotionValue(0);
+
+  const [displayGuessPopularity, setDisplayGuessPopularity] = useState(0);
+  const [displayTargetPopularity, setDisplayTargetPopularity] = useState(0);
+
   const diff = Math.abs(targetArtist.popularity - guessArtist.popularity);
   const score = Math.max(0, 100 - diff * 5);
+
+  // Animate progress bars
+  useEffect(() => {
+    const controls = animate(motionGuessPopularity, guessArtist.popularity, {
+      duration: 2.0,
+      onUpdate: (latest) => {
+        setDisplayGuessPopularity(Math.round(latest));
+      },
+    });
+
+    return controls.stop;
+  }, []);
+
   return (
     <div className="overlay">
       <div className="round-end-panel">
@@ -14,8 +35,8 @@ export default function RoundEndPanel({
           <h2>Your Guess</h2>
           <div className="artist-info-container">
             <span className="artist-name">{guessArtist.name}</span>
-            <span>Popularity: {guessArtist.popularity}/100</span>
-            <progress value={guessArtist.popularity} max={100} />
+            <span>Popularity: {displayGuessPopularity}/100</span>
+            <progress value={displayGuessPopularity} max={100} />
           </div>
         </div>
         <div className="target-section">

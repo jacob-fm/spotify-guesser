@@ -15,6 +15,7 @@ div.round-end-panel {
   background-color: white;
   width: 90%;
   border-radius: 8px;
+  border: 1px solid var(--darkest);
 
   display: flex;
   flex-direction: column;
