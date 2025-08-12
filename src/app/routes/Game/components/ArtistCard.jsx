@@ -15,7 +15,7 @@ export default function ArtistCard({ artist, visibleScore, isTarget }) {
             <LoaderCircle size={40} />
           </div>
         ) : (
-          <img src={artist.images[0].url} />
+          <img src={artist.images[0]?.url} />
         )}
       </div>
     </div>
