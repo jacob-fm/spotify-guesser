@@ -7,6 +7,7 @@ import ScoreIncrement from "/src/app/routes/Game/components/ScoreIncrement";
 import SearchScreen from "./components/SearchScreen/SearchScreen";
 import { SearchIcon } from "lucide-react";
 import "./Game.css";
+import RoundEndPanel from "./components/RoundEndPanel/RoundEndPanel";
 
 export default function Game({
   roundCount,
@@ -208,6 +209,12 @@ export default function Game({
             </button>
           </div>
         ))}
+      {guessSubmitted && (
+        <RoundEndPanel
+          guessArtist={selectedArtist}
+          targetArtist={targetArtist}
+        />
+      )}
       {isSearching && (
         <SearchScreen
           onArtistSelect={handleArtistSelect}
