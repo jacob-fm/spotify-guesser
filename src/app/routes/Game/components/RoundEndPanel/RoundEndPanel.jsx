@@ -1,6 +1,10 @@
 import "./RoundEndPanel.css";
 
-export default function RoundEndPanel({ guessArtist, targetArtist }) {
+export default function RoundEndPanel({
+  guessArtist,
+  targetArtist,
+  nextRound,
+}) {
   const diff = Math.abs(targetArtist.popularity - guessArtist.popularity);
   const score = Math.max(0, 100 - diff * 5);
   return (
@@ -29,7 +33,9 @@ export default function RoundEndPanel({ guessArtist, targetArtist }) {
           100 - (5x Difference) =
         </span>
         <span className="final-round-score">{score}</span>
-        <button className="filled">Next Round</button>
+        <button className="filled" onClick={nextRound}>
+          Next Round
+        </button>
       </div>
     </div>
   );

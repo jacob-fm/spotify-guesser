@@ -176,20 +176,7 @@ export default function Game({
         )}
       </div>
       {selectedArtist != null &&
-        (guessSubmitted ? (
-          roundCount >= totalRounds ? (
-            <button className="game-over-button filled" onClick={onGameOver}>
-              See Score
-            </button>
-          ) : (
-            <button
-              className="next-round-button filled"
-              onClick={handleNextRound}
-            >
-              Next Round
-            </button>
-          )
-        ) : (
+        (guessSubmitted ? null : (
           <div className="post-guess-buttons">
             <button
               className="outlined"
@@ -213,6 +200,7 @@ export default function Game({
         <RoundEndPanel
           guessArtist={selectedArtist}
           targetArtist={targetArtist}
+          nextRound={handleNextRound}
         />
       )}
       {isSearching && (
