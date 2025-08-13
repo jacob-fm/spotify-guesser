@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useMotionValue, animate } from "motion/react";
+import { useMotionValue, useAnimate } from "motion/react";
 import "./RoundEndPanel.css";
 
 export default function RoundEndPanel({
@@ -7,6 +7,8 @@ export default function RoundEndPanel({
   targetArtist,
   nextRound,
 }) {
+  const [scope, animate] = useAnimate();
+
   const motionGuessPopularity = useMotionValue(0);
   const motionTargetPopularity = useMotionValue(0);
 
@@ -18,14 +20,21 @@ export default function RoundEndPanel({
 
   // Animate progress bars
   useEffect(() => {
-    const controls = animate(motionGuessPopularity, guessArtist.popularity, {
-      duration: 2.0,
-      onUpdate: (latest) => {
-        setDisplayGuessPopularity(Math.round(latest));
-      },
-    });
-
-    return controls.stop;
+    const animationSequence = async () => {
+      await animate(motionGuessPopularity, guessArtist.popularity, {
+        duration: 2.0,
+        onUpdate: (latest) => {
+          setDisplayGuessPopularity(Math.round(latest));
+        },
+      });
+      await animate(motionTargetPopularity, targetArtist.popularity, {
+        duration: 2.0,
+        onUpdate: (latest) => {
+          setDisplayTargetPopularity(Math.round(latest));
+        },
+      });
+    };
+    animationSequence();
   }, []);
 
   return (
@@ -43,8 +52,8 @@ export default function RoundEndPanel({
           <h2>Your Target</h2>
           <div className="artist-info-container">
             <span className="artist-name">{targetArtist.name}</span>
-            <span>Popularity: {targetArtist.popularity}/100</span>
-            <progress value={targetArtist.popularity} max={100} />
+            <span>Popularity: {displayTargetPopularity}/100</span>
+            <progress value={displayTargetPopularity} max={100} />
           </div>
         </div>
         <span>Difference = {diff}</span>
