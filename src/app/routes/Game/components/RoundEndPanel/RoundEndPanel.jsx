@@ -22,24 +22,27 @@ export default function RoundEndPanel({
   useEffect(() => {
     const animationSequence = async () => {
       await animate(motionGuessPopularity, guessArtist.popularity, {
-        duration: 2.0,
+        duration: 1.3,
         onUpdate: (latest) => {
           setDisplayGuessPopularity(Math.round(latest));
         },
       });
       await animate(motionTargetPopularity, targetArtist.popularity, {
-        duration: 2.0,
+        duration: 1.3,
         onUpdate: (latest) => {
           setDisplayTargetPopularity(Math.round(latest));
         },
       });
+      await animate(".difference", { opacity: 1 }, { delay: 0.2 });
+      await animate(".pre-round-score", { opacity: 1 }, { delay: 0.2 });
+      await animate(".final-round-score", { opacity: 1 }, { delay: 0.2 });
     };
     animationSequence();
   }, []);
 
   return (
     <div className="overlay">
-      <div className="round-end-panel">
+      <div className="round-end-panel" ref={scope}>
         <div className="guess-section">
           <h2>Your Guess</h2>
           <div className="artist-info-container">
@@ -56,8 +59,8 @@ export default function RoundEndPanel({
             <progress value={displayTargetPopularity} max={100} />
           </div>
         </div>
-        <span>Difference = {diff}</span>
-        <span>
+        <span className="difference">Difference = {diff}</span>
+        <span className="pre-round-score">
           Round score:
           <br />
           100 - (5x Difference) =

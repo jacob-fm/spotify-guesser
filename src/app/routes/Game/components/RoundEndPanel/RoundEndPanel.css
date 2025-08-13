@@ -85,6 +85,12 @@ progress::-webkit-progress-value {
   background-color: var(--color-2);
 }
 
+.difference,
+.pre-round-score,
+.final-round-score {
+  opacity: 0;
+}
+
 .final-round-score {
   font-size: 1.375rem;
   color: #18c42c;
