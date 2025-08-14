@@ -156,6 +156,8 @@ div.artist-input-placeholder {
   border: 1px solid var(--primary);
   border-radius: 8px;
 
+  cursor: text;
+
   display: flex;
   align-items: center;
   padding: 12px;
