@@ -6,8 +6,8 @@ import { MenuIcon, XIcon } from "lucide-react";
 import { useViewportSize } from "@mantine/hooks";
 
 export default function Header() {
-  const [loggedIn, setLoggedIn] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [navLinks, setNavLinks] = useState([{ name: "Home", path: "/" }]);
   const { width } = useViewportSize();
   const isMobile = width < 768;
 
@@ -15,16 +15,17 @@ export default function Header() {
 
   useEffect(() => {
     if (session === undefined || session === null) {
-      setLoggedIn(false);
+      setNavLinks([
+        { name: "Home", path: "/" },
+        { name: "Login", path: "/login" },
+      ]);
     } else {
-      setLoggedIn(true);
+      setNavLinks([
+        { name: "Home", path: "/" },
+        { name: "Account", path: "/dashboard" },
+      ]);
     }
   }, [session]);
-
-  const navLinks = [
-    { name: "Home", path: "/" },
-    { name: "Login", path: "/login" },
-  ];
 
   // Toggle menu open/closed
   const toggleMenu = () => {
