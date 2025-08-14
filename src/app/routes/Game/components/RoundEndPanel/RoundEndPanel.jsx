@@ -51,6 +51,7 @@ export default function RoundEndPanel({
             <progress value={displayGuessPopularity} max={100} />
           </div>
         </div>
+
         <div className="target-section">
           <h2>Your Target</h2>
           <div className="artist-info-container">
@@ -59,6 +60,7 @@ export default function RoundEndPanel({
             <progress value={displayTargetPopularity} max={100} />
           </div>
         </div>
+
         <span className="difference">Difference = {diff}</span>
         <span className="pre-round-score">
           Round score:
