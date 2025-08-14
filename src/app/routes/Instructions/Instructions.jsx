@@ -7,7 +7,7 @@ import { useState } from "react";
 function InstructionCard({ image, mainText, subText }) {
   return (
     <div className="info-card">
-      <img src={image} />
+      {image && <img src={image} />}
       {mainText}
       {subText}
     </div>
@@ -19,12 +19,19 @@ export default function Instructions({ startGame }) {
 
   const cardContents = [
     {
-      image:
-        "https://cdn.pixabay.com/photo/2025/04/24/01/29/trees-9554109_1280.jpg",
+      image: "/assets/instructions/target_highlight.png",
       mainText: (
         <h2>
-          Each round, you'll see a <b>Target Artist</b> with their{" "}
-          <b>Popularity</b> hidden.
+          Each round, you'll have a new <b>Target Artist</b>.
+        </h2>
+      ),
+    },
+    {
+      image: "/assets/instructions/search.png",
+      mainText: (
+        <h2>
+          Search for and select a <b>Guess Artist</b>, who you think is
+          similarly <b>Popular</b>.
         </h2>
       ),
       subText: (
@@ -37,25 +44,24 @@ export default function Instructions({ startGame }) {
       ),
     },
     {
-      image: "https://i.imgur.com/Lbhw0Yw.jpeg",
-      mainText: (
-        <h2>
-          Search for and select a <b>Guess Artist</b>, who you think is
-          similarly popular.
-        </h2>
-      ),
-    },
-    {
-      image: "https://i.imgur.com/Lbhw0Yw.jpeg",
+      image: "/assets/instructions/round_score.png",
       mainText: (
         <h2>
           You'll earn a max of 100 points, minus 5 for each point of difference
           in <b>Popularity</b>.
         </h2>
       ),
+      subText: (
+        <a
+          href="https://www.submithub.com/story/spotify-popularity-score-guide"
+          target="_blank"
+        >
+          How do you measure <b>Popularity</b>?
+        </a>
+      ),
     },
     {
-      image: "https://i.imgur.com/Lbhw0Yw.jpeg",
+      image: "/assets/instructions/scoreboard.png",
       mainText: (
         <h2>
           Play through 5 rounds and try to get the highest total score you can!
@@ -63,7 +69,7 @@ export default function Instructions({ startGame }) {
       ),
     },
     {
-      image: "https://i.imgur.com/Lbhw0Yw.jpeg",
+      // image: "https://i.imgur.com/Lbhw0Yw.jpeg",
       mainText: (
         <h2>
           A new set of 5 Target Artists are available every day, so come back
@@ -97,10 +103,18 @@ export default function Instructions({ startGame }) {
           subText={cardContents[cardIndex].subText}
         />
         <div className="arrow-group">
-          <button className="filled" onClick={goBack}>
+          <button
+            className="filled"
+            onClick={goBack}
+            disabled={cardIndex === 0}
+          >
             <MoveLeft />
           </button>
-          <button className="filled" onClick={goForward}>
+          <button
+            className="filled"
+            onClick={goForward}
+            disabled={cardIndex >= cardContents.length - 1}
+          >
             <MoveRight />
           </button>
         </div>
