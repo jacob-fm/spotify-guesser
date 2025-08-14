@@ -51,6 +51,7 @@ function ScoresTable({ games }) {
 
 const Dashboard = () => {
   const [scores, setScores] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const { session, signOut } = UserAuth();
   const navigate = useNavigate();
@@ -83,6 +84,21 @@ const Dashboard = () => {
     }
   };
 
+  async function handleDeleteAccount() {
+    try {
+      setLoading(true);
+      await supabase.functions.invoke("delete-account");
+      alert("Account deleted successfully!");
+    } catch (error) {
+      alert("Error deleting the account!");
+      console.log(error);
+    } finally {
+      setLoading(false);
+      await supabase.auth.signOut();
+      navigate("/");
+    }
+  }
+
   return (
     <>
       <Header />
@@ -95,6 +111,9 @@ const Dashboard = () => {
           </Link>
           <button className="outlined" onClick={handleSignOut}>
             Sign out
+          </button>
+          <button className="outlined" onClick={handleDeleteAccount}>
+            Delete Account
           </button>
           {/* TODO: implement deleting account */}
           {/* <Link className="button-link outlined" to="/delete-account"> */}

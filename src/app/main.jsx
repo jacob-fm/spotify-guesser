@@ -55,11 +55,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/forgot-password",
-    element: (
-      <PublicRoute>
-        <ForgotPassword />
-      </PublicRoute>
-    ),
+    element: <ForgotPassword />,
   },
   {
     path: "/reset-password",
