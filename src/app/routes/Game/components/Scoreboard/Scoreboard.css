@@ -1,0 +1,26 @@
+/* Game Over screen */
+section.scoreboard {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  h2 {
+    font-size: 2rem;
+  }
+}
+
+table.scoreboard-table {
+  border-collapse: collapse;
+  width: 90%;
+  margin-top: 20px;
+  font-size: 1.2rem;
+  td,
+  th {
+    text-align: center;
+    padding: 12px 5px;
+  }
+  tr.dashed-line {
+    border-bottom: 1px solid var(--primary);
+  }
+}

@@ -1,32 +1,3 @@
-/* Game Over screen */
-section.scoreboard {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  max-width: 700px;
-  margin: 70px auto;
-  gap: 20px;
-  h2 {
-    font-size: 3rem;
-    line-height: 0;
-  }
-}
-
-table.scoreboard-table {
-  border-collapse: collapse;
-  width: 100%;
-  margin-top: 20px;
-  font-size: 1.2rem;
-  th,
-  td {
-    padding: 10px;
-  }
-  tr.dashed-line {
-    border-bottom: 1px solid var(--primary);
-  }
-}
-
 .tooltip {
   position: relative;
   display: inline-block;
