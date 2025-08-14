@@ -1,42 +1,47 @@
 .accordion-parent {
+  width: 100%;
+  padding-inline: 25px;
 }
 
 .accordion {
-	display: flex;
-	flex-direction: column;
-	/* max-width: 500px; */
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
-.accordion .toggle {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	font-size: 1rem;
-	padding: 10px 15px;
-	transition: all 0.15s ease;
-	cursor: pointer;
-    width: 100%;
+.accordion button.toggle {
+  background-color: var(--primary);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1rem;
+  padding: 0px 15px;
+  transition: all 0.15s ease;
+  cursor: pointer;
+  width: 100%;
+  height: 46px;
+  color: white;
 }
 
 .arrow {
-    transition: all 0.2s ease;
+  transition: all 0.2s ease;
 }
 .arrow.active {
-    rotate: 180deg;
+  rotate: 180deg;
 }
 
 .accordion .content-parent {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.15s ease-out;
-    border-bottom: 3px solid #aaa;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.15s ease-out;
 }
 
 .accordion.toggled .content-parent {
-    max-height: 500px;
-    transition: max-height 0.25s ease-in;
+  max-height: 500px;
+  transition: max-height 0.25s ease-in;
 }
 
 .accordion .content {
-    padding: 15px 10px;
+  padding: 15px 10px;
 }
+

@@ -7,7 +7,7 @@ import App from "./App.jsx";
 import NotFoundPage from "./routes/NotFoundPage.jsx";
 import SignUp from "./routes/AccountForms/SignUp.jsx";
 import Login from "./routes/AccountForms/Login.jsx";
-import Dashboard from "./routes/Dashboard.jsx";
+import Dashboard from "./routes/Dashboard/Dashboard.jsx";
 import PrivateRoute from "../components/PrivateRoute.jsx";
 import PublicRoute from "../components/PublicRoute.jsx";
 import ForgotPassword from "./routes/AccountForms/ForgotPassword.jsx";
