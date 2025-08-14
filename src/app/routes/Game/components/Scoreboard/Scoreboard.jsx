@@ -1,6 +1,7 @@
+import { Link } from "react-router-dom";
 import "./Scoreboard.css";
 
-export default function Scoreboard({ roundResults, onNewGame }) {
+export default function Scoreboard({ roundResults }) {
   return (
     <section className="scoreboard">
       <h2>Scoreboard</h2>
@@ -37,10 +38,14 @@ export default function Scoreboard({ roundResults, onNewGame }) {
           </tr>
         </tbody>
       </table>
-      {/* <button className="play-again" onClick={onNewGame}>
-                Play Again
+      {/* TODO: implement sharing score */}
+      {/* <button className="share-score" onClick={onShareScore}>
+          Share my score
             </button> */}
       <h3>See you tomorrow!</h3>
+      <Link className="button-link outlined" to="/dashboard">
+        View past scores
+      </Link>
     </section>
   );
 }
