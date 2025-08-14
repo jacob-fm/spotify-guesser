@@ -201,6 +201,9 @@ export default function Game({
           guessArtist={selectedArtist}
           targetArtist={targetArtist}
           nextRound={handleNextRound}
+          gameOver={onGameOver}
+          roundCount={roundCount}
+          totalRounds={totalRounds}
         />
       )}
       {isSearching && (

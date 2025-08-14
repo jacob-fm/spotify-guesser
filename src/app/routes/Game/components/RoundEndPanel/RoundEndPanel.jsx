@@ -6,6 +6,9 @@ export default function RoundEndPanel({
   guessArtist,
   targetArtist,
   nextRound,
+  gameOver,
+  roundCount,
+  totalRounds,
 }) {
   const [scope, animate] = useAnimate();
 
@@ -68,9 +71,15 @@ export default function RoundEndPanel({
           100 - (5x Difference) =
         </span>
         <span className="final-round-score">{score}</span>
-        <button className="filled" onClick={nextRound}>
-          Next Round
-        </button>
+        {roundCount < totalRounds ? (
+          <button className="filled" onClick={nextRound}>
+            Next Round
+          </button>
+        ) : (
+          <button className="filled" onClick={gameOver}>
+            View Score
+          </button>
+        )}
       </div>
     </div>
   );
