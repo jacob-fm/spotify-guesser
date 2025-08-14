@@ -108,13 +108,13 @@ const Dashboard = () => {
       <Header />
       <div className="dashboard">
         <h1>Your Account</h1>
+        <h2>{session?.user?.email}</h2>
         <div className="account-options">
-          <h2>{session?.user?.email}</h2>
           <Link className="button-link outlined" to="/forgot-password">
             Reset Password
           </Link>
           <button className="outlined" onClick={handleSignOut}>
-            Sign out
+            Sign Out
           </button>
           <button className="outlined" onClick={handleDeleteAccount}>
             Delete Account

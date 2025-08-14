@@ -3,6 +3,8 @@
   flex-direction: column;
   align-items: center;
   padding-top: 40px;
+  max-width: 800px;
+  margin: auto;
 }
 
 .account-options {
@@ -10,7 +12,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 80%;
   gap: 20px;
+
+  @media screen and (min-width: 769px) {
+    flex-direction: row;
+  }
 }
 
 .past-scores {
@@ -36,5 +43,9 @@
   td,
   th {
     padding: 9px 0;
+  }
+
+  @media screen and (min-width: 769px) {
+    font-size: 1.15rem;
   }
 }
