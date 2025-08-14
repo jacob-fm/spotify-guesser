@@ -97,6 +97,15 @@ button.filled,
   --label-hover-color: var(--tan);
 }
 
+button.filled-alt,
+.button-link.filled-alt {
+  --label-color: white;
+  --background-color: var(--darkest);
+  --border-color: white;
+  --background-hover-color: var(--primary);
+  --label-hover-color: var(--tan);
+}
+
 button.outlined,
 .button-link.outlined {
   --label-color: var(--darkest);

@@ -82,6 +82,7 @@ ul.closed {
 
 button.menu-toggle {
   width: min-content;
+  color: var(--primary);
   @media screen and (min-width: 769px) {
     display: none;
   }

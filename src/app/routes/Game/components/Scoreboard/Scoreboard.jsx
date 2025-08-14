@@ -38,11 +38,11 @@ export default function Scoreboard({ roundResults }) {
           </tr>
         </tbody>
       </table>
+      <h3>See you tomorrow!</h3>
       {/* TODO: implement sharing score */}
       {/* <button className="share-score" onClick={onShareScore}>
           Share my score
             </button> */}
-      <h3>See you tomorrow!</h3>
       <Link className="button-link outlined" to="/dashboard">
         View past scores
       </Link>
