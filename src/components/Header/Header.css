@@ -12,7 +12,6 @@ nav {
   width: 100%;
   height: 100%;
   position: relative;
-  z-index: 1000;
 }
 
 ul {
@@ -33,6 +32,7 @@ ul.open {
   transform: translateX(0);
   transition: transform 0.3s ease-in-out;
   background-color: var(--darkest);
+  z-index: 1000;
 }
 ul.closed {
   flex-direction: column;
