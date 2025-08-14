@@ -52,6 +52,7 @@ a {
 
 /* Button styling */
 
+.navlink > a,
 button,
 .button-link {
   display: flex;
