@@ -85,6 +85,10 @@ const Dashboard = () => {
   };
 
   async function handleDeleteAccount() {
+    const confirmed = window.confirm(
+      "Are you sure you want to permanently delete your account? This action cannot be undone.",
+    );
+    if (!confirmed) return; // user clicked cancel
     try {
       setLoading(true);
       await supabase.functions.invoke("delete-account");
