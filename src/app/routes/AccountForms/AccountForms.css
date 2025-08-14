@@ -10,17 +10,17 @@ div.account-forms {
   }
 }
 
-h2 {
+.account-forms h2 {
   text-align: center;
 }
 
-form {
+.account-forms form {
   display: flex;
   flex-direction: column;
   width: 100%;
 }
 
-section {
+.account-forms section {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -34,14 +34,14 @@ section {
   color: white;
 }
 
-div.input-group {
+.account-forms div.input-group {
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 5px;
 }
 
-input {
+.account-forms input {
   padding: 20px;
   background-color: white;
   border-radius: 8px;
@@ -50,7 +50,7 @@ input {
   font-size: 1.375rem;
 }
 
-.links-line {
+.account-forms .links-line {
   width: 100%;
   display: flex;
   justify-content: space-evenly;
