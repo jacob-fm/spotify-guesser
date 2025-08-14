@@ -65,7 +65,6 @@ export default function Login() {
             {error && <p>{error}</p>}
           </section>
         </form>
-        <Link to="/forgot-password">Forgot your password?</Link>
       </div>
     </>
   );

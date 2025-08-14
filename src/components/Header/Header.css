@@ -16,7 +16,7 @@ nav {
 
 ul {
   display: flex;
-  align-items: center;
+  align-items: end;
   gap: 18px;
   list-style-type: none;
   background-color: transparent;
@@ -24,15 +24,29 @@ ul {
 ul.open {
   flex-direction: column;
   position: fixed;
-  top: var(--navbar-height);
+  top: 0;
   right: 0;
   bottom: 0;
-  width: 50%;
-  padding: 20px;
+  width: 100%;
   transform: translateX(0);
   transition: transform 0.3s ease-in-out;
-  background-color: var(--darkest);
+  background-color: #000000a0;
   z-index: 1000;
+}
+div.navlinks-container {
+  width: 80%;
+  height: 100%;
+  background-color: var(--tan);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  gap: 18px;
+
+  @media screen and (min-width: 769px) {
+    flex-direction: row;
+    padding: 0;
+  }
 }
 ul.closed {
   flex-direction: column;
@@ -49,11 +63,11 @@ ul.closed {
 /* default/desktop */
 .navlink {
   a {
-    color: var(--darkest);
+    color: var(--primary);
     text-decoration: none;
   }
   a.active {
-    color: var(--primary);
+    color: var(--darkest);
   }
 }
 /* .navlink:has(.active) {
@@ -62,21 +76,15 @@ ul.closed {
 
 /* mobile */
 .open .navlink {
-  border: 1px solid var(--tan);
+  border: 1px solid var(--primary);
   border-radius: 8px;
   width: 100%;
   height: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
-  a {
-    color: var(--tan);
-  }
-  a.active {
-    color: var(--alt);
-  }
   &:has(.active) {
-    border-color: var(--alt);
+    border-color: var(--darkest);
   }
 }
 

@@ -48,6 +48,7 @@ div.account-forms {
   border: 1px solid var(--darkest);
 
   font-size: 1.375rem;
+  color: var(--darkest);
 }
 
 .account-forms .links-line {
