@@ -50,6 +50,12 @@ input {
   font-size: 1.375rem;
 }
 
+.links-line {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
 .login-and-signup button {
   margin-top: 60px;
 }

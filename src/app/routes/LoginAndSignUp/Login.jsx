@@ -55,9 +55,10 @@ export default function Login() {
                 type="password"
               />
             </div>
-            <p>
-              Don&apos;t have an account? <Link to="/signup">Sign up!</Link>
-            </p>
+            <div className="links-line">
+              <Link to="/signup">Create an Account</Link>
+              <Link to="/forgot-password">Forgot Password?</Link>
+            </div>
             <button type="submit" className="filled-alt" disabled={loading}>
               Log in
             </button>
