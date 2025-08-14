@@ -4,6 +4,12 @@
   padding: 12px;
   height: 85dvh;
   gap: 8px;
+
+  max-width: 600px;
+  margin: auto;
+  @media screen and (min-width: 769px) {
+    text-align: center;
+  }
 }
 
 .info-card {

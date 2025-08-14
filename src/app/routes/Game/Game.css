@@ -8,8 +8,10 @@ section.game-content {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 20px;
   padding-inline: 28px;
+
+  max-width: 700px;
+  margin: 20px auto auto auto;
 }
 
 div.round-info {
@@ -23,6 +25,13 @@ div.round-info {
   }
   h2 {
     font-size: 1.5rem;
+  }
+
+  @media screen and (min-width: 769px) {
+    gap: 5px;
+    h2 {
+      font-size: 2rem;
+    }
   }
 }
 
@@ -38,6 +47,10 @@ div.current-score-container {
   justify-content: space-between;
   width: 110px;
   font-size: 1.125rem;
+
+  @media screen and (min-width: 769px) {
+    font-size: 1.375rem;
+  }
 }
 
 .score-increment {
@@ -89,6 +102,10 @@ div.artist-info {
   width: 100%;
   justify-content: space-between;
   gap: 8px;
+
+  @media screen and (min-width: 769px) {
+    width: 50%;
+  }
 }
 
 div.artist-img-loading {
@@ -112,7 +129,7 @@ div.artist-img-loading,
 .artist-info > img {
   border-radius: 8px;
   border: 1px solid white;
-  width: 146px;
+  width: 126px;
   height: 120px;
 
   object-fit: cover;
@@ -126,6 +143,10 @@ span.artist-name {
   align-items: center;
   text-align: center;
   font-size: 1.375rem;
+
+  @media screen and (min-width: 769px) {
+    flex: none;
+  }
 }
 
 div.artist-input-placeholder {
