@@ -1,4 +1,4 @@
-div.login-and-signup {
+div.account-forms {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -56,6 +56,6 @@ input {
   justify-content: space-evenly;
 }
 
-.login-and-signup button {
+.account-forms button {
   margin-top: 60px;
 }
