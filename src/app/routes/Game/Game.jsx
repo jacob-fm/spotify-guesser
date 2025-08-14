@@ -169,9 +169,9 @@ export default function Game({
             />
           </>
         ) : (
-          <div className="artist-input-placeholder">
+          <div className="artist-input-placeholder" onClick={handleStartSearch}>
             <SearchIcon size={35} />
-            <span onClick={handleStartSearch}>Type to search...</span>
+            <span>Type to search...</span>
           </div>
         )}
       </div>
