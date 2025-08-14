@@ -1,6 +1,7 @@
 /* Game Over screen */
 section.scoreboard {
   width: 90%;
+  max-width: 700px;
   margin-inline: auto;
   margin-top: 40px;
   display: flex;
@@ -10,12 +11,16 @@ section.scoreboard {
   h2 {
     font-size: 2rem;
   }
+
+  @media screen and (min-width: 769px) {
+    gap: 32px;
+  }
 }
 
 table.scoreboard-table {
   border-collapse: collapse;
   width: 100%;
-  margin-top: 20px;
+  margin-block: 20px;
   font-size: 1.2rem;
   td,
   th {
