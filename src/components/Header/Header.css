@@ -14,84 +14,80 @@ nav {
   position: relative;
 }
 
-ul {
-  display: flex;
-  align-items: end;
-  gap: 18px;
-  list-style-type: none;
-  background-color: transparent;
-}
-ul.open {
-  flex-direction: column;
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  width: 100%;
-  transform: translateX(0);
-  transition: transform 0.3s ease-in-out;
-  background-color: #000000a0;
-  z-index: 1000;
-}
-div.navlinks-container {
-  width: 80%;
-  height: 100%;
-  background-color: var(--tan);
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: end;
-  gap: 18px;
-
-  @media screen and (min-width: 769px) {
-    flex-direction: row;
-    padding: 0;
-  }
-}
-ul.closed {
-  flex-direction: column;
-  position: fixed;
-  top: var(--navbar-height);
-  right: 0;
-  bottom: 0;
-  width: 50%;
-  padding: 8px;
-  transform: translateX(100%);
-  transition: transform 0.3s ease-in-out;
-}
-
-/* default/desktop */
-.navlink {
-  a {
-    color: var(--primary);
-    text-decoration: none;
-  }
-  a.active {
-    color: var(--darkest);
-  }
-}
-/* .navlink:has(.active) {
-    border-color: var(--faint);
-} */
-
-/* mobile */
-.open .navlink {
-  border: 1px solid var(--primary);
-  border-radius: 8px;
-  width: 100%;
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  &:has(.active) {
-    border-color: var(--darkest);
-  }
-}
-
 button.menu-toggle {
   width: min-content;
   color: var(--primary);
   @media screen and (min-width: 769px) {
     display: none;
   }
+}
+
+ul {
+  display: flex;
+  gap: 18px;
+  list-style-type: none;
+}
+
+/* only applies on mobile */
+ul.open,
+ul.closed {
+  background-color: green;
+  .navlinks-container {
+    position: fixed;
+    flex-direction: column;
+    top: 0;
+    padding: 20px;
+
+    align-items: end;
+  }
+}
+
+ul.closed .navlinks-container {
+  right: -100%;
+}
+ul.open .navlinks-container {
+  right: 0;
+}
+
+.navlinks-container {
+  display: flex;
+  align-items: end;
+  gap: 18px;
+
+  width: 80%;
+  height: 100%;
+  background-color: var(--primary);
+
+  transition: 0.3s ease-out;
+
+  z-index: 500;
+}
+
+.open .navlink {
+  border: 1px solid var(--tan);
+  border-radius: 8px;
+  width: 100%;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  a {
+    color: var(--tan);
+  }
+
+  &:has(.active) {
+    border-color: var(--darkest);
+    a {
+      color: var(--darkest);
+    }
+  }
+}
+
+#overlay {
+  z-index: 499;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
 }

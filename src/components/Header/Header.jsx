@@ -51,13 +51,13 @@ export default function Header() {
 
   // close mobile menu when area outside of main part is clicked
   function handleOverlayClick(e) {
-    if (
-      navlinksContainer.current &&
-      navlinksContainer.current.contains(e.target)
-    ) {
-      // click happened inside main area: do nothing
-      return;
-    }
+    // if (
+    //   navlinksContainer.current &&
+    //   navlinksContainer.current.contains(e.target)
+    // ) {
+    //   // click happened inside main area: do nothing
+    //   return;
+    // }
     closeMenuOnMobile();
   }
 
@@ -67,10 +67,8 @@ export default function Header() {
         <NavLink to="/" className="header-logo">
           <img src="/assets/logo.svg" />
         </NavLink>
-        <ul
-          className={isMenuOpen ? "open" : isMobile ? "closed" : ""}
-          onClick={handleOverlayClick}
-        >
+        {isMenuOpen && <div id="overlay" onClick={handleOverlayClick}></div>}
+        <ul className={isMenuOpen ? "open" : isMobile ? "closed" : ""}>
           <div className="navlinks-container" ref={navlinksContainer}>
             {isMenuOpen && (
               <button onClick={toggleMenu} className="menu-toggle">
