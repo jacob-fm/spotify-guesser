@@ -68,14 +68,7 @@ ul.open .navlinks-container {
   z-index: 500;
 }
 
-.open .navlink {
-  background-color: var(--tan);
-  border-radius: 8px;
-  width: 100%;
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.navlink {
   a {
     color: var(--primary);
   }
@@ -85,6 +78,16 @@ ul.open .navlinks-container {
       color: var(--darkest);
     }
   }
+}
+
+.open .navlink {
+  background-color: var(--tan);
+  border-radius: 8px;
+  width: 100%;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   &:hover {
     background-color: white;
