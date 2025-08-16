@@ -1,6 +1,6 @@
-import { UserAuth } from "../../lib/AuthContext";
+import { UserAuth } from "../../lib/AuthContext.jsx";
 import { NavLink } from "react-router-dom";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./Header.css";
 import { MenuIcon, XIcon } from "lucide-react";
 import { useViewportSize } from "@mantine/hooks";
@@ -49,29 +49,21 @@ export default function Header() {
     }
   };
 
-  // close mobile menu when area outside of main part is clicked
-  function handleOverlayClick(e) {
-    // if (
-    //   navlinksContainer.current &&
-    //   navlinksContainer.current.contains(e.target)
-    // ) {
-    //   // click happened inside main area: do nothing
-    //   return;
-    // }
-    closeMenuOnMobile();
-  }
-
   return (
     <header>
       <nav>
         <NavLink to="/" className="header-logo">
           <img src="/assets/logo.svg" />
         </NavLink>
-        {isMenuOpen && <div id="overlay" onClick={handleOverlayClick}></div>}
+        {isMenuOpen && <div id="overlay" onClick={closeMenuOnMobile}></div>}
         <ul className={isMenuOpen ? "open" : isMobile ? "closed" : ""}>
           <div className="navlinks-container" ref={navlinksContainer}>
             {isMenuOpen && (
-              <button onClick={toggleMenu} className="menu-toggle">
+              <button
+                type="button"
+                onClick={toggleMenu}
+                className="menu-toggle"
+              >
                 <XIcon size={32} />
               </button>
             )}
@@ -87,6 +79,7 @@ export default function Header() {
           </div>
         </ul>
         <button
+          type="button"
           aria-labelledby="Menu Toggle Button"
           className="menu-toggle"
           onClick={toggleMenu}
