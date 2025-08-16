@@ -36,7 +36,6 @@ ul {
 /* only applies on mobile */
 ul.open,
 ul.closed {
-  background-color: green;
   .navlinks-container {
     position: fixed;
     flex-direction: column;
@@ -52,6 +51,7 @@ ul.closed .navlinks-container {
 }
 ul.open .navlinks-container {
   right: 0;
+  background-color: var(--primary);
   border-radius: 12px 0 0 12px;
 }
 
@@ -62,7 +62,6 @@ ul.open .navlinks-container {
 
   width: 80%;
   height: 100%;
-  background-color: var(--primary);
 
   transition: 0.3s ease-out;
 
