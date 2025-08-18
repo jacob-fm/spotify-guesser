@@ -14,6 +14,11 @@ nav {
   position: relative;
 }
 
+/* logo */
+a.header-logo {
+  display: flex;
+}
+
 /* hamburger icon */
 button.menu-toggle {
   width: min-content;
@@ -53,6 +58,7 @@ ul.open .navlinks-container {
   right: 0;
   background-color: var(--primary);
   border-radius: 12px 0 0 12px;
+  z-index: 500;
 }
 
 .navlinks-container {
@@ -65,7 +71,6 @@ ul.open .navlinks-container {
 
   transition: 0.3s ease-out;
 
-  z-index: 500;
 }
 
 .navlink {
