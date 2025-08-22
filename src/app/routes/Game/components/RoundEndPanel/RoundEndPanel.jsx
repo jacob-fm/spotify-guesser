@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { useMotionValue, useAnimate } from "motion/react";
+import { useEffect, useState } from "react";
+import { useAnimate, useMotionValue } from "motion/react";
 import "./RoundEndPanel.css";
 
 export default function RoundEndPanel({
@@ -15,8 +15,10 @@ export default function RoundEndPanel({
   const motionGuessPopularity = useMotionValue(0);
   const motionTargetPopularity = useMotionValue(0);
 
-  const [displayGuessPopularity, setDisplayGuessPopularity] = useState(0);
-  const [displayTargetPopularity, setDisplayTargetPopularity] = useState(0);
+  const [roundedGuessPop, setRoundedGuessPop] = useState(0);
+  const [roundedTargetPop, setRoundedTaretPop] = useState(0);
+  const [fullGuessPop, setFullGuessPop] = useState(0);
+  const [fullTargetPop, setFullTargetPop] = useState(0);
 
   const diff = Math.abs(targetArtist.popularity - guessArtist.popularity);
   const score = Math.max(0, 100 - diff * 5);
@@ -25,15 +27,19 @@ export default function RoundEndPanel({
   useEffect(() => {
     const animationSequence = async () => {
       await animate(motionGuessPopularity, guessArtist.popularity, {
-        duration: 1.3,
+        duration: 1.6,
+        ease: "easeOut",
         onUpdate: (latest) => {
-          setDisplayGuessPopularity(Math.round(latest));
+          setRoundedGuessPop(Math.round(latest));
+          setFullGuessPop(latest);
         },
       });
       await animate(motionTargetPopularity, targetArtist.popularity, {
-        duration: 1.3,
+        duration: 1.6,
+        ease: "easeOut",
         onUpdate: (latest) => {
-          setDisplayTargetPopularity(Math.round(latest));
+          setRoundedTaretPop(Math.round(latest));
+          setFullTargetPop(latest);
         },
       });
       await animate(".difference", { opacity: 1 }, { delay: 0.2 });
@@ -50,8 +56,8 @@ export default function RoundEndPanel({
           <h2>Your Guess</h2>
           <div className="artist-info-container">
             <span className="artist-name">{guessArtist.name}</span>
-            <span>Popularity: {displayGuessPopularity}/100</span>
-            <progress value={displayGuessPopularity} max={100} />
+            <span>Popularity: {roundedGuessPop}/100</span>
+            <progress value={fullGuessPop} max={100} />
           </div>
         </div>
 
@@ -59,8 +65,8 @@ export default function RoundEndPanel({
           <h2>Your Target</h2>
           <div className="artist-info-container">
             <span className="artist-name">{targetArtist.name}</span>
-            <span>Popularity: {displayTargetPopularity}/100</span>
-            <progress value={displayTargetPopularity} max={100} />
+            <span>Popularity: {roundedTargetPop}/100</span>
+            <progress value={fullTargetPop} max={100} />
           </div>
         </div>
 
@@ -71,15 +77,17 @@ export default function RoundEndPanel({
           100 - (5x Difference) =
         </span>
         <span className="final-round-score">{score}</span>
-        {roundCount < totalRounds ? (
-          <button className="filled" onClick={nextRound}>
-            Next Round
-          </button>
-        ) : (
-          <button className="filled" onClick={gameOver}>
-            View Score
-          </button>
-        )}
+        {roundCount < totalRounds
+          ? (
+            <button className="filled" onClick={nextRound}>
+              Next Round
+            </button>
+          )
+          : (
+            <button className="filled" onClick={gameOver}>
+              View Score
+            </button>
+          )}
       </div>
     </div>
   );
