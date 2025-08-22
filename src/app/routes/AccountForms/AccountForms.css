@@ -18,6 +18,7 @@ div.account-forms {
   display: flex;
   flex-direction: column;
   width: 100%;
+  max-width: 700px;
 }
 
 .account-forms section {
