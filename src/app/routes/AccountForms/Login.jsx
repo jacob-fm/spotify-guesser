@@ -34,6 +34,7 @@ export default function Login() {
 
   return (
     <>
+      <title>bopmatch | Daily Music Trivia Game | Login</title>
       <Header />
       <div className="account-forms">
         <h2>Account Login</h2>

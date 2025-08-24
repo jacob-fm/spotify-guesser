@@ -30,8 +30,8 @@ export default function Instructions({ startGame }) {
       image: "/assets/instructions/search.png",
       mainText: (
         <h2>
-          Search for and select a <b>Guess Artist</b>, who you think is
-          similarly <b>Popular</b>.
+          Search for and select a{" "}
+          <b>Guess Artist</b>, who you think is similarly <b>Popular</b>.
         </h2>
       ),
       subText: (
@@ -77,7 +77,6 @@ export default function Instructions({ startGame }) {
         </h2>
       ),
     },
-
     // Add more cards as needed
   ];
 
@@ -95,8 +94,10 @@ export default function Instructions({ startGame }) {
 
   return (
     <>
+      <title>Instructions</title>
       <Header />
       <section className="instructions-content">
+        <h1>Instructions</h1>
         <InstructionCard
           image={cardContents[cardIndex].image}
           mainText={cardContents[cardIndex].mainText}

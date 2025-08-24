@@ -8,6 +8,10 @@
   max-width: 600px;
   margin: auto;
 
+  h1 {
+    display: none;
+  }
+
   .button-link {
     padding-block: 16px;
   }

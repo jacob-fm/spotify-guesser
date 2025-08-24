@@ -6,9 +6,9 @@ import Game from "./routes/Game/Game";
 import Scoreboard from "./routes/Game/components/Scoreboard/Scoreboard";
 import { supabase } from "../lib/supabaseClient";
 import {
+  FunctionsFetchError,
   FunctionsHttpError,
   FunctionsRelayError,
-  FunctionsFetchError,
 } from "@supabase/supabase-js";
 
 function App() {
@@ -64,6 +64,7 @@ function App() {
 
   return (
     <>
+      <title>Daily Music Trivia Game - bopmatch</title>
       <Header />
       {gameState === GAME_STATES.GAME && (
         <Game

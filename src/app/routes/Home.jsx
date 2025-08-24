@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 export default function Home() {
   return (
     <>
+      <title>Daily Music Trivia Game - bopmatch</title>
       <Header />
       <div className="home-layout">
         <Link to="/instructions" className="button-link outlined">
