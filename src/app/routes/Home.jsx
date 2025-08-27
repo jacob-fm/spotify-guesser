@@ -7,6 +7,10 @@ export default function Home() {
       <title>Daily Music Trivia Game - bopmatch</title>
       <Header />
       <div className="home-layout">
+        <p className="short-description">
+          Guess the artist and score points based on how closely their
+          popularity matches the target.
+        </p>
         <Link to="/instructions" className="button-link outlined">
           Instructions
         </Link>
