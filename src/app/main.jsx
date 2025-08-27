@@ -14,6 +14,7 @@ import ForgotPassword from "./routes/AccountForms/ForgotPassword.jsx";
 import ResetPassword from "./routes/AccountForms/ResetPassword.jsx";
 import Instructions from "./routes/Instructions/Instructions.jsx";
 import Home from "./routes/Home.jsx";
+import About from "./routes/About/About.jsx";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
   {
     path: "/instructions",
     element: <Instructions />,
+  },
+  {
+    path: "/about",
+    element: <About />,
   },
   {
     path: "/signup",
