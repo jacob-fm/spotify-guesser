@@ -95,7 +95,7 @@ button.filled,
   --label-color: white;
   --background-color: var(--primary);
   --border-color: transparent;
-  --background-hover-color: var(--darkest);
+  --background-hover-color: #cc1a3e;
   --label-hover-color: var(--tan);
 }
 
@@ -104,7 +104,7 @@ button.filled-alt,
   --label-color: white;
   --background-color: var(--darkest);
   --border-color: white;
-  --background-hover-color: var(--primary);
+  --background-hover-color: #46294f;
   --label-hover-color: var(--tan);
 }
 
@@ -180,6 +180,12 @@ div.not-found {
   max-width: 500px;
   margin: auto;
   @media screen and (min-width: 769px) {
-    gap: 30px;
+    gap: 35px;
+    max-width: 700px;
+    
+    a.button-link {
+      font-size: 2rem;
+      height: 70px;
+    }
   }
 }

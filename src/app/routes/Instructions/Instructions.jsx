@@ -132,6 +132,9 @@ export default function Instructions({ startGame }) {
             <MoveRight />
           </button>
         </div>
+        <Link to="/game" className="button-link filled-alt">
+          Play
+        </Link>
         <Link to="/" className="button-link outlined">
           Home
         </Link>
