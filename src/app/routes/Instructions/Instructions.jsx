@@ -3,6 +3,7 @@ import Header from "../../../components/Header/Header";
 import { MoveLeft, MoveRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { preload } from "react-dom";
 
 function InstructionCard({ image, mainText, subText }) {
   return (
@@ -69,7 +70,6 @@ export default function Instructions({ startGame }) {
       ),
     },
     {
-      // image: "https://i.imgur.com/Lbhw0Yw.jpeg",
       mainText: (
         <h2>
           A new set of 5 Target Artists are available every day, so come back
@@ -79,6 +79,19 @@ export default function Instructions({ startGame }) {
     },
     // Add more cards as needed
   ];
+
+  preload("/assets/instructions/target_highlight.png", {
+    as: "image",
+  });
+  preload("/assets/instructions/search.png", {
+    as: "image",
+  });
+  preload("/assets/instructions/round_score.png", {
+    as: "image",
+  });
+  preload("/assets/instructions/scoreboard.png", {
+    as: "image",
+  });
 
   const goBack = () => {
     if (cardIndex > 0) {
