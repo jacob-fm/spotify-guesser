@@ -8,8 +8,8 @@ export default function Scoreboard({ roundResults }) {
       <table className="scoreboard-table">
         <thead>
           <tr>
-            <th>Guess</th>
             <th>Target</th>
+            <th>Guess</th>
             <th>Score</th>
           </tr>
         </thead>
@@ -40,9 +40,11 @@ export default function Scoreboard({ roundResults }) {
       </table>
       <h3>See you tomorrow!</h3>
       {/* TODO: implement sharing score */}
-      {/* <button className="share-score" onClick={onShareScore}>
+      {
+        /* <button className="share-score" onClick={onShareScore}>
           Share my score
-            </button> */}
+            </button> */
+      }
       <Link className="button-link outlined" to="/dashboard">
         View past scores
       </Link>
