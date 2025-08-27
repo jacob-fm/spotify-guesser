@@ -7,7 +7,6 @@ import { useViewportSize } from "@mantine/hooks";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [navLinks, setNavLinks] = useState([{ name: "Home", path: "/" }]);
   const { width } = useViewportSize();
   const isMobile = width < 768;
 
@@ -15,19 +14,15 @@ export default function Header() {
 
   const { session } = UserAuth();
 
-  useEffect(() => {
-    if (session === undefined || session === null) {
-      setNavLinks([
-        { name: "Home", path: "/" },
-        { name: "Login", path: "/login" },
-      ]);
-    } else {
-      setNavLinks([
-        { name: "Home", path: "/" },
-        { name: "Account", path: "/dashboard" },
-      ]);
-    }
-  }, [session]);
+  const conditionalLink = session?.user
+    ? { name: "Dashboard", path: "/dashboard" }
+    : { name: "Login", path: "/login" };
+
+  const navLinks = [
+    { name: "Home", path: "/" },
+    conditionalLink,
+    { name: "About", path: "/about" },
+  ];
 
   useEffect(() => {
     if (isMenuOpen) {
