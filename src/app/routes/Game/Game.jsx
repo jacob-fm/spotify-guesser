@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { supabase } from "/src/lib/supabaseClient";
 import { getArtistById } from "/src/api/fetchSpotifyData";
 import ArtistCard from "/src/app/routes/Game/components/ArtistCard";
@@ -8,6 +8,7 @@ import SearchScreen from "./components/SearchScreen/SearchScreen";
 import { SearchIcon } from "lucide-react";
 import "./Game.css";
 import RoundEndPanel from "./components/RoundEndPanel/RoundEndPanel";
+import { useViewportSize } from "@mantine/hooks";
 
 export default function Game({
   roundCount,
@@ -26,6 +27,9 @@ export default function Game({
   const [thisRoundScore, setThisRoundScore] = useState(0);
   const totalRounds = 5;
   const today = new Date().toISOString().slice(0, 10); // Get today's date in YYYY-MM-DD format
+
+  const { width } = useViewportSize();
+  const isMobile = width < 768;
 
   // Fetch the game data for today from Supabase
   useEffect(() => {
@@ -160,20 +164,26 @@ export default function Game({
             isTarget={true}
           />
         }
-        {selectedArtist != null ? (
-          <>
-            <ArtistCard
-              artist={selectedArtist}
-              visibleScore={guessSubmitted}
-              isTarget={false}
-            />
-          </>
-        ) : (
-          <div className="artist-input-placeholder" onClick={handleStartSearch}>
-            <SearchIcon size={35} />
-            <span>Type to search...</span>
-          </div>
-        )}
+        {selectedArtist != null
+          ? (
+            <>
+              <ArtistCard
+                artist={selectedArtist}
+                visibleScore={guessSubmitted}
+                isTarget={false}
+              />
+            </>
+          )
+          : (isMobile &&
+            (
+              <div
+                className="artist-input-placeholder"
+                onClick={handleStartSearch}
+              >
+                <SearchIcon size={35} />
+                <span>Type to search...</span>
+              </div>
+            ))}
       </div>
       {selectedArtist != null &&
         (guessSubmitted ? null : (
@@ -206,7 +216,7 @@ export default function Game({
           totalRounds={totalRounds}
         />
       )}
-      {isSearching && (
+      {(isSearching || !isMobile) && (
         <SearchScreen
           onArtistSelect={handleArtistSelect}
           targetArtist={targetArtist}

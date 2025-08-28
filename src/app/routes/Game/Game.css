@@ -167,6 +167,10 @@ div.artist-input-placeholder {
   span {
     font-size: 1.375rem;
   }
+
+  @media screen and (min-width: 769px) {
+    display: none;
+  }
 }
 
 /* buttons */

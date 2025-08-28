@@ -9,6 +9,7 @@
   background-color: var(--tan);
 }
 
+
 div.top-row {
   display: flex;
   justify-content: space-between;
@@ -16,7 +17,7 @@ div.top-row {
   padding-inline: 20px;
 
   /* X icon */
-  svg {
+  svg.lucide-x {
     color: var(--primary);
   }
 }
@@ -25,7 +26,7 @@ div.search-input-container {
   flex: 1;
   cursor: text;
   /* Search icon */
-  svg {
+  svg.lucide-search {
     position: absolute;
     top: 16px;
     left: 32px;
@@ -73,4 +74,43 @@ div.search-input-container {
     border-color: var(--primary);
     color: var(--primary);
   }
+}
+
+/* on pc, the actual search screen shows even before serach starts */
+@media screen and (min-width: 769px ) {
+  .search-screen { 
+    position: relative;
+    top: 20px;
+  }
+
+  div.top-row {
+    padding: 0;
+    /* X icon */
+    svg.lucide-x {
+      position: relative;
+      left: 12px;
+    }
+  }
+
+  input#artist-search-input {
+    width: 100%;
+    padding-block: 13px;
+  }
+  
+  div.search-input-container {
+    /* search icon */
+    svg.lucide-search {
+      left: 12px;
+      top: 12px;
+    }
+  }
+
+  div.search-results-list {
+    padding: 0;
+  }
+
+  .search-result {
+    padding-block: 13px;
+  }
+
 }
