@@ -19,7 +19,7 @@ export default function Header() {
     : { name: "Login", path: "/login" };
 
   const navLinks = [
-    { name: "Home", path: "/" },
+    { name: "Play", path: "/" },
     conditionalLink,
     { name: "About", path: "/about" },
   ];
