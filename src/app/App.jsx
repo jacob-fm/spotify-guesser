@@ -12,7 +12,6 @@ import {
 } from "@supabase/supabase-js";
 
 function App() {
-  // other state things
   const GAME_STATES = {
     GAME: "game",
     ENDED: "end",
@@ -23,6 +22,8 @@ function App() {
 
   const { session } = UserAuth();
   const loggedIn = session != null && session != undefined;
+
+  const today = new Date().toISOString().slice(0, 10); // Get today's date in YYYY-MM-DD format
 
   function startGame() {
     setRoundCount(1);
@@ -35,6 +36,8 @@ function App() {
     if (loggedIn) {
       submitScoreToSupabase();
     }
+
+    localStorage.setItem("lastPlayedDate", today);
   }
 
   async function submitScoreToSupabase() {
@@ -73,6 +76,7 @@ function App() {
           roundResults={roundResults}
           updateRoundResults={setRoundResults}
           onGameOver={handleGameOver}
+          today={today}
         />
       )}
       {gameState === GAME_STATES.ENDED && (

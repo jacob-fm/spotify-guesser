@@ -10,6 +10,7 @@ import Login from "./routes/AccountForms/Login.jsx";
 import Dashboard from "./routes/Dashboard/Dashboard.jsx";
 import PrivateRoute from "../components/PrivateRoute.jsx";
 import PublicRoute from "../components/PublicRoute.jsx";
+import UnplayedRoute from "../components/UnplayedRoute.jsx";
 import ForgotPassword from "./routes/AccountForms/ForgotPassword.jsx";
 import ResetPassword from "./routes/AccountForms/ResetPassword.jsx";
 import Instructions from "./routes/Instructions/Instructions.jsx";
@@ -19,12 +20,20 @@ import About from "./routes/About/About.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
+    element: (
+      <UnplayedRoute>
+        <Home />
+      </UnplayedRoute>
+    ),
     errorElement: <NotFoundPage />,
   },
   {
     path: "/game",
-    element: <App />,
+    element: (
+      <UnplayedRoute>
+        <App />
+      </UnplayedRoute>
+    ),
   },
   {
     path: "/instructions",

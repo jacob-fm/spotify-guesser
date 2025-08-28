@@ -16,6 +16,7 @@ export default function Game({
   roundResults,
   updateRoundResults,
   onGameOver,
+  today,
 }) {
   const [targetArtistList, setTargetArtistList] = useState([]);
   const [targetArtist, setTargetArtist] = useState(null);
@@ -26,7 +27,6 @@ export default function Game({
   const [combinedScore, setCombinedScore] = useState(0);
   const [thisRoundScore, setThisRoundScore] = useState(0);
   const totalRounds = 5;
-  const today = new Date().toISOString().slice(0, 10); // Get today's date in YYYY-MM-DD format
 
   const { width } = useViewportSize();
   const isMobile = width < 768;
