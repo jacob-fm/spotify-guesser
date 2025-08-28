@@ -216,7 +216,7 @@ export default function Game({
           totalRounds={totalRounds}
         />
       )}
-      {(isSearching || !isMobile) && (
+      {(isSearching || (!isMobile && selectedArtist === null)) && (
         <SearchScreen
           onArtistSelect={handleArtistSelect}
           targetArtist={targetArtist}
