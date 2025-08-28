@@ -1,8 +1,8 @@
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { searchSpotifyArtists } from "/src/api/fetchSpotifyData";
 import useDebounce from "/src/hooks/useDebounce";
 import SearchResult from "./SearchResult";
-import { XIcon, SearchIcon } from "lucide-react";
+import { SearchIcon, XIcon } from "lucide-react";
 import "./SearchScreen.css";
 
 export default function SearchScreen({
@@ -11,7 +11,8 @@ export default function SearchScreen({
   setIsSearching,
 }) {
   const [searchInput, setSearchInput] = useState("");
-  const debouncedInput = useDebounce(searchInput);
+  const debouncedInput = useDebounce(searchInput, 300);
+  const [loading, setLoading] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
   // for selecting search results with keyboard
   const [selectedItemIndex, setSelectedItemIndex] = useState(-1);
@@ -41,6 +42,7 @@ export default function SearchScreen({
       setSearchResults(cacheRef.current[debouncedInput]);
       // console.log("Loaded from cache");
     } else {
+      setLoading(true);
       // Fetch from Spotify API and cache it
       searchSpotifyArtists(debouncedInput)
         .then((results) => {
@@ -49,15 +51,12 @@ export default function SearchScreen({
           );
           cacheRef.current[debouncedInput] = filteredResults;
           setSearchResults(filteredResults);
-          // console.log("Fetched from API");
         })
         .catch((err) => {
           console.error("Error fetching from Spotify:", err);
-        });
+        })
+        .finally(() => setLoading(false));
     }
-
-    // console.log("Search Results:", searchResults.length);
-    // console.log("Cache Size:", Object.keys(cacheRef.current).length);
   }, [debouncedInput]);
 
   const handleChange = (value) => {
@@ -72,7 +71,7 @@ export default function SearchScreen({
       selectedItemIndex < searchResults.length - 1
     ) {
       setSelectedItemIndex((prevIndex) =>
-        Math.min(prevIndex + 1, searchResults.length - 1),
+        Math.min(prevIndex + 1, searchResults.length - 1)
       );
     } else if (e.key === "Enter" && selectedItemIndex >= 0) {
       const selected = searchResults[selectedItemIndex];
@@ -82,13 +81,13 @@ export default function SearchScreen({
 
   function SearchResultsList({ results }) {
     return (
-      <div className="search-results-list">
+      <div className={`search-results-list ${loading ? "loading" : ""}`}>
         {results.map((artist, index) => (
           <SearchResult
             key={index}
             artistName={artist.name}
             isActive={index === selectedItemIndex}
-            onClick={() => onArtistSelect(artist)}
+            onClick={loading ? null : () => onArtistSelect(artist)}
           />
         ))}
       </div>
