@@ -49,6 +49,7 @@ function ScoresTable({ games }) {
 
 export default function PastScores() {
   const [games, setGames] = useState(null);
+  const [loading, setLoading] = useState(false);
   const { session } = UserAuth();
 
   useEffect(() => {
@@ -56,6 +57,7 @@ export default function PastScores() {
   }, []);
 
   async function getUserScores() {
+    setLoading(true);
     const { data, error } = await supabase
       .from("user_scores")
       .select()
@@ -63,9 +65,11 @@ export default function PastScores() {
     if (error) {
       console.error("Error fetching user scores:", error);
       setGames([]);
+      setLoading(false);
       return;
     } else {
       setGames(data);
+      setLoading(false);
     }
   }
 
@@ -74,7 +78,9 @@ export default function PastScores() {
       <Header />
       <div className="past-scores">
         <h1>Past Scores</h1>
-        {games === null ? <p>no scores</p> : <ScoresTable games={games} />}
+        {loading
+          ? <span>Loading...</span>
+          : (games === null ? <p>no scores</p> : <ScoresTable games={games} />)}
       </div>
     </>
   );
