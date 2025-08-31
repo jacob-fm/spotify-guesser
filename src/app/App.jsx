@@ -10,30 +10,7 @@ import {
   FunctionsHttpError,
   FunctionsRelayError,
 } from "@supabase/supabase-js";
-
-// utility: safe JSON parse
-function safeParse(str) {
-  if (!str) return null;
-  try {
-    return JSON.parse(str);
-  } catch {
-    return null; // invalid JSON
-  }
-}
-
-// utility: validate game shape
-function isValidGameArray(val) {
-  return (
-    Array.isArray(val) &&
-    val.every(
-      (round) =>
-        round &&
-        typeof round === "object" &&
-        "guessed" in round &&
-        "target" in round,
-    )
-  );
-}
+import { isValidGameArray, safeParse } from "../hooks/validateJSON";
 
 function App() {
   const GAME_STATES = {
@@ -50,7 +27,6 @@ function App() {
   const today = new Date().toISOString().slice(0, 10); // Get today's date in YYYY-MM-DD format
 
   useEffect(() => {
-    const storedGame = localStorage.getItem("currentGame");
     // see if user is in the middle of today's game
     if (localStorage.getItem("lastDateStarted") === today) {
       const raw = localStorage.getItem("currentGame");
@@ -76,7 +52,6 @@ function App() {
 
     localStorage.setItem("lastDateCompleted", today);
   }
-
   async function submitScoreToSupabase() {
     const { error } = await supabase.functions.invoke("submit-score", {
       method: "POST",
