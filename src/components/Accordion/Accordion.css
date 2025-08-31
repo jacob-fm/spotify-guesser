@@ -1,5 +1,6 @@
 .accordion-parent {
   width: 100%;
+  max-width: 800px;
   padding-inline: 25px;
 }
 
