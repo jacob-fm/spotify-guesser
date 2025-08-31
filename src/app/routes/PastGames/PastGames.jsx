@@ -77,7 +77,7 @@ export default function PastScores() {
     <>
       <Header />
       <div className="past-scores">
-        <h1>Past Scores</h1>
+        <h1>Past Games</h1>
         {loading
           ? <span>Loading...</span>
           : (games === null ? <p>no scores</p> : <ScoresTable games={games} />)}
