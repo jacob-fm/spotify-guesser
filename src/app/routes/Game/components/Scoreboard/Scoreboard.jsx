@@ -16,8 +16,8 @@ export default function Scoreboard({ roundResults }) {
         <tbody>
           {roundResults.map((result, index) => (
             <tr key={index}>
-              <td>{result.target.name}</td>
-              <td>{result.guessed.name}</td>
+              <td>{result.target.name} ({result.target.popularity})</td>
+              <td>{result.guessed.name} ({result.guessed.popularity})</td>
               <td>{result.score}</td>
             </tr>
           ))}
