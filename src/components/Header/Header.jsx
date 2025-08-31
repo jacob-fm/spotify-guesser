@@ -13,14 +13,16 @@ export default function Header() {
   const navlinksContainer = useRef(null);
 
   const { session } = UserAuth();
-
-  const conditionalLink = session?.user
-    ? { name: "Dashboard", path: "/dashboard" }
-    : { name: "Login", path: "/login" };
+  const conditionalLinks = session?.user
+    ? [{ name: "Dashboard", path: "/dashboard" }, {
+      name: "Past Games",
+      path: "/past-games",
+    }]
+    : [{ name: "Login", path: "/login" }];
 
   const navLinks = [
     { name: "Play", path: "/" },
-    conditionalLink,
+    ...conditionalLinks,
     { name: "About", path: "/about" },
   ];
 
