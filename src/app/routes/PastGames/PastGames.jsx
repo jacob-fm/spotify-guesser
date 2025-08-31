@@ -13,8 +13,8 @@ function ScoresTable({ games }) {
       <table className="past-scores-table">
         <thead>
           <tr>
-            <th>Guess</th>
             <th>Target</th>
+            <th>Guess</th>
             <th>Points</th>
           </tr>
         </thead>
@@ -22,10 +22,10 @@ function ScoresTable({ games }) {
           {g.details.map((round, index) => (
             <tr key={index}>
               <td>
-                {round.guessName} ({round.guessPopularity})
+                {round.targetName} ({round.targetPopularity})
               </td>
               <td>
-                {round.targetName} ({round.targetPopularity})
+                {round.guessName} ({round.guessPopularity})
               </td>
               <td>{round.points}</td>
             </tr>
