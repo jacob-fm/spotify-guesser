@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { UserAuth } from "../lib/AuthContext";
 import "./App.css";
 import Header from "/src/components/Header/Header";
@@ -25,12 +25,16 @@ function App() {
 
   const today = new Date().toISOString().slice(0, 10); // Get today's date in YYYY-MM-DD format
 
-  function startGame() {
-    setRoundCount(1);
-    setRoundResults([]);
-    setGameState(GAME_STATES.GAME);
+  useEffect(() => {
+    // see if user is in the middle of today's game
+    if (localStorage.getItem("lastDateStarted") === today) {
+      const loadedGame = JSON.parse(localStorage.getItem("currentGame"));
+      setRoundResults(loadedGame);
+      setRoundCount(loadedGame.length + 1);
+    }
+    // set lastDateStarted to today in all cases
     localStorage.setItem("lastDateStarted", today);
-  }
+  }, []);
 
   function handleGameOver() {
     setGameState(GAME_STATES.ENDED);
@@ -81,7 +85,7 @@ function App() {
         />
       )}
       {gameState === GAME_STATES.ENDED && (
-        <Scoreboard roundResults={roundResults} onNewGame={startGame} />
+        <Scoreboard roundResults={roundResults} />
       )}
     </>
   );

@@ -74,6 +74,7 @@ export default function Game({
   }, [targetArtistList, roundCount]);
 
   // Update the combined score whenever new score is added to roundResults
+  // also store in localStorage
   useEffect(() => {
     let totalScore = 0;
     roundResults.forEach((element) => {
@@ -81,6 +82,11 @@ export default function Game({
     });
     setPreviousScore(combinedScore);
     setCombinedScore(totalScore);
+
+    // localStorage
+    if (roundResults.length !== 0) {
+      localStorage.setItem("currentGame", JSON.stringify(roundResults));
+    }
   }, [roundResults]);
 
   function handleArtistSelect(artist) {
