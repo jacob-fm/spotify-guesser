@@ -1,7 +1,11 @@
 import { Link } from "react-router-dom";
 import "./Scoreboard.css";
+import { UserAuth } from "../../../../../lib/AuthContext";
 
 export default function Scoreboard({ roundResults }) {
+  const { session } = UserAuth();
+  const loggedIn = session?.user;
+
   return (
     <section className="scoreboard">
       <h2>Scoreboard</h2>
@@ -45,9 +49,17 @@ export default function Scoreboard({ roundResults }) {
           Share my score
             </button> */
       }
-      <Link className="button-link outlined" to="/dashboard">
-        View past scores
-      </Link>
+      {loggedIn
+        ? (
+          <Link className="button-link outlined" to="/past-games">
+            View past games
+          </Link>
+        )
+        : (
+          <Link className="button-link outlined" to="/login">
+            Log in to save your scores!
+          </Link>
+        )}
     </section>
   );
 }
