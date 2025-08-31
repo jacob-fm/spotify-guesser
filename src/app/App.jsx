@@ -26,11 +26,14 @@ function App() {
   const today = new Date().toISOString().slice(0, 10); // Get today's date in YYYY-MM-DD format
 
   useEffect(() => {
+    const storedGame = localStorage.getItem("currentGame");
     // see if user is in the middle of today's game
-    if (localStorage.getItem("lastDateStarted") === today) {
+    if (storedGame && localStorage.getItem("lastDateStarted") === today) {
       const loadedGame = JSON.parse(localStorage.getItem("currentGame"));
       setRoundResults(loadedGame);
       setRoundCount(loadedGame.length + 1);
+    } else { // if hasn't started today's game, clear currentGame from localStorage
+      localStorage.setItem("currentGame", "");
     }
     // set lastDateStarted to today in all cases
     localStorage.setItem("lastDateStarted", today);
