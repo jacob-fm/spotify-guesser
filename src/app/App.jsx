@@ -29,6 +29,7 @@ function App() {
     setRoundCount(1);
     setRoundResults([]);
     setGameState(GAME_STATES.GAME);
+    localStorage.setItem("lastDateStarted", today);
   }
 
   function handleGameOver() {
@@ -37,7 +38,7 @@ function App() {
       submitScoreToSupabase();
     }
 
-    localStorage.setItem("lastPlayedDate", today);
+    localStorage.setItem("lastDateCompleted", today);
   }
 
   async function submitScoreToSupabase() {

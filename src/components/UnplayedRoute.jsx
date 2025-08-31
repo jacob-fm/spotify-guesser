@@ -2,7 +2,7 @@ import { Navigate } from "react-router-dom";
 
 const UnplayedRoute = ({ children }) => {
   const today = new Date().toISOString().slice(0, 10); // Get today's date in YYYY-MM-DD format
-  const playedToday = localStorage.getItem("lastPlayedDate") === today;
+  const playedToday = localStorage.getItem("lastDateCompleted") === today;
   return <>{!playedToday ? <>{children}</> : <Navigate to="/dashboard" />}</>;
 };
 
