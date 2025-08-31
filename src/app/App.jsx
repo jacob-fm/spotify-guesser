@@ -11,6 +11,30 @@ import {
   FunctionsRelayError,
 } from "@supabase/supabase-js";
 
+// utility: safe JSON parse
+function safeParse(str) {
+  if (!str) return null;
+  try {
+    return JSON.parse(str);
+  } catch {
+    return null; // invalid JSON
+  }
+}
+
+// utility: validate game shape
+function isValidGameArray(val) {
+  return (
+    Array.isArray(val) &&
+    val.every(
+      (round) =>
+        round &&
+        typeof round === "object" &&
+        "guessed" in round &&
+        "target" in round,
+    )
+  );
+}
+
 function App() {
   const GAME_STATES = {
     GAME: "game",
@@ -28,12 +52,17 @@ function App() {
   useEffect(() => {
     const storedGame = localStorage.getItem("currentGame");
     // see if user is in the middle of today's game
-    if (storedGame && localStorage.getItem("lastDateStarted") === today) {
-      const loadedGame = JSON.parse(localStorage.getItem("currentGame"));
-      setRoundResults(loadedGame);
-      setRoundCount(loadedGame.length + 1);
+    if (localStorage.getItem("lastDateStarted") === today) {
+      const raw = localStorage.getItem("currentGame");
+      const parsed = safeParse(raw);
+      if (isValidGameArray(parsed)) {
+        setRoundResults(parsed);
+        setRoundCount(parsed.length + 1);
+      } else { // corrupted or wrong shape
+        localStorage.removeItem("currentGame");
+      }
     } else { // if hasn't started today's game, clear currentGame from localStorage
-      localStorage.setItem("currentGame", "");
+      localStorage.removeItem("currentGame");
     }
     // set lastDateStarted to today in all cases
     localStorage.setItem("lastDateStarted", today);
@@ -49,12 +78,6 @@ function App() {
   }
 
   async function submitScoreToSupabase() {
-    console.log(
-      JSON.stringify({
-        user_id: session.user.id,
-        rounds: roundResults,
-      }),
-    );
     const { error } = await supabase.functions.invoke("submit-score", {
       method: "POST",
       body: {
