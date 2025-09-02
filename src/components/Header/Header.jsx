@@ -14,7 +14,7 @@ export default function Header() {
 
   const { session } = UserAuth();
   const conditionalLinks = session?.user
-    ? [{ name: "Dashboard", path: "/dashboard" }, {
+    ? [{ name: "Account", path: "/dashboard" }, {
       name: "Past Games",
       path: "/past-games",
     }]
