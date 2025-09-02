@@ -21,11 +21,7 @@ import PastGames from "./routes/PastGames/PastGames.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: (
-      <UnplayedRoute>
-        <Home />
-      </UnplayedRoute>
-    ),
+    element: <Home />,
     errorElement: <NotFoundPage />,
   },
   {
