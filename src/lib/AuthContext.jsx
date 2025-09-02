@@ -7,6 +7,7 @@ const AuthContext = createContext();
 export const AuthContextProvider = ({ children }) => {
   const [session, setSession] = useState(undefined);
   const [loading, setLoading] = useState(true);
+  const today = new Date().toISOString().slice(0, 10); // Get today's date in YYYY-MM-DD format
 
   // Sign up
   const signUpNewUser = async (email, password) => {
@@ -103,15 +104,19 @@ export const AuthContextProvider = ({ children }) => {
     supabase.auth.onAuthStateChange((event, session) => {
       setSession(session);
       if (event === "SIGNED_IN" && session?.user) {
-        console.log(session.user);
         onUserLogin(session);
       }
     });
   }, []);
 
   async function onUserLogin(session) {
+    // if game was already uploaded today, don't upload again
+    if (localStorage.getItem("lastDateUploaded") === today) {
+      return;
+    }
+
+    console.log("blah blah blah");
     const lastDateCompleted = localStorage.getItem("lastDateCompleted");
-    const today = new Date().toISOString().slice(0, 10); // Get today's date in YYYY-MM-DD format
     if (lastDateCompleted === today) {
       const storedGame = safeParse(localStorage.getItem("currentGame"));
       if (isValidGameArray(storedGame)) {
@@ -122,6 +127,9 @@ export const AuthContextProvider = ({ children }) => {
             rounds: storedGame,
           },
         });
+        if (!error) {
+          localStorage.setItem("lastDateUploaded", today);
+        }
       }
     }
   }
