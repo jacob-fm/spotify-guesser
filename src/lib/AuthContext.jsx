@@ -115,7 +115,6 @@ export const AuthContextProvider = ({ children }) => {
       return;
     }
 
-    console.log("blah blah blah");
     const lastDateCompleted = localStorage.getItem("lastDateCompleted");
     if (lastDateCompleted === today) {
       const storedGame = safeParse(localStorage.getItem("currentGame"));
