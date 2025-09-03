@@ -131,6 +131,7 @@ export const AuthContextProvider = ({ children }) => {
           );
         } else if (existing) {
           setTodaysGameExistsInSupabase(true);
+          localStorage.setItem("lastDateCompleted", today);
         } else {
           setTodaysGameExistsInSupabase(false);
         }
