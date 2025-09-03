@@ -64,15 +64,20 @@ export default function SearchScreen({
   };
 
   const handleKeyDown = (e) => {
-    if (e.key === "ArrowUp" && selectedItemIndex > 0) {
-      setSelectedItemIndex((prevIndex) => Math.max(prevIndex - 1, 0));
+    if (e.key === "ArrowUp") {
+      e.preventDefault();
+      if (selectedItemIndex > 0) {
+        setSelectedItemIndex((prevIndex) => Math.max(prevIndex - 1, 0));
+      }
     } else if (
-      e.key === "ArrowDown" &&
-      selectedItemIndex < searchResults.length - 1
+      e.key === "ArrowDown"
     ) {
-      setSelectedItemIndex((prevIndex) =>
-        Math.min(prevIndex + 1, searchResults.length - 1)
-      );
+      e.preventDefault();
+      if (selectedItemIndex < searchResults.length - 1) {
+        setSelectedItemIndex((prevIndex) =>
+          Math.min(prevIndex + 1, searchResults.length - 1)
+        );
+      }
     } else if (e.key === "Enter" && selectedItemIndex >= 0) {
       const selected = searchResults[selectedItemIndex];
       onArtistSelect(selected);
