@@ -9,6 +9,7 @@ import { SearchIcon } from "lucide-react";
 import "./Game.css";
 import RoundEndPanel from "./components/RoundEndPanel/RoundEndPanel";
 import { useViewportSize } from "@mantine/hooks";
+import { preload } from "react-dom";
 
 export default function Game({
   roundCount,
@@ -20,6 +21,7 @@ export default function Game({
 }) {
   const [targetArtistList, setTargetArtistList] = useState([]);
   const [targetArtist, setTargetArtist] = useState(null);
+  const [fullArtistDetails, setFullArtistDetails] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
   const [selectedArtist, setSelectedArtist] = useState(null);
   const [guessSubmitted, setGuessSubmitted] = useState(false);
@@ -54,24 +56,34 @@ export default function Game({
     fetchTodaysGame();
   }, []);
 
-  function handleGetTargetArtist() {
-    getArtistById(targetArtistList[roundCount - 1])
-      .then((artist) => {
-        setTargetArtist(artist);
-      })
-      .catch((error) => {
-        console.error("Error fetching artist data:", error);
-        setTargetArtist(null);
-      });
-  }
-
-  // fetch target artist when round count or list changes
+  // useEffect to get details when targetArtistList is updated
   useEffect(() => {
     if (targetArtistList.length > 0) {
-      // Only call if we have data
-      handleGetTargetArtist();
+      getInfoForTargetList();
     }
-  }, [targetArtistList, roundCount]);
+  }, [targetArtistList]);
+
+  function getInfoForTargetList() {
+    targetArtistList.forEach((e) => {
+      getArtistById(e)
+        .then((thisArtist) => {
+          // preload image
+          if (thisArtist?.images?.[0]?.url) {
+            preload(thisArtist.images[0].url, { as: "image" });
+          }
+          setFullArtistDetails((prev) => [...prev, thisArtist]);
+        })
+        .catch((error) => {
+          console.error("Error fetching artist data:", error);
+        });
+    });
+  }
+
+  useEffect(() => {
+    if (fullArtistDetails.length > 0) {
+      setTargetArtist(fullArtistDetails[roundCount - 1]);
+    }
+  }, [fullArtistDetails, roundCount]);
 
   // Update the combined score whenever new score is added to roundResults
   // also store in localStorage
