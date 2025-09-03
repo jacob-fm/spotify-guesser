@@ -74,7 +74,13 @@ div.round-end-panel {
 progress {
   /* reset default appearance */
   -webkit-appearance: none;
+  -moz-appearance: none;
   appearance: none;
+
+  border-radius: 8px;
+  border: 2px solid var(--tan);
+  background-color: var(--tan);
+  padding: 2px;
 
   width: 80%;
   height: 25px;
@@ -82,10 +88,14 @@ progress {
 
 progress::-webkit-progress-bar {
   background-color: var(--tan);
-  border: 2px solid var(--tan);
-  border-radius: 8px;
+  border-radius: 28px;
 }
 progress::-webkit-progress-value {
+  border-radius: inherit;
+  background-color: var(--color-2);
+}
+/* same as webkit-progress-value, but using a comma to style both breaks webkit */
+progress::-moz-progress-bar {
   border-radius: inherit;
   background-color: var(--color-2);
 }
