@@ -61,7 +61,8 @@ export default function PastScores() {
     const { data, error } = await supabase
       .from("user_scores")
       .select()
-      .eq("user_id", session.user.id);
+      .eq("user_id", session.user.id)
+      .order("game_date", { ascending: false });
     if (error) {
       console.error("Error fetching user scores:", error);
       setGames([]);
