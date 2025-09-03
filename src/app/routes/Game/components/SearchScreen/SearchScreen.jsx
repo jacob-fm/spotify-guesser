@@ -61,6 +61,7 @@ export default function SearchScreen({
 
   const handleChange = (value) => {
     setSearchInput(value);
+    setSelectedItemIndex(-1);
   };
 
   const handleKeyDown = (e) => {
