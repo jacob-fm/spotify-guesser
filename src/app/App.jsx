@@ -26,6 +26,8 @@ function App() {
 
   const today = new Date().toISOString().slice(0, 10); // Get today's date in YYYY-MM-DD format
 
+  const totalRounds = 5;
+
   useEffect(() => {
     // see if user is in the middle of today's game
     if (localStorage.getItem("lastDateStarted") === today) {
@@ -44,14 +46,20 @@ function App() {
     localStorage.setItem("lastDateStarted", today);
   }, []);
 
-  function handleGameOver() {
-    setGameState(GAME_STATES.ENDED);
-    if (loggedIn) {
-      submitScoreToSupabase();
-    }
+  useEffect(() => {
+    if (roundResults.length >= totalRounds) {
+      if (loggedIn) {
+        submitScoreToSupabase();
+      }
 
-    localStorage.setItem("lastDateCompleted", today);
+      localStorage.setItem("lastDateCompleted", today);
+    }
+  }, [roundResults]);
+
+  function showScoreboard() {
+    setGameState(GAME_STATES.ENDED);
   }
+
   async function submitScoreToSupabase() {
     const { error } = await supabase.functions.invoke("submit-score", {
       method: "POST",
@@ -80,8 +88,9 @@ function App() {
           roundCount={roundCount}
           updateRoundCount={setRoundCount}
           roundResults={roundResults}
+          totalRounds={totalRounds}
           updateRoundResults={setRoundResults}
-          onGameOver={handleGameOver}
+          showScoreboard={showScoreboard}
           today={today}
         />
       )}

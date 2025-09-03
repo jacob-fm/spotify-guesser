@@ -14,9 +14,10 @@ import { preload } from "react-dom";
 export default function Game({
   roundCount,
   updateRoundCount,
+  totalRounds,
   roundResults,
   updateRoundResults,
-  onGameOver,
+  showScoreboard,
   today,
 }) {
   const [targetArtistList, setTargetArtistList] = useState([]);
@@ -28,7 +29,6 @@ export default function Game({
   const [previousScore, setPreviousScore] = useState(0);
   const [combinedScore, setCombinedScore] = useState(0);
   const [thisRoundScore, setThisRoundScore] = useState(0);
-  const totalRounds = 5;
 
   const { width } = useViewportSize();
   const isMobile = width < 768;
@@ -229,7 +229,7 @@ export default function Game({
           guessArtist={selectedArtist}
           targetArtist={targetArtist}
           nextRound={handleNextRound}
-          gameOver={onGameOver}
+          showScoreboard={showScoreboard}
           roundCount={roundCount}
           totalRounds={totalRounds}
         />

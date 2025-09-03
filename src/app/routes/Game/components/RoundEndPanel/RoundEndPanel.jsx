@@ -6,7 +6,7 @@ export default function RoundEndPanel({
   guessArtist,
   targetArtist,
   nextRound,
-  gameOver,
+  showScoreboard,
   roundCount,
   totalRounds,
 }) {
@@ -84,7 +84,7 @@ export default function RoundEndPanel({
             </button>
           )
           : (
-            <button className="filled" onClick={gameOver}>
+            <button className="filled" onClick={showScoreboard}>
               View Score
             </button>
           )}
