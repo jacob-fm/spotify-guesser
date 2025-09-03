@@ -1,17 +1,25 @@
 import Header from "../../components/Header/Header";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { UserAuth } from "../../lib/AuthContext";
 
 export default function Home() {
   const lastDateCompleted = localStorage.getItem("lastDateCompleted");
   const today = new Date().toISOString().slice(0, 10); // Get today's date in YYYY-MM-DD format
-  const [played, setPlayed] = useState(false);
+  const [playedLocal, setPlayedLocal] = useState(false);
+  const { todaysGameExistsInSupabase } = UserAuth();
 
   useEffect(() => {
     if (lastDateCompleted === today) {
-      setPlayed(true);
+      setPlayedLocal(true);
     }
   }, [lastDateCompleted, today]);
+
+  useEffect(() => {
+    if (todaysGameExistsInSupabase) {
+      setPlayedLocal(true);
+    }
+  }, [todaysGameExistsInSupabase]);
 
   return (
     <>
@@ -25,7 +33,7 @@ export default function Home() {
         <Link to="/instructions" className="button-link outlined">
           Instructions
         </Link>
-        {played
+        {playedLocal || todaysGameExistsInSupabase
           ? (
             <>
               <Link to="/past-games" className="button-link filled">

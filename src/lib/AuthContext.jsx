@@ -7,6 +7,9 @@ const AuthContext = createContext();
 export const AuthContextProvider = ({ children }) => {
   const [session, setSession] = useState(undefined);
   const [loading, setLoading] = useState(true);
+  const [todaysGameExistsInSupabase, setTodaysGameExistsInSupabase] = useState(
+    false,
+  );
   const today = new Date().toISOString().slice(0, 10); // Get today's date in YYYY-MM-DD format
 
   // Sign up
@@ -109,6 +112,33 @@ export const AuthContextProvider = ({ children }) => {
     });
   }, []);
 
+  // check supabase to see if there's a score for today
+  useEffect(() => {
+    const checkSupa = async () => {
+      if (session?.user) {
+        const { data: existing, error: existingError } = await supabase
+          .from("user_scores")
+          .select()
+          .eq("user_id", session.user.id)
+          .gte("game_date", `${today}T00:00:00.000Z`)
+          .lte("game_date", `${today}T23:59:59.999Z`)
+          .maybeSingle();
+
+        if (existingError) {
+          console.error(
+            "Error checking Supabase for existing games",
+            existingError,
+          );
+        } else if (existing) {
+          setTodaysGameExistsInSupabase(true);
+        } else {
+          setTodaysGameExistsInSupabase(false);
+        }
+      }
+    };
+    checkSupa();
+  }, [today, session]);
+
   async function onUserLogin(session) {
     // if game was already uploaded today, don't upload again
     if (localStorage.getItem("lastDateUploaded") === today) {
@@ -154,6 +184,7 @@ export const AuthContextProvider = ({ children }) => {
         sendPasswordReset,
         updatePassword,
         signOut,
+        todaysGameExistsInSupabase,
       }}
     >
       {children}
