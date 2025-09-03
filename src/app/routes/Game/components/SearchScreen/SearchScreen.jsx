@@ -20,10 +20,11 @@ export default function SearchScreen({
   // Simple cache object stored in a ref
   const cacheRef = useRef({});
 
-  // for leaving search when escape is pressed
+  // for leaving search when escape is pressed, and setting index to -1
   useEffect(() => {
     window.addEventListener("keydown", (e) => {
       if (e.key === "Escape") {
+        setSelectedItemIndex(-1);
         setIsSearching(false);
       }
     });
@@ -40,7 +41,7 @@ export default function SearchScreen({
     // Check cache
     if (cacheRef.current[debouncedInput]) {
       setSearchResults(cacheRef.current[debouncedInput]);
-      // console.log("Loaded from cache");
+      setLoading(false);
     } else {
       setLoading(true);
       // Fetch from Spotify API and cache it
@@ -62,6 +63,7 @@ export default function SearchScreen({
   const handleChange = (value) => {
     setSearchInput(value);
     setSelectedItemIndex(-1);
+    setLoading(true);
   };
 
   const handleKeyDown = (e) => {
