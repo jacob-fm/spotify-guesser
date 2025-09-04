@@ -64,19 +64,28 @@ export default function Game({
   }, [targetArtistList]);
 
   function getInfoForTargetList() {
-    targetArtistList.forEach((e) => {
-      getArtistById(e)
-        .then((thisArtist) => {
-          // preload image
-          if (thisArtist?.images?.[0]?.url) {
-            preload(thisArtist.images[0].url, { as: "image" });
-          }
-          setFullArtistDetails((prev) => [...prev, thisArtist]);
-        })
-        .catch((error) => {
-          console.error("Error fetching artist data:", error);
-        });
+    console.log("getInfoForTargetList");
+    // Create an array of promises for each artist ID
+    const artistPromises = targetArtistList.map((artistId) => {
+      return getArtistById(artistId).then((artist) => {
+        // Preload the image as each promise resolves
+        if (artist?.images?.[0]?.url) {
+          preload(artist.images[0].url, { as: "image" });
+        }
+        return artist;
+      });
     });
+
+    // Use Promise.all to wait for all promises to resolve
+    Promise.all(artistPromises)
+      .then((artists) => {
+        // Update the state once with the full array of artists
+        setFullArtistDetails(artists);
+        console.log("All artist details have been set.");
+      })
+      .catch((error) => {
+        console.error("Error fetching all artist data:", error);
+      });
   }
 
   useEffect(() => {
