@@ -5,11 +5,25 @@ const supabase = createClient(
   process.env.SUPABASE_SERVICE_ROLE_KEY,
 );
 
+async function resetArtistPool() {
+  console.log("Resetting artist pool: marking all artists unused");
+  const { error } = await supabase
+    .from("target_pool")
+    .update({ used: false })
+    .eq("used", true);
+  if (error) {
+    console.error("Error resetting artist pool:", error);
+    return false;
+  }
+  console.log("Artist pool successfully reset.");
+  return true;
+}
+
 export default async (req) => {
   const today = new Date().toISOString().slice(0, 10);
 
   // 1. Get all unused artists
-  const { data: availableArtists, error: fetchError } = await supabase
+  let { data: availableArtists, error: fetchError } = await supabase
     .from("target_pool")
     .select("*")
     .eq("used", false);
@@ -19,9 +33,24 @@ export default async (req) => {
     return new Response("Failed to fetch available artists", { status: 500 });
   }
 
-  if (availableArtists.length < 5) {
-    console.warn("Not enough available artists for daily game");
-    return new Response("Not enough available artists", { status: 400 });
+  // Check for reset condition
+  if (availableArtists.length <= 10) {
+    const resetSuccess = await resetArtistPool();
+    if (!resetSuccess) {
+      return new Response("Failed to reset artist pool", { status: 500 });
+    }
+    // Re-fetch all artists after reset
+    const { data: allArtists, error: refetchError } = await supabase
+      .from("target_pool")
+      .select("*");
+
+    if (refetchError) {
+      console.error("Error re-fetching artists after reset:", refetchError);
+      return new Response("Failed to re-fetch artists after reset", {
+        status: 500,
+      });
+    }
+    availableArtists = allArtists;
   }
 
   // 2. Shuffle and pick 5
