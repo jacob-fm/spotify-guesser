@@ -107,7 +107,7 @@ export default function Instructions({ startGame }) {
 
   return (
     <>
-      <title>Instructions | bopmatch - Daily Music Trivia Game</title>
+      <title>Instructions | BopMatch - Daily Music Trivia Game</title>
       <Header />
       <section className="instructions-content">
         <h1>Instructions</h1>

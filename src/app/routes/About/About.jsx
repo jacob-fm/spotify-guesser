@@ -22,12 +22,12 @@ const EmailLink = () => {
 export default function About() {
   return (
     <>
-      <title>About | bopmatch - Daily Music Trivia Game</title>
+      <title>About | BopMatch - Daily Music Trivia Game</title>
       <Header />
       <div className="about">
-        <h1>About bopmatch</h1>
+        <h1>About BopMatch</h1>
         <p>
-          bopmatch is the work of Jacob Feit Mann.<br></br>{" "}
+          BopMatch is the work of Jacob Feit Mann.<br></br>{" "}
           Feel free to email me with any questions, comments, or bug reports!
         </p>
         <ul>
@@ -38,7 +38,7 @@ export default function About() {
           <li>
             <SiGithub />
             <a href="https://github.com/jacob-fm/spotify-guesser">
-              bopmatch Github Repo
+              BopMatch Github Repo
             </a>
           </li>
           <li>

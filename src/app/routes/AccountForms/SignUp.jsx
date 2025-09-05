@@ -35,7 +35,7 @@ export default function SignUp() {
   return (
     <>
       <title>
-        bopmatch | Daily Music Trivia Game | Sign Up to track your scores!
+        BopMatch | Daily Music Trivia Game | Sign Up to track your scores!
       </title>
       <Header />
       <div className="account-forms">

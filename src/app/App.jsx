@@ -81,7 +81,7 @@ function App() {
 
   return (
     <>
-      <title>Daily Music Trivia Game - bopmatch</title>
+      <title>Daily Music Trivia Game - BopMatch</title>
       <Header />
       {gameState === GAME_STATES.GAME && (
         <Game

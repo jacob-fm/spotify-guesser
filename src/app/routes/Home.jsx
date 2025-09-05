@@ -23,7 +23,7 @@ export default function Home() {
 
   return (
     <>
-      <title>Daily Music Trivia Game - bopmatch</title>
+      <title>Daily Music Trivia Game - BopMatch</title>
       <Header />
       <div className="home-layout">
         <p className="short-description">
