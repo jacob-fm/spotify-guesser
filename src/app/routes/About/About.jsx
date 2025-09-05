@@ -1,7 +1,23 @@
 import "./About.css";
 import Header from "../../../components/Header/Header";
 import { SiGithub, SiInstagram } from "@icons-pack/react-simple-icons";
-import { UserIcon } from "lucide-react";
+import { MailIcon, UserIcon } from "lucide-react";
+import { useEffect, useState } from "react";
+
+const EmailLink = () => {
+  const [link, setLink] = useState("#");
+  useEffect(() => {
+    const user = "jacobfeitmann";
+    const domain = "gmail.com";
+    const fullEmail = `mailto:${user}@${domain}`;
+    setLink(fullEmail);
+  }, []);
+  return (
+    <a href={link} rel="nofollow, noindex">
+      jacobfeitmann[at]gmail[dot]com
+    </a>
+  );
+};
 
 export default function About() {
   return (
@@ -10,8 +26,15 @@ export default function About() {
       <Header />
       <div className="about">
         <h1>About bopmatch</h1>
-        <p>bopmatch is the work of Jacob Feit Mann.</p>
+        <p>
+          bopmatch is the work of Jacob Feit Mann.<br></br>{" "}
+          Feel free to email me with any questions, comments, or bug reports!
+        </p>
         <ul>
+          <li>
+            <MailIcon />
+            <EmailLink />
+          </li>
           <li>
             <SiGithub />
             <a href="https://github.com/jacob-fm/spotify-guesser">
