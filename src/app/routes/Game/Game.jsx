@@ -110,6 +110,15 @@ export default function Game({
     }
   }, [roundResults]);
 
+  // disable scroll while round end panel is showing
+  useEffect(() => {
+    if (guessSubmitted) {
+      document.body.classList.add("no-scroll");
+    } else {
+      document.body.classList.remove("no-scroll");
+    }
+  }, [guessSubmitted]);
+
   function handleArtistSelect(artist) {
     getArtistById(artist.id)
       .then((artist) => {
