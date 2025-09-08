@@ -1,6 +1,6 @@
 import { LoaderCircle } from "lucide-react";
 
-export default function ArtistCard({ artist, visibleScore, isTarget }) {
+export default function ArtistCard({ artist, isTarget }) {
   const isLoading = artist == null;
   return (
     <div className={"artist-card" + " " + (isTarget ? "target" : "guess")}>
@@ -10,13 +10,13 @@ export default function ArtistCard({ artist, visibleScore, isTarget }) {
         <span className="artist-name">
           {isLoading ? "Loading..." : artist.name}
         </span>
-        {isLoading ? (
-          <div className="artist-img-loading">
-            <LoaderCircle size={40} />
-          </div>
-        ) : (
-          <img src={artist.images[0]?.url} />
-        )}
+        {isLoading
+          ? (
+            <div className="artist-img-loading">
+              <LoaderCircle size={40} />
+            </div>
+          )
+          : <img src={artist.images[0]?.url} />}
       </div>
     </div>
   );
