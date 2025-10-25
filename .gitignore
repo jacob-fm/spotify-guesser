@@ -27,3 +27,5 @@ dist-ssr
 scripts/
 # Local Netlify folder
 .netlify
+
+src/data/validate_pool.py
