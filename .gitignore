@@ -29,3 +29,4 @@ scripts/
 .netlify
 
 src/data/validate_pool.py
+.cache

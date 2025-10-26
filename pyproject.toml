@@ -1,0 +1,14 @@
+[project]
+name = "spotify-guesser"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "python-dotenv>=1.1.1",
+]
+
+[dependency-groups]
+dev = [
+    "spotipy>=2.25.1",
+]
