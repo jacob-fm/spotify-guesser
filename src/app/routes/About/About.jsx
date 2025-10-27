@@ -7,14 +7,14 @@ import { useEffect, useState } from "react";
 const EmailLink = () => {
   const [link, setLink] = useState("#");
   useEffect(() => {
-    const user = "jacobfeitmann";
+    const user = "bopmatch";
     const domain = "gmail.com";
     const fullEmail = `mailto:${user}@${domain}`;
     setLink(fullEmail);
   }, []);
   return (
     <a href={link} rel="nofollow, noindex">
-      jacobfeitmann at gmail dot com
+      bopmatch at gmail dot com
     </a>
   );
 };
@@ -47,12 +47,6 @@ export default function About() {
           <li>
             <UserIcon />
             <a href="https://jacobfm.com/">Jacob's Website</a>
-          </li>
-          <li>
-            <SiInstagram />
-            <a href="https://www.instagram.com/i.love.kishka/">
-              Jacob's Instagram
-            </a>
           </li>
         </ul>
       </div>
