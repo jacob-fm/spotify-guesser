@@ -1,6 +1,6 @@
 import "./About.css";
 import Header from "../../../components/Header/Header";
-import { SiGithub, SiInstagram } from "@icons-pack/react-simple-icons";
+import { SiGithub, SiInstagram, SiX } from "@icons-pack/react-simple-icons";
 import { MailIcon, UserIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 
@@ -14,7 +14,7 @@ const EmailLink = () => {
   }, []);
   return (
     <a href={link} rel="nofollow, noindex">
-      jacobfeitmann[at]gmail[dot]com
+      jacobfeitmann at gmail dot com
     </a>
   );
 };
@@ -31,15 +31,18 @@ export default function About() {
           Feel free to email me with any questions, comments, or bug reports!
         </p>
         <ul>
-          <li>
-            <MailIcon />
-            <EmailLink />
+          <li><SiX />
+            <a href="https://x.com/BopMatch">BopMatch Twitter</a>
           </li>
           <li>
             <SiGithub />
             <a href="https://github.com/jacob-fm/spotify-guesser">
               BopMatch Github Repo
             </a>
+          </li>
+          <li>
+            <MailIcon />
+            <EmailLink />
           </li>
           <li>
             <UserIcon />
