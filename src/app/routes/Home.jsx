@@ -27,8 +27,8 @@ export default function Home() {
       <Header />
       <div className="home-layout">
         <p className="short-description">
-          Choose an artist, and score points based on how closely their
-          popularity matches the target.
+          Choose an artist, and score points based on how closely their&nbsp;
+          <a href="https://www.submithub.com/story/spotify-popularity-score-guide">popularity</a> matches the target.
         </p>
         <Link to="/instructions" className="button-link outlined">
           Instructions
