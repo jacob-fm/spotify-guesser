@@ -5,6 +5,9 @@ import { UserAuth } from "../../../../../lib/AuthContext";
 export default function Scoreboard({ roundResults }) {
   const { session } = UserAuth();
   const loggedIn = session?.user;
+  const totalScore = roundResults.reduce(
+    (total, result) => total + result.score, 0)
+  const shareText = `I just scored ${totalScore} points in BopMatch 🎶\nThink you know music better? Play at https://bopmatch.com`
 
   return (
     <section className="scoreboard">
@@ -43,12 +46,7 @@ export default function Scoreboard({ roundResults }) {
         </tbody>
       </table>
       <h3>See you tomorrow!</h3>
-      {/* TODO: implement sharing score */}
-      {
-        /* <button className="share-score" onClick={onShareScore}>
-          Share my score
-            </button> */
-      }
+      <button className="share-score outlined" onClick={() => navigator.clipboard.writeText(shareText)}>Copy Score</button>
       {loggedIn
         ? (
           <Link className="button-link outlined" to="/past-games">
