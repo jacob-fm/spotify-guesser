@@ -1,10 +1,27 @@
 import { Link } from "react-router-dom";
 import "./Scoreboard.css";
 import { UserAuth } from "../../../../../lib/AuthContext";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function Scoreboard({ roundResults }) {
   const { session } = UserAuth();
   const loggedIn = session?.user;
+  const totalScore = roundResults.reduce(
+    (total, result) => total + result.score, 0)
+  function roundsText() {
+    let message = ""
+    roundResults.forEach((result) => {
+      message += `${result.target.name}: ${result.score}\n`;
+    });
+    return message
+  }
+
+  const shareText = `My BopMatch score today:\n${roundsText()}\nTotal: ${totalScore}\nThink you can do better? Try for yourself: https://bopmatch.com`
+
+  function copyToClipboard() {
+    navigator.clipboard.writeText(shareText)
+    toast.success("Score copied to clipboard")
+  }
 
   return (
     <section className="scoreboard">
@@ -43,12 +60,7 @@ export default function Scoreboard({ roundResults }) {
         </tbody>
       </table>
       <h3>See you tomorrow!</h3>
-      {/* TODO: implement sharing score */}
-      {
-        /* <button className="share-score" onClick={onShareScore}>
-          Share my score
-            </button> */
-      }
+      <button className="share-score outlined" onClick={copyToClipboard}>Share my score</button>
       {loggedIn
         ? (
           <Link className="button-link outlined" to="/past-games">
@@ -60,6 +72,7 @@ export default function Scoreboard({ roundResults }) {
             Log in to save your scores!
           </Link>
         )}
+      <ToastContainer position="bottom-center" autoClose={3000} closeButton={false} draggable newestOnTop hideProgressBar closeOnClick />
     </section>
   );
 }
