@@ -12,6 +12,8 @@
   --darkest: #643a71;
 
   font-family: Exo, Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  /* for toastify */
+  --toastify-font-family: Exo, Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: auto;
   font-weight: 400;
 
@@ -23,6 +25,7 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  
 }
 
 body {

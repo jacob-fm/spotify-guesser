@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import "./Scoreboard.css";
 import { UserAuth } from "../../../../../lib/AuthContext";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function Scoreboard({ roundResults }) {
   const { session } = UserAuth();
@@ -8,6 +9,11 @@ export default function Scoreboard({ roundResults }) {
   const totalScore = roundResults.reduce(
     (total, result) => total + result.score, 0)
   const shareText = `I just scored ${totalScore} points in BopMatch 🎶\nThink you know music better? Play at https://bopmatch.com`
+
+  function copyToClipboard() {
+    navigator.clipboard.writeText(shareText)
+    toast.success("Score copied to clipboard")
+  }
 
   return (
     <section className="scoreboard">
@@ -46,7 +52,7 @@ export default function Scoreboard({ roundResults }) {
         </tbody>
       </table>
       <h3>See you tomorrow!</h3>
-      <button className="share-score outlined" onClick={() => navigator.clipboard.writeText(shareText)}>Copy Score</button>
+      <button className="share-score outlined" onClick={copyToClipboard}>Copy Score</button>
       {loggedIn
         ? (
           <Link className="button-link outlined" to="/past-games">
@@ -58,6 +64,7 @@ export default function Scoreboard({ roundResults }) {
             Log in to save your scores!
           </Link>
         )}
+      <ToastContainer position="bottom-center" autoClose={3000} closeButton={false} draggable newestOnTop hideProgressBar closeOnClick />
     </section>
   );
 }
