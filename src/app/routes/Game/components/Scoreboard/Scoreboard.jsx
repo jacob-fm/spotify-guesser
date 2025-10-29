@@ -60,7 +60,7 @@ export default function Scoreboard({ roundResults }) {
         </tbody>
       </table>
       <h3>See you tomorrow!</h3>
-      <button className="share-score outlined" onClick={copyToClipboard}>Share my score</button>
+      <button className="share-score filled" onClick={copyToClipboard}>Share my score</button>
       {loggedIn
         ? (
           <Link className="button-link outlined" to="/past-games">
