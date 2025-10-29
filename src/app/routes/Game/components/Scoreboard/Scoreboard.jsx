@@ -8,7 +8,15 @@ export default function Scoreboard({ roundResults }) {
   const loggedIn = session?.user;
   const totalScore = roundResults.reduce(
     (total, result) => total + result.score, 0)
-  const shareText = `I just scored ${totalScore} points in BopMatch 🎶\nThink you know music better? Play at https://bopmatch.com`
+  function roundsText() {
+    let message = ""
+    roundResults.forEach((result) => {
+      message += `${result.target.name}: ${result.score}\n`;
+    });
+    return message
+  }
+
+  const shareText = `My BopMatch score today:\n${roundsText()}\nTotal: ${totalScore}\nThink you can do better? Try for yourself: https://bopmatch.com`
 
   function copyToClipboard() {
     navigator.clipboard.writeText(shareText)
@@ -52,7 +60,7 @@ export default function Scoreboard({ roundResults }) {
         </tbody>
       </table>
       <h3>See you tomorrow!</h3>
-      <button className="share-score outlined" onClick={copyToClipboard}>Copy Score</button>
+      <button className="share-score outlined" onClick={copyToClipboard}>Share my score</button>
       {loggedIn
         ? (
           <Link className="button-link outlined" to="/past-games">
