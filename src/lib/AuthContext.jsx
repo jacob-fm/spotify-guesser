@@ -7,9 +7,8 @@ const AuthContext = createContext();
 export const AuthContextProvider = ({ children }) => {
   const [session, setSession] = useState(undefined);
   const [loading, setLoading] = useState(true);
-  const [todaysGameExistsInSupabase, setTodaysGameExistsInSupabase] = useState(
-    false,
-  );
+  const [todaysGameExistsInSupabase, setTodaysGameExistsInSupabase] =
+    useState(false);
   const today = new Date().toISOString().slice(0, 10); // Get today's date in YYYY-MM-DD format
 
   // Sign up
@@ -56,7 +55,7 @@ export const AuthContextProvider = ({ children }) => {
   const sendPasswordReset = async (email) => {
     try {
       const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: "https://spopularity.jacobfm.com/reset-password",
+        redirectTo: "https://bopmatch.com/reset-password",
       });
       // Handle Supabase error explicitly
       if (error) {
